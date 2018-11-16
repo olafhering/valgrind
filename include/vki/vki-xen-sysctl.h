@@ -47,6 +47,7 @@
 #define VKI_XEN_SYSCTL_cpupool_op                    18
 #define VKI_XEN_SYSCTL_scheduler_op                  19
 #define VKI_XEN_SYSCTL_coverage_op                   20
+#define VKI_XEN_SYSCTL_gcov_op                       20 /* Since xen-4.9 */
 #define VKI_XEN_SYSCTL_psr_cmt_op                    21
 #define VKI_XEN_SYSCTL_pcitopoinfo                   22
 #define VKI_XEN_SYSCTL_psr_cat_op                    23
@@ -275,6 +276,7 @@ struct vki_xen_sysctl {
         struct vki_xen_sysctl_cpupool_op        cpupool_op;
         //struct vki_xen_sysctl_scheduler_op      scheduler_op;
         //struct vki_xen_sysctl_coverage_op       coverage_op;
+        //struct vki_xen_sysctl_gcov_op           gcov_op;
         //struct vki_xen_sysctl_psr_cmt_op        psr_cmt_op;
         //struct vki_xen_sysctl_psr_cat_op        psr_cat_op;
         //struct vki_xen_sysctl_tmem_op           tmem_op;
