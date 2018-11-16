@@ -657,6 +657,9 @@ PRE(sysctl) {
    case 0x0000000c:
       vki_set_assumed_xenversion(vki_xenversion_406);
 	   break;
+   case 0x0000000d:
+      vki_set_assumed_xenversion(vki_xenversion_407);
+	   break;
    default:
       bad_intf_version(tid, layout, arrghs, status, flags,
                        "__HYPERVISOR_sysctl", sysctl->interface_version);
@@ -1863,6 +1866,7 @@ POST(sysctl)
    case 0x0000000a:
    case 0x0000000b:
    case 0x0000000c:
+   case 0x0000000d:
 	   break;
    default:
       return;
