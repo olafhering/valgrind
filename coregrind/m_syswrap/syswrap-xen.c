@@ -1054,11 +1054,6 @@ PRE(domctl)
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
-      case 0x0000000e:
-      case 0x0000000f:
-      case 0x00000010:
-      case 0x00000011:
-      case 0x00000012:
          __PRE_XEN_DOMCTL_READ(test_assign_device, assign_device_0000000b, dev);
          __PRE_XEN_DOMCTL_READ(test_assign_device, assign_device_0000000b, flag);
          switch (domctl->u.assign_device_0000000b.dev) {
@@ -1078,6 +1073,30 @@ PRE(domctl)
             break;
          }
          break;
+      case 0x0000000e:
+      case 0x0000000f:
+      case 0x00000010:
+      case 0x00000011:
+      case 0x00000012:
+         __PRE_XEN_DOMCTL_READ(test_assign_device, assign_device_0000000e, dev);
+         __PRE_XEN_DOMCTL_READ(test_assign_device, assign_device_0000000e, flags);
+         switch (domctl->u.assign_device_0000000e.dev) {
+         case VKI_XEN_DOMCTL_DEV_PCI:
+            __PRE_XEN_DOMCTL_READ(test_assign_device, assign_device_0000000e, u.pci);
+            break;
+         case VKI_XEN_DOMCTL_DEV_DT:
+            __PRE_XEN_DOMCTL_READ(test_assign_device, assign_device_0000000e, u.dt);
+            PRE_MEM_READ("XEN_DOMTCL_test_assign_device.dt",
+                          (Addr)domctl->u.assign_device_0000000e.u.dt.path.p,
+                          domctl->u.assign_device_0000000e.u.dt.size);
+            break;
+         default:
+            bad_subop(tid, layout, arrghs, status, flags,
+                         "__HYPERVISOR_domctl_test_assign_device dev",
+                         domctl->u.assign_device_0000000e.dev);
+            break;
+         }
+         break;
       }
       break;
    case VKI_XEN_DOMCTL_assign_device:
@@ -1091,11 +1110,6 @@ PRE(domctl)
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
-      case 0x0000000e:
-      case 0x0000000f:
-      case 0x00000010:
-      case 0x00000011:
-      case 0x00000012:
          __PRE_XEN_DOMCTL_READ(assign_device, assign_device_0000000b, dev);
          __PRE_XEN_DOMCTL_READ(assign_device, assign_device_0000000b, flag);
          switch (domctl->u.assign_device_0000000b.dev) {
@@ -1115,6 +1129,25 @@ PRE(domctl)
             break;
          }
          break;
+      case 0x0000000e:
+      case 0x0000000f:
+      case 0x00000010:
+      case 0x00000011:
+      case 0x00000012:
+         __PRE_XEN_DOMCTL_READ(assign_device, assign_device_0000000e, dev);
+         __PRE_XEN_DOMCTL_READ(assign_device, assign_device_0000000e, flags);
+         switch (domctl->u.assign_device_0000000e.dev) {
+         case VKI_XEN_DOMCTL_DEV_PCI:
+            __PRE_XEN_DOMCTL_READ(assign_device, assign_device_0000000e, u.pci);
+            break;
+         case VKI_XEN_DOMCTL_DEV_DT:
+            __PRE_XEN_DOMCTL_READ(assign_device, assign_device_0000000e, u.dt);
+            PRE_MEM_READ("XEN_DOMTCL_assign_device.dt",
+                        (Addr)domctl->u.assign_device_0000000e.u.dt.path.p,
+                        domctl->u.assign_device_0000000e.u.dt.size);
+            break;
+         }
+         break;
       }
       break;
    case VKI_XEN_DOMCTL_deassign_device:
@@ -1128,11 +1161,6 @@ PRE(domctl)
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
-      case 0x0000000e:
-      case 0x0000000f:
-      case 0x00000010:
-      case 0x00000011:
-      case 0x00000012:
          __PRE_XEN_DOMCTL_READ(deassign_device, assign_device_0000000b, dev);
          __PRE_XEN_DOMCTL_READ(deassign_device, assign_device_0000000b, flag);
          switch (domctl->u.assign_device_0000000b.dev) {
@@ -1149,6 +1177,25 @@ PRE(domctl)
             bad_subop(tid, layout, arrghs, status, flags,
                          "__HYPERVISOR_domctl_deassign_device dev",
                          domctl->u.assign_device_0000000b.dev);
+            break;
+         }
+         break;
+      case 0x0000000e:
+      case 0x0000000f:
+      case 0x00000010:
+      case 0x00000011:
+      case 0x00000012:
+         __PRE_XEN_DOMCTL_READ(deassign_device, assign_device_0000000e, dev);
+         __PRE_XEN_DOMCTL_READ(deassign_device, assign_device_0000000e, flags);
+         switch (domctl->u.assign_device_0000000e.dev) {
+         case VKI_XEN_DOMCTL_DEV_PCI:
+            __PRE_XEN_DOMCTL_READ(deassign_device, assign_device_0000000e, u.pci);
+            break;
+         case VKI_XEN_DOMCTL_DEV_DT:
+            __PRE_XEN_DOMCTL_READ(deassign_device, assign_device_0000000e, u.dt);
+            PRE_MEM_READ("XEN_DOMTCL_assign_device.dt",
+                        (Addr)domctl->u.assign_device_0000000e.u.dt.path.p,
+                        domctl->u.assign_device_0000000e.u.dt.size);
             break;
          }
          break;
