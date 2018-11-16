@@ -364,6 +364,10 @@ struct vki_xen_domctl_settimeoffset_00000001 {
     vki_int32_t time_offset_seconds;
 };
 
+struct vki_xen_domctl_settimeoffset_0000000b {
+    vki_int64_t time_offset_seconds;
+};
+
 struct vki_xen_domctl_cpuid {
   vki_uint32_t input[2];
   vki_uint32_t eax;
@@ -639,6 +643,7 @@ struct vki_xen_domctl {
         struct vki_xen_domctl_hypercall_init    hypercall_init;
         //struct vki_xen_domctl_arch_setup        arch_setup;
         struct vki_xen_domctl_settimeoffset_00000001     settimeoffset_00000001;
+        struct vki_xen_domctl_settimeoffset_0000000b     settimeoffset_0000000b;
         //struct vki_xen_domctl_disable_migrate   disable_migrate;
         struct vki_xen_domctl_tsc_info_00000007   tsc_info_00000007;
         struct vki_xen_domctl_tsc_info_0000000b   tsc_info_0000000b;
