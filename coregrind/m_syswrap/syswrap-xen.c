@@ -868,30 +868,38 @@ PRE(domctl)
        break;
 
    case VKI_XEN_DOMCTL_gethvmcontext_partial:
-       __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial, type);
-       __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial, instance);
-       __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial, buffer);
+      switch (domctl->interface_version) {
+      case 0x00000007:
+      case 0x00000008:
+      case 0x00000009:
+      case 0x0000000a:
+      case 0x0000000b:
+         __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_00000005, type);
+         __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_00000005, instance);
+         __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_00000005, buffer);
 
-       switch (domctl->u.hvmcontext_partial.type) {
-       case VKI_HVM_SAVE_CODE(CPU):
-           if ( domctl->u.hvmcontext_partial.buffer.p )
-                PRE_MEM_WRITE("XEN_DOMCTL_gethvmcontext_partial *buffer",
-                   (Addr)domctl->u.hvmcontext_partial.buffer.p,
-                   VKI_HVM_SAVE_LENGTH(CPU));
-           break;
-       case VKI_HVM_SAVE_CODE(MTRR):
-           if ( domctl->u.hvmcontext_partial.buffer.p )
-	        PRE_MEM_WRITE("XEN_DOMCTL_gethvmcontext_partial *buffer",
-		   (Addr)domctl->u.hvmcontext_partial.buffer.p,
-		   VKI_HVM_SAVE_LENGTH(MTRR));
-           break;
-       default:
-           bad_subop(tid, layout, arrghs, status, flags,
-                         "__HYPERVISOR_domctl_gethvmcontext_partial type",
-                         domctl->u.hvmcontext_partial.type);
-           break;
-       }
-       break;
+         switch (domctl->u.hvmcontext_partial_00000005.type) {
+         case VKI_HVM_SAVE_CODE(CPU):
+            if ( domctl->u.hvmcontext_partial_00000005.buffer.p )
+               PRE_MEM_WRITE("XEN_DOMCTL_gethvmcontext_partial *buffer",
+                           (Addr)domctl->u.hvmcontext_partial_00000005.buffer.p,
+                           VKI_HVM_SAVE_LENGTH(CPU));
+            break;
+         case VKI_HVM_SAVE_CODE(MTRR):
+            if ( domctl->u.hvmcontext_partial_00000005.buffer.p )
+               PRE_MEM_WRITE("XEN_DOMCTL_gethvmcontext_partial *buffer",
+                           (Addr)domctl->u.hvmcontext_partial_00000005.buffer.p,
+                           VKI_HVM_SAVE_LENGTH(MTRR));
+            break;
+         default:
+            bad_subop(tid, layout, arrghs, status, flags,
+                      "__HYPERVISOR_domctl_gethvmcontext_partial type",
+                      domctl->u.hvmcontext_partial_00000005.type);
+            break;
+         }
+         break;
+      }
+      break;
 
    case VKI_XEN_DOMCTL_max_mem:
       PRE_XEN_DOMCTL_READ(max_mem, max_memkb);
@@ -2004,14 +2012,22 @@ POST(domctl){
        break;
 
    case VKI_XEN_DOMCTL_gethvmcontext_partial:
-       switch (domctl->u.hvmcontext_partial.type) {
-       case VKI_HVM_SAVE_CODE(CPU):
-           if ( domctl->u.hvmcontext_partial.buffer.p )
-                POST_MEM_WRITE((Addr)domctl->u.hvmcontext_partial.buffer.p,
-                   VKI_HVM_SAVE_LENGTH(CPU));
-           break;
-       }
-       break;
+      switch (domctl->interface_version) {
+      case 0x00000007:
+      case 0x00000008:
+      case 0x00000009:
+      case 0x0000000a:
+      case 0x0000000b:
+         switch (domctl->u.hvmcontext_partial_00000005.type) {
+         case VKI_HVM_SAVE_CODE(CPU):
+            if ( domctl->u.hvmcontext_partial_00000005.buffer.p )
+               POST_MEM_WRITE((Addr)domctl->u.hvmcontext_partial_00000005.buffer.p,
+                              VKI_HVM_SAVE_LENGTH(CPU));
+            break;
+         }
+         break;
+      }
+      break;
 
    case VKI_XEN_DOMCTL_scheduler_op:
       if ( domctl->u.scheduler_op.cmd == VKI_XEN_DOMCTL_SCHEDOP_getinfo ) {
