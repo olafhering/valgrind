@@ -130,7 +130,7 @@ struct vki_xen_sysctl_topologyinfo {
     VKI_XEN_GUEST_HANDLE_64(vki_uint32) cpu_to_node;
 };
 
-struct vki_xen_sysctl_numainfo {
+struct vki_xen_sysctl_numainfo_00000008 {
     vki_uint32_t max_node_index;
     VKI_XEN_GUEST_HANDLE_64(vki_uint64) node_to_memsize;
     VKI_XEN_GUEST_HANDLE_64(vki_uint64) node_to_memfree;
@@ -202,7 +202,7 @@ struct vki_xen_sysctl {
         struct vki_xen_sysctl_physinfo_0000000a physinfo_0000000a;
         struct vki_xen_sysctl_physinfo_00000010 physinfo_00000010;
         struct vki_xen_sysctl_topologyinfo      topologyinfo;
-        struct vki_xen_sysctl_numainfo          numainfo;
+        struct vki_xen_sysctl_numainfo_00000008 numainfo_00000008;
         struct vki_xen_sysctl_sched_id          sched_id;
         //struct vki_xen_sysctl_perfc_op          perfc_op;
         /* getdomaininfolist (sysctl) suffix is the getdomaininfo (domctl) suffix */
