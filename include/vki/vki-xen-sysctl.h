@@ -49,6 +49,7 @@
 #define VKI_XEN_SYSCTL_pcitopoinfo                   22
 #define VKI_XEN_SYSCTL_psr_cat_op                    23
 #define VKI_XEN_SYSCTL_tmem_op                       24
+#define VKI_XEN_SYSCTL_get_cpu_levelling_caps        25
 #define VKI_XEN_SYSCTL_get_cpu_featureset            26
 
 struct vki_xen_sysctl_readconsole {
@@ -249,6 +250,7 @@ struct vki_xen_sysctl {
         //struct vki_xen_sysctl_psr_cmt_op        psr_cmt_op;
         //struct vki_xen_sysctl_psr_cat_op        psr_cat_op;
         //struct vki_xen_sysctl_tmem_op           tmem_op;
+        //struct vki_xen_sysctl_cpu_levelling_caps cpu_levelling_caps;
         struct vki_xen_sysctl_cpu_featureset_0000000d cpu_featureset_0000000d;
 
         vki_uint8_t                             pad[128];
