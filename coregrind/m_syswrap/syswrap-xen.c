@@ -655,6 +655,8 @@ PRE(sysctl) {
       vki_set_assumed_xenversion(vki_xenversion_406);
 	   break;
    case 0x0000000d:
+      vki_set_assumed_xenversion(vki_xenversion_407);
+	   break;
    case 0x0000000e:
    case 0x0000000f:
    case 0x00000010:
