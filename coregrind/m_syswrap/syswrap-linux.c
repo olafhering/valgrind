@@ -8287,6 +8287,13 @@ PRE(sys_ioctl)
                   (Addr)&args->vaddr, sizeof(args->vaddr));
       }
       break;
+   case VKI_XEN_IOCTL_GNTDEV_SET_MAX_GRANTS: {
+      struct vki_xen_ioctl_gntdev_set_max_grants *args =
+         (struct vki_xen_ioctl_gntdev_set_max_grants*)(Addr)(ARG3);
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTDEV_set_max_grants(count)",
+                  (Addr)&args->count, sizeof(args->count));
+      }
+      break;
 #endif
 
    /* Lustre */
@@ -10777,6 +10784,9 @@ POST(sys_ioctl)
       POST_FIELD_WRITE(args->count);
       POST_FIELD_WRITE(args->offset);
       }
+      break;
+   case VKI_XEN_IOCTL_GNTDEV_SET_MAX_GRANTS:
+      /* No output */
       break;
 #endif
 
