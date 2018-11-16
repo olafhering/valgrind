@@ -773,10 +773,18 @@ PRE(sysctl) {
       break;
 
    case VKI_XEN_SYSCTL_numainfo:
-      PRE_XEN_SYSCTL_READ(numainfo, max_node_index);
-      PRE_XEN_SYSCTL_READ(numainfo, node_to_memsize);
-      PRE_XEN_SYSCTL_READ(numainfo, node_to_memfree);
-      PRE_XEN_SYSCTL_READ(numainfo, node_to_node_distance);
+      switch (sysctl->interface_version)
+      {
+      case 0x00000008:
+      case 0x00000009:
+      case 0x0000000a:
+      case 0x0000000b:
+         PRE_XEN_SYSCTL_READ(numainfo_00000008, max_node_index);
+         PRE_XEN_SYSCTL_READ(numainfo_00000008, node_to_memsize);
+         PRE_XEN_SYSCTL_READ(numainfo_00000008, node_to_memfree);
+         PRE_XEN_SYSCTL_READ(numainfo_00000008, node_to_node_distance);
+         break;
+      }
       break;
 
    default:
@@ -2103,14 +2111,22 @@ POST(sysctl)
       break;
 
    case VKI_XEN_SYSCTL_numainfo:
-      POST_XEN_SYSCTL_WRITE(numainfo, max_node_index);
-      POST_MEM_WRITE((Addr)sysctl->u.numainfo.node_to_memsize.p,
-                     sizeof(uint64_t) * sysctl->u.numainfo.max_node_index);
-      POST_MEM_WRITE((Addr)sysctl->u.numainfo.node_to_memfree.p,
-                     sizeof(uint64_t) * sysctl->u.numainfo.max_node_index);
-      POST_MEM_WRITE((Addr)sysctl->u.numainfo.node_to_node_distance.p,
-                     sizeof(uint32_t) *
-                     (sysctl->u.numainfo.max_node_index * sysctl->u.numainfo.max_node_index));
+      switch (sysctl->interface_version)
+      {
+      case 0x00000008:
+      case 0x00000009:
+      case 0x0000000a:
+      case 0x0000000b:
+         POST_XEN_SYSCTL_WRITE(numainfo_00000008, max_node_index);
+         POST_MEM_WRITE((Addr)sysctl->u.numainfo_00000008.node_to_memsize.p,
+                        sizeof(uint64_t) * sysctl->u.numainfo_00000008.max_node_index);
+         POST_MEM_WRITE((Addr)sysctl->u.numainfo_00000008.node_to_memfree.p,
+                        sizeof(uint64_t) * sysctl->u.numainfo_00000008.max_node_index);
+         POST_MEM_WRITE((Addr)sysctl->u.numainfo_00000008.node_to_node_distance.p,
+                        sizeof(uint32_t) *
+                        (sysctl->u.numainfo_00000008.max_node_index * sysctl->u.numainfo_00000008.max_node_index));
+         break;
+      }
       break;
 
    /* No outputs */
