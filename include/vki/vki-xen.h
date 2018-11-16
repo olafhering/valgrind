@@ -70,6 +70,7 @@
 #define __VKI_XEN_tmem_op              38
 #define __VKI_XEN_xc_reserved_op       39 /* reserved for XenClient */
 #define __VKI_XEN_xenpmu_op            40
+#define __VKI_XEN_dm_op                41
 
 #define __DEFINE_VKI_XEN_GUEST_HANDLE(name, type) \
     ___DEFINE_VKI_XEN_GUEST_HANDLE(name, type);   \

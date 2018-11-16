@@ -1731,6 +1731,16 @@ PRE(tmem_op)
 #undef __PRE_XEN_TMEMOP_READ
 }
 
+PRE(dm_op)
+{
+   unsigned int domid = ARG1, num = ARG2;
+   struct vki_xen_privcmd_dm_op_buf *args = (void *)(ARG3);
+
+   PRINT("__HYPERVISOR_dm_op ( %u, %u, %p )", domid, num, args);
+
+   PRE_MEM_READ("__HYPERVISOR_dm_op ubuf", (Addr)args, sizeof(*args) * num);
+}
+
 POST(memory_op)
 {
    switch (ARG1) {
@@ -2591,6 +2601,14 @@ POST(tmem_op)
     }
 }
 
+POST(dm_op)
+{
+   unsigned int num = ARG2;
+   struct vki_xen_privcmd_dm_op_buf *args = (void *)(ARG3);
+
+   POST_MEM_WRITE((Addr) args, sizeof(*args) * num);
+}
+
 typedef
    struct {
       SyscallTableEntry entry;
@@ -2653,6 +2671,7 @@ static XenHypercallTableEntry hypercall_table[] = {
    //    __VKI_XEN_kexec_op                                        // 37
    HYPXY(__VKI_XEN_tmem_op,                 tmem_op,           1), // 38
    //    __VKI_XEN_xenpmu_op                                       // 40
+   HYPXY(__VKI_XEN_dm_op,                   dm_op,             3), // 41
 };
 
 static void bad_before ( ThreadId              tid,
