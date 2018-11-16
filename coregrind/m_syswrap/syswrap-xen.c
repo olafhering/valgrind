@@ -1021,6 +1021,32 @@ PRE(domctl)
             break;
          }
          break;
+      case 0x0000000e:
+         __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_0000000e, type);
+         __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_0000000e, instance);
+         __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_0000000e, bufsz);
+         __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_0000000e, buffer);
+
+         switch (domctl->u.hvmcontext_partial_0000000e.type) {
+         case VKI_HVM_SAVE_CODE(CPU):
+            if ( domctl->u.hvmcontext_partial_0000000e.buffer.p )
+               PRE_MEM_WRITE("XEN_DOMCTL_gethvmcontext_partial *buffer",
+                           (Addr)domctl->u.hvmcontext_partial_0000000e.buffer.p,
+                           VKI_HVM_SAVE_LENGTH(CPU));
+            break;
+         case VKI_HVM_SAVE_CODE(MTRR):
+            if ( domctl->u.hvmcontext_partial_0000000e.buffer.p )
+               PRE_MEM_WRITE("XEN_DOMCTL_gethvmcontext_partial *buffer",
+                           (Addr)domctl->u.hvmcontext_partial_0000000e.buffer.p,
+                           VKI_HVM_SAVE_LENGTH(MTRR));
+            break;
+         default:
+            bad_subop(tid, layout, arrghs, status, flags,
+                     "__HYPERVISOR_domctl_gethvmcontext_partial type",
+                     domctl->u.hvmcontext_partial_0000000e.type);
+            break;
+         }
+         break;
       }
       break;
 
@@ -2356,6 +2382,14 @@ POST(domctl){
          case VKI_HVM_SAVE_CODE(CPU):
             if ( domctl->u.hvmcontext_partial_00000005.buffer.p )
                POST_MEM_WRITE((Addr)domctl->u.hvmcontext_partial_00000005.buffer.p,
+                              VKI_HVM_SAVE_LENGTH(CPU));
+            break;
+         }
+      case 0x0000000e:
+         switch (domctl->u.hvmcontext_partial_0000000e.type) {
+         case VKI_HVM_SAVE_CODE(CPU):
+            if ( domctl->u.hvmcontext_partial_0000000e.buffer.p )
+               POST_MEM_WRITE((Addr)domctl->u.hvmcontext_partial_0000000e.buffer.p,
                               VKI_HVM_SAVE_LENGTH(CPU));
             break;
          }

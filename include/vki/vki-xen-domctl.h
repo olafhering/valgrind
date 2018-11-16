@@ -447,6 +447,14 @@ struct vki_xen_domctl_hvmcontext_partial_00000005 {
 typedef struct vki_xen_domctl_hvmcontext_partial_00000005 vki_xen_domctl_hvmcontext_partial_00000005_t;
 DEFINE_VKI_XEN_GUEST_HANDLE(vki_xen_domctl_hvmcontext_partial_00000005_t);
 
+struct vki_xen_domctl_hvmcontext_partial_0000000e {
+    vki_uint32_t type; /* IN */
+    vki_uint32_t instance; /* IN */
+    vki_xen_uint64_aligned_t bufsz; /* IN */
+    VKI_XEN_GUEST_HANDLE_64(vki_uint8) buffer; /* IN/OUT buffer */
+};
+typedef struct vki_xen_domctl_hvmcontext_partial_0000000e vki_xen_domctl_hvmcontext_partial_0000000e_t;
+DEFINE_VKI_XEN_GUEST_HANDLE(vki_xen_domctl_hvmcontext_partial_0000000e_t);
 
 struct vki_xen_domctl_pin_mem_cacheattr {
     vki_xen_uint64_aligned_t start, end; /* IN */
@@ -721,6 +729,7 @@ struct vki_xen_domctl {
         //struct vki_xen_domctl_real_mode_area    real_mode_area;
         struct vki_xen_domctl_hvmcontext        hvmcontext;
         struct vki_xen_domctl_hvmcontext_partial_00000005 hvmcontext_partial_00000005;
+        struct vki_xen_domctl_hvmcontext_partial_0000000e hvmcontext_partial_0000000e;
         struct vki_xen_domctl_address_size      address_size;
         //struct vki_xen_domctl_sendtrigger       sendtrigger;
         //struct vki_xen_domctl_get_device_group  get_device_group;
