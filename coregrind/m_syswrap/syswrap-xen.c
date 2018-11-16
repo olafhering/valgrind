@@ -285,6 +285,16 @@ PRE(memory_op)
    case VKI_XENMEM_get_sharing_shared_pages:
       break;
 
+   case VKI_XENMEM_get_pod_target:
+   case VKI_XENMEM_set_pod_target: {
+      struct vki_xen_pod_target *arg =
+         (struct vki_xen_pod_target *)ARG2;
+      PRE_MEM_READ("XENMEM_set_pod_target target_pages",
+                  (Addr)&arg->target_pages, sizeof(arg->target_pages));
+      PRE_MEM_READ("XENMEM_set_pod_target domid",
+                  (Addr)&arg->domid, sizeof(arg->domid));
+      break;
+   }
    case VKI_XENMEM_access_op: {
        struct vki_xen_mem_event_op *arg =
             (struct vki_xen_mem_event_op *)ARG2;
@@ -1560,6 +1570,7 @@ POST(memory_op)
    case VKI_XENMEM_claim_pages:
    case VKI_XENMEM_maximum_gpfn:
    case VKI_XENMEM_remove_from_physmap:
+   case VKI_XENMEM_set_pod_target:
    case VKI_XENMEM_access_op:
       /* No outputs */
       break;
@@ -1604,6 +1615,15 @@ POST(memory_op)
    case VKI_XENMEM_get_sharing_shared_pages:
        /* No outputs */
        break;
+   case VKI_XENMEM_get_pod_target: {
+      struct vki_xen_pod_target *arg =
+         (struct vki_xen_pod_target *)ARG2;
+      POST_MEM_WRITE((Addr)&arg->tot_pages, sizeof(arg->tot_pages));
+      POST_MEM_WRITE((Addr)&arg->pod_cache_pages, sizeof(arg->pod_cache_pages));
+      POST_MEM_WRITE((Addr)&arg->pod_entries, sizeof(arg->pod_entries));
+      }
+      break;
+
    }
 }
 
