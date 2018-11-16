@@ -52,6 +52,7 @@
 #define VKI_XENMEM_claim_pages                24
 #define VKI_XENMEM_machphys_compat_mfn_list   25
 #define VKI_XENMEM_get_vnumainfo              26
+#define VKI_XENMEM_reserved_device_memory_map 27
 
 struct vki_xen_memory_map {
     unsigned int nr_entries;
