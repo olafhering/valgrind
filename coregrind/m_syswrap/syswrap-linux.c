@@ -9909,6 +9909,13 @@ PRE(sys_ioctl)
                   (Addr)&args->pad, sizeof(args->pad));
       }
       break;
+   case VKI_XEN_IOCTL_GNTDEV_GET_OFFSET_FOR_VADDR: {
+      struct vki_xen_ioctl_gntdev_get_offset_for_vaddr *args =
+         (struct vki_xen_ioctl_gntdev_get_offset_for_vaddr*)(Addr)(ARG3);
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTDEV_map_grant_ref(vaddr)",
+                  (Addr)&args->vaddr, sizeof(args->vaddr));
+      }
+      break;
 #endif
 
    /* Lustre */
@@ -12615,6 +12622,13 @@ POST(sys_ioctl)
       break;
    case VKI_XEN_IOCTL_GNTDEV_UNMAP_GRANT_REF:
       /* No output */
+      break;
+   case VKI_XEN_IOCTL_GNTDEV_GET_OFFSET_FOR_VADDR: {
+      struct vki_xen_ioctl_gntdev_get_offset_for_vaddr *args =
+         (struct vki_xen_ioctl_gntdev_get_offset_for_vaddr*)(Addr)(ARG3);
+      POST_FIELD_WRITE(args->count);
+      POST_FIELD_WRITE(args->offset);
+      }
       break;
 #endif
 
