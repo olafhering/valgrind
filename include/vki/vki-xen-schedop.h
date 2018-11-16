@@ -45,4 +45,6 @@ typedef struct vki_xen_remote_shutdown vki_xen_remote_shutdown_t;
 
 #define VKI_XEN_SCHEDOP_watchdog        6
 
+#define VKI_XEN_SCHEDOP_pin_override    7
+
 #endif /* __VKI_XEN_SCHED_OP_H */
