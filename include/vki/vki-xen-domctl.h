@@ -608,6 +608,7 @@ struct vki_xen_domctl_vcpu_msrs {
 #define VKI_XEN_DOMCTL_MONITOR_EVENT_PRIVILEGED_CALL       7
 #define VKI_XEN_DOMCTL_MONITOR_EVENT_INTERRUPT             8
 #define VKI_XEN_DOMCTL_MONITOR_EVENT_DESC_ACCESS           9
+#define VKI_XEN_DOMCTL_MONITOR_EVENT_EMUL_UNIMPLEMENTED    10
 
 struct vki_xen_domctl_monitor_op_0000000b {
     vki_uint32_t op; /* vki_xen_DOMCTL_MONITOR_OP_* */
