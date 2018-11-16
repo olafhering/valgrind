@@ -51,6 +51,7 @@
 #define VKI_XENMEM_add_to_physmap_batch       23
 #define VKI_XENMEM_claim_pages                24
 #define VKI_XENMEM_machphys_compat_mfn_list   25
+#define VKI_XENMEM_get_vnumainfo              26
 
 struct vki_xen_memory_map {
     unsigned int nr_entries;
