@@ -8294,6 +8294,17 @@ PRE(sys_ioctl)
                   (Addr)&args->count, sizeof(args->count));
       }
       break;
+   case VKI_XEN_IOCTL_GNTALLOC_ALLOC_GREF: {
+      struct vki_xen_ioctl_gntalloc_alloc_gref *args =
+         (struct vki_xen_ioctl_gntalloc_alloc_gref*)(Addr)(ARG3);
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTALLOC_alloc_gref(domid)",
+                  (Addr)&args->domid, sizeof(args->domid));
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTALLOC_alloc_gref(flags)",
+                  (Addr)&args->flags, sizeof(args->flags));
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTALLOC_alloc_gref(count)",
+                  (Addr)&args->count, sizeof(args->count));
+      }
+      break;
 #endif
 
    /* Lustre */
@@ -10787,6 +10798,15 @@ POST(sys_ioctl)
       break;
    case VKI_XEN_IOCTL_GNTDEV_SET_MAX_GRANTS:
       /* No output */
+      break;
+   case VKI_XEN_IOCTL_GNTALLOC_ALLOC_GREF: {
+      struct vki_xen_ioctl_gntalloc_alloc_gref *args =
+         (struct vki_xen_ioctl_gntalloc_alloc_gref*)(Addr)(ARG3);
+      POST_FIELD_WRITE(args->index);
+      POST_FIELD_WRITE(args->count);
+      POST_MEM_WRITE((Addr)&args->gref_ids,
+                     sizeof(args->gref_ids) * sizeof(args->count));
+      }
       break;
 #endif
 
