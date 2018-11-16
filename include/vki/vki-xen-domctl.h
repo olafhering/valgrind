@@ -264,6 +264,7 @@ struct vki_xen_domctl_vcpuaffinity_0000000a {
     vki_uint32_t  vcpu;              /* IN */
 #define VKI_XEN_VCPUAFFINITY_HARD   (1U<<0)
 #define VKI_XEN_VCPUAFFINITY_SOFT   (1U<<1)
+#define VKI_XEN_VCPUAFFINITY_FORCE  (1U<<2)
     vki_uint32_t  flags;              /* IN */
     struct vki_xenctl_bitmap cpumap_hard; /* IN/OUT */
     struct vki_xenctl_bitmap cpumap_soft; /* IN/OUT */
