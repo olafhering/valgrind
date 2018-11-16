@@ -906,6 +906,8 @@ PRE(domctl)
       vki_set_assumed_xenversion(vki_xenversion_410);
 	   break;
    case 0x0000000f:
+      vki_set_assumed_xenversion(vki_xenversion_4101);
+	   break;
    case 0x00000010:
    case 0x00000011:
    case 0x00000012:
