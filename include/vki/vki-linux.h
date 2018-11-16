@@ -3655,6 +3655,14 @@ struct vki_xen_ioctl_gntdev_map_grant_ref {
    struct vki_xen_ioctl_gntdev_grant_ref refs[1];
 };
 
+#define VKI_XEN_IOCTL_GNTDEV_UNMAP_GRANT_REF			\
+	_VKI_IOC(_VKI_IOC_NONE, 'G', 1, sizeof(struct vki_xen_ioctl_gntdev_unmap_grant_ref))
+struct vki_xen_ioctl_gntdev_unmap_grant_ref {
+   __vki_u64 index;
+   vki_u32 count;
+   vki_u32 pad;
+};
+
 //----------------------------------------------------------------------
 // From linux-3.4.0/include/linux/fs.h
 //----------------------------------------------------------------------
