@@ -792,6 +792,16 @@ PRE(sysctl) {
       }
       break;
 
+   case VKI_XEN_SYSCTL_pcitopoinfo:
+      switch (sysctl->interface_version)
+      {
+      case 0x0000000c:
+         PRE_XEN_SYSCTL_READ(pcitopoinfo_0000000c, num_devs);
+         PRE_XEN_SYSCTL_READ(pcitopoinfo_0000000c, devs);
+         break;
+      }
+      break;
+
    default:
       bad_subop(tid, layout, arrghs, status, flags,
                 "__HYPERVISOR_sysctl", sysctl->cmd);
@@ -1999,6 +2009,16 @@ POST(sysctl)
       }
       break;
 
+   case VKI_XEN_SYSCTL_pcitopoinfo:
+      switch (sysctl->interface_version)
+      {
+      case 0x0000000c:
+         POST_XEN_SYSCTL_WRITE(pcitopoinfo_0000000c, num_devs);
+         POST_MEM_WRITE((Addr)sysctl->u.pcitopoinfo_0000000c.nodes.p,
+                        sizeof(uint32_t) *  sysctl->u.pcitopoinfo_0000000c.num_devs);
+         break;
+      }
+      break;
    /* No outputs */
    case VKI_XEN_SYSCTL_debug_keys:
        break;
