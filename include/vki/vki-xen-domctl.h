@@ -125,6 +125,7 @@
 #define VKI_XEN_DOMCTL_arm_configure_domain          76
 #define VKI_XEN_DOMCTL_monitor_op                    77 /* new in 4.6 */
 #define VKI_XEN_DOMCTL_psr_cat_op                    78
+#define VKI_XEN_DOMCTL_soft_reset                    79
 #define VKI_XEN_DOMCTL_gdbsx_guestmemio            1000
 #define VKI_XEN_DOMCTL_gdbsx_pausevcpu             1001
 #define VKI_XEN_DOMCTL_gdbsx_unpausevcpu           1002
