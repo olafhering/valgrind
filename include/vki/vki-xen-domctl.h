@@ -795,6 +795,7 @@ struct vki_xen_domctl {
         struct vki_xen_domctl_getdomaininfo_00000007 getdomaininfo_00000007;
         struct vki_xen_domctl_getdomaininfo_00000008 getdomaininfo_00000008;
         struct vki_xen_domctl_getdomaininfo_00000009 getdomaininfo_00000009;
+        struct vki_xen_domctl_getdomaininfo_0000000f getdomaininfo_0000000f;
         //struct vki_xen_domctl_getmemlist        getmemlist;
         //struct vki_xen_domctl_getpageframeinfo  getpageframeinfo;
         //struct vki_xen_domctl_getpageframeinfo2 getpageframeinfo2;
