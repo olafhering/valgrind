@@ -2742,6 +2742,7 @@ static XenHypercallTableEntry hypercall_table[] = {
    HYPXY(__VKI_XEN_domctl,                  domctl,            1), // 36
    //    __VKI_XEN_kexec_op                                        // 37
    HYPXY(__VKI_XEN_tmem_op,                 tmem_op,           1), // 38
+   //    __VKI_XEN_xenpmu_op                                       // 40
 };
 
 static void bad_before ( ThreadId              tid,
