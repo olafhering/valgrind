@@ -39,6 +39,7 @@
 #define VKI_XEN_SYSCTL_page_offline_op               14
 #define VKI_XEN_SYSCTL_lockprof_op                   15
 #define VKI_XEN_SYSCTL_topologyinfo                  16
+#define VKI_XEN_SYSCTL_cputopoinfo                   16 /* Since xen-4.6 */
 #define VKI_XEN_SYSCTL_numainfo                      17
 #define VKI_XEN_SYSCTL_cpupool_op                    18
 #define VKI_XEN_SYSCTL_scheduler_op                  19
@@ -132,6 +133,19 @@ struct vki_xen_sysctl_topologyinfo {
     VKI_XEN_GUEST_HANDLE_64(vki_uint32) cpu_to_node;
 };
 
+struct vki_xen_sysctl_cputopo_0000000c {
+    vki_uint32_t core;
+    vki_uint32_t socket;
+    vki_uint32_t node;
+};
+typedef struct vki_xen_sysctl_cputopo_0000000c vki_xen_sysctl_cputopo_0000000c_t;
+DEFINE_VKI_XEN_GUEST_HANDLE(vki_xen_sysctl_cputopo_0000000c_t);
+
+struct vki_xen_sysctl_cputopoinfo_0000000c {
+    vki_uint32_t num_cpus;
+    VKI_XEN_GUEST_HANDLE_64(vki_xen_sysctl_cputopo_0000000c_t) cputopo;
+};
+
 struct vki_xen_sysctl_numainfo_00000008 {
     vki_uint32_t max_node_index;
     VKI_XEN_GUEST_HANDLE_64(vki_uint64) node_to_memsize;
@@ -218,6 +232,7 @@ struct vki_xen_sysctl {
         struct vki_xen_sysctl_physinfo_0000000a physinfo_0000000a;
         struct vki_xen_sysctl_physinfo_00000010 physinfo_00000010;
         struct vki_xen_sysctl_topologyinfo      topologyinfo;
+        struct vki_xen_sysctl_cputopoinfo_0000000c cputopoinfo_0000000c;
         struct vki_xen_sysctl_numainfo_00000008 numainfo_00000008;
         struct vki_xen_sysctl_numainfo_0000000c numainfo_0000000c;
         struct vki_xen_sysctl_sched_id          sched_id;
