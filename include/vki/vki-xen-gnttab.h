@@ -40,6 +40,7 @@ typedef vki_uint32_t vki_xen_grant_ref_t;
 #define VKI_XEN_GNTTABOP_get_status_frames    9
 #define VKI_XEN_GNTTABOP_get_version          10
 #define VKI_XEN_GNTTABOP_swap_grant_ref	      11
+#define VKI_XEN_GNTTABOP_cache_flush          12
 
 struct vki_xen_gnttab_setup_table {
     /* IN parameters. */
