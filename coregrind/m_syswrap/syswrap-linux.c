@@ -9889,6 +9889,15 @@ PRE(sys_ioctl)
    case VKI_XEN_IOCTL_EVTCHN_RESET:
       /* No input*/
       break;
+   case VKI_XEN_IOCTL_GNTDEV_MAP_GRANT_REF: {
+      struct vki_xen_ioctl_gntdev_map_grant_ref *args =
+         (struct vki_xen_ioctl_gntdev_map_grant_ref*)(Addr)(ARG3);
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTDEV_map_grant_ref(count)",
+                  (Addr)&args->count, sizeof(args->count));
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTDEV_map_grant_ref(refs)",
+                  (Addr)args->refs, sizeof(*(args->refs)) * args->count);
+      }
+      break;
 #endif
 
    /* Lustre */
@@ -12586,6 +12595,12 @@ POST(sys_ioctl)
    case VKI_XEN_IOCTL_EVTCHN_NOTIFY:
    case VKI_XEN_IOCTL_EVTCHN_RESET:
       /* No output */
+      break;
+   case VKI_XEN_IOCTL_GNTDEV_MAP_GRANT_REF: {
+       struct vki_xen_ioctl_gntdev_map_grant_ref *args =
+            (struct vki_xen_ioctl_gntdev_map_grant_ref*)(Addr)(ARG3);
+       POST_FIELD_WRITE(args->index);
+      }
       break;
 #endif
 
