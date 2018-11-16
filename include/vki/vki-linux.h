@@ -3672,6 +3672,12 @@ struct vki_xen_ioctl_gntdev_get_offset_for_vaddr {
    vki_u32 pad;
 };
 
+#define VKI_XEN_IOCTL_GNTDEV_SET_MAX_GRANTS			\
+	_VKI_IOC(_VKI_IOC_NONE, 'G', 3, sizeof(struct vki_xen_ioctl_gntdev_set_max_grants))
+struct vki_xen_ioctl_gntdev_set_max_grants {
+   vki_u32 count;
+};
+
 //----------------------------------------------------------------------
 // From linux-3.4.0/include/linux/fs.h
 //----------------------------------------------------------------------
