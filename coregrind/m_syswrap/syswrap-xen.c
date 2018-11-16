@@ -593,6 +593,7 @@ PRE(xen_version)
    case VKI_XENVER_pagesize:
    case VKI_XENVER_guest_handle:
    case VKI_XENVER_commandline:
+   case VKI_XENVER_build_id:
       /* No inputs */
       break;
 
@@ -1869,6 +1870,9 @@ POST(xen_version)
       break;
    case VKI_XENVER_commandline:
       POST_MEM_WRITE((Addr)ARG2, sizeof(vki_xen_commandline_t));
+      break;
+   case VKI_XENVER_build_id:
+      POST_MEM_WRITE((Addr)ARG2, sizeof(struct vki_xen_build_id));
       break;
    }
 }
