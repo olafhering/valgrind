@@ -210,6 +210,23 @@ struct vki_xen_sysctl_physinfo_0000000a {
     vki_uint32_t capabilities;
 };
 
+struct vki_xen_sysctl_physinfo_00000010 {
+    vki_uint32_t threads_per_core;
+    vki_uint32_t cores_per_socket;
+    vki_uint32_t nr_cpus;     /* # CPUs currently online */
+    vki_uint32_t max_cpu_id;  /* Largest possible CPU ID on this host */
+    vki_uint32_t nr_nodes;    /* # nodes currently online */
+    vki_uint32_t max_node_id; /* Largest possible node ID on this host */
+    vki_uint32_t cpu_khz;
+    vki_uint32_t capabilities; /* XEN_SYSCTL_PHYSCAP_??? */
+    vki_xen_uint64_aligned_t total_pages;
+    vki_xen_uint64_aligned_t free_pages;
+    vki_xen_uint64_aligned_t scrub_pages;
+    vki_xen_uint64_aligned_t outstanding_pages;
+    vki_xen_uint64_aligned_t max_mfn; /* Largest possible MFN on this host */
+    vki_uint32_t hw_cap[8];
+};
+
 /* vki_xen_sysctl_physinfo_0000000b is the same as 0000000a */
 
 struct vki_xen_sysctl_sched_id {
@@ -231,6 +248,7 @@ struct vki_xen_sysctl {
         //struct vki_xen_sysctl_tbuf_op           tbuf_op;
         struct vki_xen_sysctl_physinfo_00000008 physinfo_00000008;
         struct vki_xen_sysctl_physinfo_0000000a physinfo_0000000a;
+        struct vki_xen_sysctl_physinfo_00000010 physinfo_00000010;
         struct vki_xen_sysctl_topologyinfo      topologyinfo;
         struct vki_xen_sysctl_cputopoinfo_0000000c cputopoinfo_0000000c;
         struct vki_xen_sysctl_pcitopoinfo_0000000c pcitopoinfo_0000000c;

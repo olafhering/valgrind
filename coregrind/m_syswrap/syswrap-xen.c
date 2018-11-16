@@ -2192,6 +2192,22 @@ POST(sysctl)
          POST_XEN_SYSCTL_WRITE(physinfo_0000000a, hw_cap[8]);
          POST_XEN_SYSCTL_WRITE(physinfo_0000000a, capabilities);
          break;
+      case 0x00000010:
+         POST_XEN_SYSCTL_WRITE(physinfo_00000010, threads_per_core);
+         POST_XEN_SYSCTL_WRITE(physinfo_00000010, cores_per_socket);
+         POST_XEN_SYSCTL_WRITE(physinfo_00000010, nr_cpus);
+         POST_XEN_SYSCTL_WRITE(physinfo_00000010, max_cpu_id);
+         POST_XEN_SYSCTL_WRITE(physinfo_00000010, nr_nodes);
+         POST_XEN_SYSCTL_WRITE(physinfo_00000010, max_node_id);
+         POST_XEN_SYSCTL_WRITE(physinfo_00000010, cpu_khz);
+         POST_XEN_SYSCTL_WRITE(physinfo_00000010, capabilities);
+         POST_XEN_SYSCTL_WRITE(physinfo_00000010, total_pages);
+         POST_XEN_SYSCTL_WRITE(physinfo_00000010, free_pages);
+         POST_XEN_SYSCTL_WRITE(physinfo_00000010, scrub_pages);
+         POST_XEN_SYSCTL_WRITE(physinfo_00000010, outstanding_pages);
+         POST_XEN_SYSCTL_WRITE(physinfo_00000010, max_mfn);
+         POST_XEN_SYSCTL_WRITE(physinfo_00000010, hw_cap[8]);
+         break;
       }
       break;
 
