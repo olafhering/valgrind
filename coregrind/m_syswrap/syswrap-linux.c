@@ -8325,6 +8325,15 @@ PRE(sys_ioctl)
                   (Addr)&args->event_channel_port, sizeof(args->event_channel_port));
       }
       break;
+   case VKI_XEN_IOCTL_GNTDEV_GRANT_COPY: {
+      struct vki_xen_ioctl_gntdev_grant_copy *args =
+         (struct vki_xen_ioctl_gntdev_grant_copy*)(Addr)(ARG3);
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTDEV_grant_copy(count)",
+                  (Addr)&args->count, sizeof(args->count));
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTDEV_grant_copy(segments)",
+                  (Addr)args->segments, sizeof(*(args->segments)) * args->count);
+      }
+      break;
 #endif
 
    /* Lustre */
@@ -10831,6 +10840,12 @@ POST(sys_ioctl)
    case VKI_XEN_IOCTL_GNTALLOC_DEALLOC_GREF:
    case VKI_XEN_IOCTL_GNTALLOC_SET_UNMAP_NOTIFY:
       /* No output */
+      break;
+   case VKI_XEN_IOCTL_GNTDEV_GRANT_COPY: {
+      struct vki_xen_ioctl_gntdev_grant_copy *args =
+         (struct vki_xen_ioctl_gntdev_grant_copy*)(Addr)(ARG3);
+      POST_MEM_WRITE((Addr)args->segments, sizeof(*(args->segments)) * args->count);
+      }
       break;
 #endif
 

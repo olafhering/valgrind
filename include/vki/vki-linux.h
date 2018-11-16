@@ -3493,6 +3493,27 @@ struct vki_xen_ioctl_gntalloc_set_unmap_notify {
    vki_u32 event_channel_port;
 };
 
+#define VKI_XEN_IOCTL_GNTDEV_GRANT_COPY				\
+	_VKI_IOC(_VKI_IOC_NONE, 'G', 8, sizeof(struct vki_xen_ioctl_gntdev_grant_copy))
+struct vki_xen_gntdev_grant_copy_segment {
+   union {
+      void *virt;
+      struct {
+         vki_u32 ref; /* grant_ref_t */
+         vki_u16 offset;
+         vki_u16 domid; /* domid_t */
+      } foreign;
+   } source, dest;
+   vki_u16 len;
+   vki_u16 flags;  /* GNTCOPY_* */
+   __vki_s16 status; /* GNTST_* */
+};
+
+struct vki_xen_ioctl_gntdev_grant_copy {
+   vki_uint32_t count;
+   struct vki_xen_gntdev_grant_copy_segment *segments;
+};
+
 //----------------------------------------------------------------------
 // From linux-3.4.0/include/linux/fs.h
 //----------------------------------------------------------------------
