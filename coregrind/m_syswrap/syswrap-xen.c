@@ -2055,7 +2055,8 @@ POST(sysctl)
       POST_MEM_WRITE((Addr)sysctl->u.numainfo.node_to_memfree.p,
                      sizeof(uint64_t) * sysctl->u.numainfo.max_node_index);
       POST_MEM_WRITE((Addr)sysctl->u.numainfo.node_to_node_distance.p,
-                     sizeof(uint32_t) * sysctl->u.numainfo.max_node_index);
+                     sizeof(uint32_t) *
+                     (sysctl->u.numainfo.max_node_index * sysctl->u.numainfo.max_node_index));
       break;
 
    /* No outputs */
