@@ -58,6 +58,15 @@ struct vki_xen_physdev_unmap_pirq {
     int pirq;
 };
 
+struct vki_physdev_pci_device {
+    /* IN */
+    vki_uint16_t seg;
+    vki_uint8_t bus;
+    vki_uint8_t devfn;
+};
+typedef struct vki_physdev_pci_device vki_physdev_pci_device_t;
+DEFINE_VKI_XEN_GUEST_HANDLE(vki_physdev_pci_device_t);
+
 #endif // __VKI_XEN_PHYSDEV_H
 
 /*--------------------------------------------------------------------*/
