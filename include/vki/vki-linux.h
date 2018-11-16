@@ -3594,11 +3594,25 @@ struct vki_xen_privcmd_mmapbatch_v2 {
         int __user *err;  /* array of error codes */
 };
 
+struct vki_xen_privcmd_dm_op_buf {
+        void __user *uptr;
+        __vki_kernel_size_t size;
+};
+
+struct vki_xen_privcmd_dm_op {
+        __vki_u16 dom;
+        __vki_u16 num;
+        const struct vki_xen_privcmd_dm_op_buf __user *ubufs;
+};
+
+
 #define VKI_XEN_IOCTL_PRIVCMD_HYPERCALL    _VKI_IOC(_VKI_IOC_NONE, 'P', 0, sizeof(struct vki_xen_privcmd_hypercall))
 #define VKI_XEN_IOCTL_PRIVCMD_MMAP         _VKI_IOC(_VKI_IOC_NONE, 'P', 2, sizeof(struct vki_xen_privcmd_mmap))
 
 #define VKI_XEN_IOCTL_PRIVCMD_MMAPBATCH    _VKI_IOC(_VKI_IOC_NONE, 'P', 3, sizeof(struct vki_xen_privcmd_mmapbatch))
 #define VKI_XEN_IOCTL_PRIVCMD_MMAPBATCH_V2 _VKI_IOC(_VKI_IOC_NONE, 'P', 4, sizeof(struct vki_xen_privcmd_mmapbatch_v2))
+
+#define VKI_XEN_IOCTL_PRIVCMD_DM_OP        _VKI_IOC(_VKI_IOC_NONE, 'P', 5, sizeof(struct vki_xen_privcmd_dm_op))
 
 //----------------------------------------------------------------------
 // Xen evtchn IOCTL

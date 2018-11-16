@@ -9848,6 +9848,17 @@ PRE(sys_ioctl)
                     (Addr)args->arr, sizeof(*(args->arr)) * args->num);
       break;
    }
+   case VKI_XEN_IOCTL_PRIVCMD_DM_OP: {
+      struct vki_xen_privcmd_dm_op *args =
+         (struct vki_xen_privcmd_dm_op *)(ARG3);
+      PRE_MEM_READ("VKI_XEN_IOCTL_PRIVCMD_DM_OP(dom)",
+                  (Addr)&args->dom, sizeof(args->dom));
+      PRE_MEM_READ("VKI_XEN_IOCTL_PRIVCMD_DM_OP(num)",
+                  (Addr)&args->num, sizeof(args->num));
+      PRE_MEM_READ("VKI_XEN_IOCTL_PRIVCMD_DM_OP(ubufs)",
+                  (Addr)args->ubufs, sizeof(*(args->ubufs)) * args->num);
+      break;
+   }
 
    case VKI_XEN_IOCTL_EVTCHN_BIND_VIRQ: {
          struct vki_xen_ioctl_evtchn_bind_virq *args =
@@ -12650,6 +12661,12 @@ POST(sys_ioctl)
        struct vki_xen_privcmd_mmapbatch_v2 *args =
            (struct vki_xen_privcmd_mmapbatch_v2 *)(Addr)(ARG3);
        POST_MEM_WRITE((Addr)args->err, sizeof(*(args->err)) * args->num);
+      }
+      break;
+   case VKI_XEN_IOCTL_PRIVCMD_DM_OP: {
+      struct vki_xen_privcmd_dm_op *args =
+         (struct vki_xen_privcmd_dm_op *)(ARG3);
+      POST_MEM_WRITE((Addr)args->ubufs, sizeof(*(args->ubufs)) * args->num);
       }
       break;
 
