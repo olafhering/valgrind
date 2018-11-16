@@ -662,6 +662,27 @@ struct vki_xen_domctl_monitor_op_0000000b {
     } u;
 };
 
+struct vki_xen_domctl_monitor_op_0000000c {
+    vki_uint32_t op; /* vki_xen_DOMCTL_MONITOR_OP_* */
+    vki_uint32_t event;
+    union {
+        struct {
+            vki_uint8_t index;
+            vki_uint8_t sync;
+            vki_uint8_t onchangeonly;
+        } mov_to_cr;
+        struct {
+            vki_uint32_t msr;
+        } mov_to_msr;
+        struct {
+            vki_uint8_t sync;
+        } guest_request;
+        struct {
+            vki_uint8_t sync;
+        } debug_exception;
+    } u;
+};
+
 struct vki_xen_domctl_monitor_op_00000011 {
     vki_uint32_t op; /* vki_xen_DOMCTL_MONITOR_OP_* */
 
@@ -786,6 +807,7 @@ struct vki_xen_domctl {
         //struct vki_xen_domctl_gdbsx_pauseunp_vcpu gdbsx_pauseunp_vcpu;
         //struct vki_xen_domctl_gdbsx_domstatus   gdbsx_domstatus;
         struct vki_xen_domctl_monitor_op_0000000b monitor_op_0000000b;
+        struct vki_xen_domctl_monitor_op_0000000c monitor_op_0000000c;
         struct vki_xen_domctl_monitor_op_00000011 monitor_op_00000011;
         //struct vki_xen_domctl_vnuma             vnuma;
         //struct vki_xen_domctl_psr_cmt_op        psr_cmt_op;
