@@ -877,6 +877,7 @@ PRE(domctl)
    case VKI_XEN_DOMCTL_getdomaininfo:
    case VKI_XEN_DOMCTL_unpausedomain:
    case VKI_XEN_DOMCTL_resumedomain:
+   case VKI_XEN_DOMCTL_soft_reset:
       /* No input fields. */
       break;
 
@@ -2109,6 +2110,7 @@ POST(domctl){
    case VKI_XEN_DOMCTL_resumedomain:
    case VKI_XEN_DOMCTL_set_vcpu_msrs:
    case VKI_XEN_DOMCTL_set_access_required:
+   case VKI_XEN_DOMCTL_soft_reset:
       /* No output fields */
       break;
 
