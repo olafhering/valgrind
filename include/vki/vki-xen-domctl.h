@@ -404,13 +404,13 @@ struct vki_xen_domctl_hvmcontext {
 typedef struct vki_xen_domctl_hvmcontext vki_xen_domctl_hvmcontext_t;
 DEFINE_VKI_XEN_GUEST_HANDLE(vki_xen_domctl_hvmcontext_t);
 
-struct vki_xen_domctl_hvmcontext_partial_00000007 {
+struct vki_xen_domctl_hvmcontext_partial_00000005 {
     vki_uint32_t type; /* IN */
     vki_uint32_t instance; /* IN */
     VKI_XEN_GUEST_HANDLE_64(vki_uint8) buffer; /* IN/OUT buffer */
 };
-typedef struct vki_xen_domctl_hvmcontext_partial_00000007 vki_xen_domctl_hvmcontext_partial_00000007_t;
-DEFINE_VKI_XEN_GUEST_HANDLE(vki_xen_domctl_hvmcontext_partial_00000007_t);
+typedef struct vki_xen_domctl_hvmcontext_partial_00000005 vki_xen_domctl_hvmcontext_partial_00000005_t;
+DEFINE_VKI_XEN_GUEST_HANDLE(vki_xen_domctl_hvmcontext_partial_00000005_t);
 
 struct vki_xen_domctl_hvmcontext_partial_0000000e {
     vki_uint32_t type; /* IN */
@@ -691,7 +691,7 @@ struct vki_xen_domctl {
         struct vki_xen_domctl_tsc_info_0000000b   tsc_info_0000000b;
         //struct vki_xen_domctl_real_mode_area    real_mode_area;
         struct vki_xen_domctl_hvmcontext        hvmcontext;
-        struct vki_xen_domctl_hvmcontext_partial_0000000e hvmcontext_partial_00000007;
+        struct vki_xen_domctl_hvmcontext_partial_00000005 hvmcontext_partial_00000005;
         struct vki_xen_domctl_hvmcontext_partial_0000000e hvmcontext_partial_0000000e;
         struct vki_xen_domctl_address_size      address_size;
         //struct vki_xen_domctl_sendtrigger       sendtrigger;
