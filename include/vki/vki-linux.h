@@ -3428,6 +3428,22 @@ struct vki_xen_ioctl_evtchn_notify {
 #define VKI_XEN_IOCTL_EVTCHN_RESET				\
 	_VKI_IOC(_VKI_IOC_NONE, 'E', 5, 0)
 
+//----------------------------------------------------------------------
+// Xen gnttdev IOCTL
+//----------------------------------------------------------------------
+
+#define VKI_XEN_IOCTL_GNTDEV_MAP_GRANT_REF			\
+   _VKI_IOC(_VKI_IOC_NONE, 'G', 0, sizeof(struct vki_xen_ioctl_gntdev_map_grant_ref))
+struct vki_xen_ioctl_gntdev_grant_ref {
+   vki_u32 domid;
+   vki_u32 ref;
+};
+struct vki_xen_ioctl_gntdev_map_grant_ref {
+   vki_u32 count;
+   vki_u32 pad;
+   __vki_u64 index;
+   struct vki_xen_ioctl_gntdev_grant_ref refs[1];
+};
 
 //----------------------------------------------------------------------
 // From linux-3.4.0/include/linux/fs.h
