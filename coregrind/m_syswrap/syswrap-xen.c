@@ -828,9 +828,16 @@ PRE(domctl)
       break;
 
    case VKI_XEN_DOMCTL_createdomain:
-      PRE_XEN_DOMCTL_READ(createdomain, ssidref);
-      PRE_XEN_DOMCTL_READ(createdomain, handle);
-      PRE_XEN_DOMCTL_READ(createdomain, flags);
+      switch (domctl->interface_version) {
+      case 0x00000007:
+      case 0x00000008:
+      case 0x00000009:
+      case 0x0000000a:
+         PRE_XEN_DOMCTL_READ(createdomain_00000004, ssidref);
+         PRE_XEN_DOMCTL_READ(createdomain_00000004, handle);
+         PRE_XEN_DOMCTL_READ(createdomain_00000004, flags);
+         break;
+      }
       break;
 
    case VKI_XEN_DOMCTL_gethvmcontext:

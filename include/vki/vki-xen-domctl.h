@@ -129,7 +129,7 @@
 #define VKI_XEN_DOMCTL_gdbsx_unpausevcpu           1002
 #define VKI_XEN_DOMCTL_gdbsx_domstatus             1003
 
-struct vki_xen_domctl_createdomain {
+struct vki_xen_domctl_createdomain_00000004 {
     /* IN parameters */
     vki_uint32_t ssidref;
     vki_xen_domain_handle_t handle;
@@ -582,7 +582,7 @@ struct vki_xen_domctl {
     vki_uint32_t interface_version; /* XEN_DOMCTL_INTERFACE_VERSION */
     vki_xen_domid_t  domain;
     union {
-        struct vki_xen_domctl_createdomain      createdomain;
+        struct vki_xen_domctl_createdomain_00000004  createdomain_00000004;
         struct vki_xen_domctl_getdomaininfo_00000007 getdomaininfo_00000007;
         struct vki_xen_domctl_getdomaininfo_00000008 getdomaininfo_00000008;
         struct vki_xen_domctl_getdomaininfo_00000009 getdomaininfo_00000009;
