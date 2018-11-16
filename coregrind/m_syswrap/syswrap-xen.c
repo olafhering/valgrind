@@ -1130,6 +1130,9 @@ PRE(domctl)
       case 0x0000000a:
          PRE_XEN_DOMCTL_READ(settimeoffset_00000001, time_offset_seconds);
          break;
+      case 0x0000000b:
+         PRE_XEN_DOMCTL_READ(settimeoffset_0000000b, time_offset_seconds);
+         break;
       }
       break;
 
