@@ -9898,6 +9898,17 @@ PRE(sys_ioctl)
                   (Addr)args->refs, sizeof(*(args->refs)) * args->count);
       }
       break;
+   case VKI_XEN_IOCTL_GNTDEV_UNMAP_GRANT_REF: {
+      struct vki_xen_ioctl_gntdev_map_grant_ref *args =
+         (struct vki_xen_ioctl_gntdev_map_grant_ref*)(Addr)(ARG3);
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTDEV_map_grant_ref(index)",
+                  (Addr)&args->index, sizeof(args->index));
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTDEV_map_grant_ref(count)",
+                  (Addr)&args->count, sizeof(args->count));
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTDEV_map_grant_ref(pad)",
+                  (Addr)&args->pad, sizeof(args->pad));
+      }
+      break;
 #endif
 
    /* Lustre */
@@ -12601,6 +12612,9 @@ POST(sys_ioctl)
             (struct vki_xen_ioctl_gntdev_map_grant_ref*)(Addr)(ARG3);
        POST_FIELD_WRITE(args->index);
       }
+      break;
+   case VKI_XEN_IOCTL_GNTDEV_UNMAP_GRANT_REF:
+      /* No output */
       break;
 #endif
 
