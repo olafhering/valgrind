@@ -49,6 +49,7 @@
 #define VKI_XEN_SYSCTL_pcitopoinfo                   22
 #define VKI_XEN_SYSCTL_psr_cat_op                    23
 #define VKI_XEN_SYSCTL_tmem_op                       24
+#define VKI_XEN_SYSCTL_get_cpu_featureset            26
 
 struct vki_xen_sysctl_readconsole {
     /* IN */
@@ -210,6 +211,12 @@ struct vki_xen_sysctl_sched_id {
     vki_uint32_t              sched_id;
 };
 
+struct vki_xen_sysctl_cpu_featureset_0000000d {
+    vki_uint32_t index;
+    vki_uint32_t nr_features;
+    VKI_XEN_GUEST_HANDLE_64(vki_uint32) features;
+};
+
 struct vki_xen_sysctl {
     vki_uint32_t cmd;
     vki_uint32_t interface_version; /* XEN_SYSCTL_INTERFACE_VERSION */
@@ -242,6 +249,7 @@ struct vki_xen_sysctl {
         //struct vki_xen_sysctl_psr_cmt_op        psr_cmt_op;
         //struct vki_xen_sysctl_psr_cat_op        psr_cat_op;
         //struct vki_xen_sysctl_tmem_op           tmem_op;
+        struct vki_xen_sysctl_cpu_featureset_0000000d cpu_featureset_0000000d;
 
         vki_uint8_t                             pad[128];
     } u;

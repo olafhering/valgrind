@@ -806,6 +806,16 @@ PRE(sysctl) {
       }
       break;
 
+   case VKI_XEN_SYSCTL_get_cpu_featureset:
+      switch (sysctl->interface_version)
+      {
+      case 0x0000000d:
+         PRE_XEN_SYSCTL_READ(cpu_featureset_0000000d, index);
+         PRE_XEN_SYSCTL_READ(cpu_featureset_0000000d, nr_features);
+         break;
+      }
+      break;
+
    default:
       bad_subop(tid, layout, arrghs, status, flags,
                 "__HYPERVISOR_sysctl", sysctl->cmd);
@@ -2054,6 +2064,18 @@ POST(sysctl)
          break;
       }
       break;
+
+   case VKI_XEN_SYSCTL_get_cpu_featureset:
+      switch (sysctl->interface_version)
+      {
+      case 0x0000000d:
+         POST_XEN_SYSCTL_WRITE(cpu_featureset_0000000d, nr_features);
+         POST_MEM_WRITE((Addr)sysctl->u.cpu_featureset_0000000d.features.p,
+                        sizeof(uint32_t) *  sysctl->u.cpu_featureset_0000000d.nr_features);
+         break;
+      }
+      break;
+
    /* No outputs */
    case VKI_XEN_SYSCTL_debug_keys:
        break;
