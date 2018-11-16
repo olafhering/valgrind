@@ -2570,6 +2570,31 @@ POST(domctl){
 	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, handle);
 	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, cpupool);
       break;
+      case 0x0000000f:
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, domain);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, flags);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, tot_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, max_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, outstanding_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, shr_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, paged_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, shared_info_frame);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, cpu_time);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, nr_online_vcpus);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, max_vcpu_id);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, ssidref);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, handle);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, cpupool);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, arch_config);
+#if defined(__i386__) || defined(__x86_64__)
+         __POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, getdomaininfo_0000000f, arch_config.emulation_flags);
+#endif
+#if defined(__arm__) || defined(__aarch64__)
+         __POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, getdomaininfo_0000000f, arch_config.gic_version);
+         __POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, getdomaininfo_0000000f, arch_config.nr_spis);
+         __POST_XEN_DOMCTL_WRITE(getdomaininfo_0000000f, getdomaininfo_0000000f, arch_config.clock_frequency);
+#endif
+         break;
       }
       break;
    case VKI_XEN_DOMCTL_getvcpucontext:
