@@ -889,6 +889,9 @@ PRE(domctl)
    case 0x0000000d:
       vki_set_assumed_xenversion(vki_xenversion_409);
 	   break;
+   case 0x0000000e:
+      vki_set_assumed_xenversion(vki_xenversion_410);
+	   break;
    default:
       bad_intf_version(tid, layout, arrghs, status, flags,
                        "__HYPERVISOR_domctl", domctl->interface_version);
@@ -2194,6 +2197,7 @@ POST(domctl){
    case 0x0000000b:
    case 0x0000000c:
    case 0x0000000d:
+   case 0x0000000e:
 	   break;
    default:
 	   return;
