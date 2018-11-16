@@ -767,7 +767,7 @@ PRE(sysctl) {
       /* No input params */
       break;
 
-   case VKI_XEN_SYSCTL_topologyinfo:
+   case VKI_XEN_SYSCTL_topologyinfo | VKI_XEN_SYSCTL_cputopoinfo:
       switch (sysctl->interface_version)
       {
       case 0x00000007:
@@ -779,6 +779,10 @@ PRE(sysctl) {
          PRE_XEN_SYSCTL_READ(topologyinfo, cpu_to_core);
          PRE_XEN_SYSCTL_READ(topologyinfo, cpu_to_socket);
          PRE_XEN_SYSCTL_READ(topologyinfo, cpu_to_node);
+         break;
+      case 0x0000000c:
+         PRE_XEN_SYSCTL_READ(cputopoinfo_0000000c, num_cpus);
+         PRE_XEN_SYSCTL_READ(cputopoinfo_0000000c, cputopo);
          break;
       }
       break;
@@ -2129,7 +2133,7 @@ POST(sysctl)
       }
       break;
 
-   case VKI_XEN_SYSCTL_topologyinfo:
+   case VKI_XEN_SYSCTL_topologyinfo | VKI_XEN_SYSCTL_cputopoinfo:
       switch (sysctl->interface_version)
       {
       case 0x00000007:
@@ -2147,6 +2151,12 @@ POST(sysctl)
          if (sysctl->u.topologyinfo.cpu_to_node.p)
             POST_MEM_WRITE((Addr)sysctl->u.topologyinfo.cpu_to_node.p,
                            sizeof(uint32_t) * sysctl->u.topologyinfo.max_cpu_index);
+         break;
+      case 0x0000000c:
+         POST_XEN_SYSCTL_WRITE(cputopoinfo_0000000c, num_cpus);
+         if (sysctl->u.cputopoinfo_0000000c.cputopo.p)
+            POST_MEM_WRITE((Addr)sysctl->u.cputopoinfo_0000000c.cputopo.p,
+                           sizeof(vki_xen_sysctl_cputopo_0000000c_t) * sysctl->u.cputopoinfo_0000000c.num_cpus);
          break;
       }
       break;
