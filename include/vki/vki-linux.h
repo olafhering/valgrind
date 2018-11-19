@@ -3695,6 +3695,14 @@ struct vki_xen_ioctl_gntalloc_dealloc_gref {
    vki_u32 count;
 };
 
+#define VKI_XEN_IOCTL_GNTALLOC_SET_UNMAP_NOTIFY			\
+	_VKI_IOC(_VKI_IOC_NONE, 'G', 7, sizeof(struct vki_xen_ioctl_gntalloc_set_unmap_notify))
+struct vki_xen_ioctl_gntalloc_set_unmap_notify {
+   __vki_u64 index;
+   vki_u32 action;
+   vki_u32 event_channel_port;
+};
+
 //----------------------------------------------------------------------
 // From linux-3.4.0/include/linux/fs.h
 //----------------------------------------------------------------------
