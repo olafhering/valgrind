@@ -9878,6 +9878,8 @@ PRE(sys_ioctl)
                   (Addr)&args->addr, sizeof(args->addr));
       break;
    }
+   case VKI_XEN_IOCTL_PRIVCMD_UNIMPLEMENTED:
+      break;
 
    case VKI_XEN_IOCTL_EVTCHN_BIND_VIRQ: {
          struct vki_xen_ioctl_evtchn_bind_virq *args =
@@ -12690,6 +12692,7 @@ POST(sys_ioctl)
       break;
    case VKI_XEN_IOCTL_PRIVCMD_RESTRICT:
    case VKI_XEN_IOCTL_PRIVCMD_MMAP_RESOURCE:
+   case VKI_XEN_IOCTL_PRIVCMD_UNIMPLEMENTED:
       break;
 
    case VKI_XEN_IOCTL_EVTCHN_BIND_VIRQ:
