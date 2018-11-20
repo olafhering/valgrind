@@ -1717,7 +1717,6 @@ PRE(domctl)
          break;
       case 0x0000000e:
       case 0x0000000f:
-      case 0x00000010:
           if (domctl->u.monitor_op_0000000e.op == VKI_XEN_DOMCTL_MONITOR_OP_ENABLE ||
               domctl->u.monitor_op_0000000e.op == VKI_XEN_DOMCTL_MONITOR_OP_DISABLE) {
              switch (domctl->u.monitor_op_0000000e.event) {
@@ -1737,23 +1736,26 @@ PRE(domctl)
           }
 
          break;
+      case 0x00000010:
       case 0x0000011:
       case 0x0000012:
-          if (domctl->u.monitor_op_00000011.op == VKI_XEN_DOMCTL_MONITOR_OP_ENABLE ||
-              domctl->u.monitor_op_00000011.op == VKI_XEN_DOMCTL_MONITOR_OP_DISABLE) {
-             switch (domctl->u.monitor_op_00000011.event) {
+          if (domctl->u.monitor_op_00000010.op == VKI_XEN_DOMCTL_MONITOR_OP_ENABLE ||
+              domctl->u.monitor_op_00000010.op == VKI_XEN_DOMCTL_MONITOR_OP_DISABLE) {
+             switch (domctl->u.monitor_op_00000010.event) {
              case VKI_XEN_DOMCTL_MONITOR_EVENT_WRITE_CTRLREG:
-                __PRE_XEN_DOMCTL_READ(monitor_op, monitor_op_00000011, u.mov_to_cr);
+                __PRE_XEN_DOMCTL_READ(monitor_op, monitor_op_00000010, u.mov_to_cr);
                 break;
              case VKI_XEN_DOMCTL_MONITOR_EVENT_MOV_TO_MSR:
-                __PRE_XEN_DOMCTL_READ(monitor_op, monitor_op_00000011, u.mov_to_msr);
+                __PRE_XEN_DOMCTL_READ(monitor_op, monitor_op_00000010, u.mov_to_msr);
                 break;
              case VKI_XEN_DOMCTL_MONITOR_EVENT_GUEST_REQUEST:
-                __PRE_XEN_DOMCTL_READ(monitor_op, monitor_op_00000011, u.guest_request);
+                __PRE_XEN_DOMCTL_READ(monitor_op, monitor_op_00000010, u.guest_request);
+                break;
+             case VKI_XEN_DOMCTL_MONITOR_EVENT_DEBUG_EXCEPTION:
+                __PRE_XEN_DOMCTL_READ(monitor_op, monitor_op_00000010, u.debug_exception);
                 break;
              }
           }
-
          break;
       }
       break;
@@ -2914,18 +2916,22 @@ POST(domctl){
           }
 
          break;
+      case 0x0000010:
       case 0x0000011:
-          if (domctl->u.monitor_op_00000011.op == VKI_XEN_DOMCTL_MONITOR_OP_GET_CAPABILITIES) {
-             switch(domctl->u.monitor_op_00000011.event) {
+          if (domctl->u.monitor_op_00000010.op == VKI_XEN_DOMCTL_MONITOR_OP_GET_CAPABILITIES) {
+             switch(domctl->u.monitor_op_00000010.event) {
              case VKI_XEN_DOMCTL_MONITOR_EVENT_WRITE_CTRLREG:
-                __POST_XEN_DOMCTL_WRITE(monitor_op, monitor_op_00000011, u.mov_to_cr);
+                __POST_XEN_DOMCTL_WRITE(monitor_op, monitor_op_00000010, u.mov_to_cr);
                 break;
              case VKI_XEN_DOMCTL_MONITOR_EVENT_MOV_TO_MSR:
-                __POST_XEN_DOMCTL_WRITE(monitor_op, monitor_op_00000011, u.mov_to_msr);
+                __POST_XEN_DOMCTL_WRITE(monitor_op, monitor_op_00000010, u.mov_to_msr);
                 break;
              case VKI_XEN_DOMCTL_MONITOR_EVENT_GUEST_REQUEST:
-                __POST_XEN_DOMCTL_WRITE(monitor_op, monitor_op_00000011, u.guest_request);
+                __POST_XEN_DOMCTL_WRITE(monitor_op, monitor_op_00000010, u.guest_request);
                 break;
+            case VKI_XEN_DOMCTL_MONITOR_EVENT_DEBUG_EXCEPTION:
+               __POST_XEN_DOMCTL_WRITE(monitor_op, monitor_op_00000010, u.debug_exception);
+               break;
              }
           }
 
