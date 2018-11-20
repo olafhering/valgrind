@@ -729,52 +729,27 @@ struct vki_xen_domctl_monitor_op_0000000e {
     } u;
 };
 
-struct vki_xen_domctl_monitor_op_00000011 {
+struct vki_xen_domctl_monitor_op_00000010 {
     vki_uint32_t op; /* vki_xen_DOMCTL_MONITOR_OP_* */
-
-    /*
-     * When used with ENABLE/DISABLE this has to be set to
-     * the requested vki_xen_DOMCTL_MONITOR_EVENT_* value.
-     * With GET_CAPABILITIES this field returns a bitmap of
-     * events supported by the platform, in the format
-     * (1 << vki_xen_DOMCTL_MONITOR_EVENT_*).
-     */
     vki_uint32_t event;
-
-    /*
-     * Further options when issuing vki_xen_DOMCTL_MONITOR_OP_ENABLE.
-     */
     union {
         struct {
-            /* Which control register */
             vki_uint8_t index;
-            /* Pause vCPU until response */
             vki_uint8_t sync;
-            /* Send event only on a change of value */
             vki_uint8_t onchangeonly;
-            /* Allignment padding */
             vki_uint8_t pad1;
             vki_uint32_t pad2;
-            /*
-             * Send event only if the changed bit in the control register
-             * is not masked.
-             */
             vki_xen_uint64_aligned_t bitmask;
         } mov_to_cr;
-
         struct {
             vki_uint32_t msr;
             vki_uint8_t onchangeonly;
         } mov_to_msr;
-
         struct {
-            /* Pause vCPU until response */
             vki_uint8_t sync;
             vki_uint8_t allow_userspace;
         } guest_request;
-
         struct {
-            /* Pause vCPU until response */
             vki_uint8_t sync;
         } debug_exception;
     } u;
@@ -862,7 +837,7 @@ struct vki_xen_domctl {
         struct vki_xen_domctl_monitor_op_0000000b monitor_op_0000000b;
         struct vki_xen_domctl_monitor_op_0000000c monitor_op_0000000c;
         struct vki_xen_domctl_monitor_op_0000000e monitor_op_0000000e;
-        struct vki_xen_domctl_monitor_op_00000011 monitor_op_00000011;
+        struct vki_xen_domctl_monitor_op_00000010 monitor_op_00000010;
         //struct vki_xen_domctl_vnuma             vnuma;
         //struct vki_xen_domctl_psr_cmt_op        psr_cmt_op;
         //struct vki_xen_domctl_psr_cat_op        psr_cat_op;
