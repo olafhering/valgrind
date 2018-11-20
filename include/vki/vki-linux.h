@@ -3605,6 +3605,14 @@ struct vki_xen_privcmd_dm_op {
         const struct vki_xen_privcmd_dm_op_buf __user *ubufs;
 };
 
+struct vki_xen_privcmd_mmap_resource {
+        __vki_u16 dom;
+        __vki_u32 type;
+        __vki_u32 id;
+        __vki_u32 idx;
+        __vki_u64 num;
+        __vki_u64 addr;
+};
 
 #define VKI_XEN_IOCTL_PRIVCMD_HYPERCALL    _VKI_IOC(_VKI_IOC_NONE, 'P', 0, sizeof(struct vki_xen_privcmd_hypercall))
 #define VKI_XEN_IOCTL_PRIVCMD_MMAP         _VKI_IOC(_VKI_IOC_NONE, 'P', 2, sizeof(struct vki_xen_privcmd_mmap))
@@ -3614,6 +3622,7 @@ struct vki_xen_privcmd_dm_op {
 
 #define VKI_XEN_IOCTL_PRIVCMD_DM_OP        _VKI_IOC(_VKI_IOC_NONE, 'P', 5, sizeof(struct vki_xen_privcmd_dm_op))
 #define VKI_XEN_IOCTL_PRIVCMD_RESTRICT     _VKI_IOC(_VKI_IOC_NONE, 'P', 6, sizeof(__vki_u16))
+#define VKI_XEN_IOCTL_PRIVCMD_MMAP_RESOURCE _VKI_IOC(_VKI_IOC_NONE, 'P', 7, sizeof(struct vki_xen_privcmd_mmap_resource))
 
 //----------------------------------------------------------------------
 // Xen evtchn IOCTL

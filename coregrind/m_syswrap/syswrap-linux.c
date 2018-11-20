@@ -9861,6 +9861,23 @@ PRE(sys_ioctl)
    }
    case VKI_XEN_IOCTL_PRIVCMD_RESTRICT:
       break;
+   case VKI_XEN_IOCTL_PRIVCMD_MMAP_RESOURCE: {
+      struct vki_xen_privcmd_mmap_resource *args =
+         (struct vki_xen_privcmd_mmap_resource *)(ARG3);
+      PRE_MEM_READ("VKI_XEN_IOCTL_PRIVCMD_MMAP_RESOURCE(dom)",
+                  (Addr)&args->dom, sizeof(args->dom));
+      PRE_MEM_READ("VKI_XEN_IOCTL_PRIVCMD_MMAP_RESOURCE(type)",
+                  (Addr)&args->type, sizeof(args->type));
+      PRE_MEM_READ("VKI_XEN_IOCTL_PRIVCMD_MMAP_RESOURCE(id)",
+                  (Addr)&args->id, sizeof(args->id));
+      PRE_MEM_READ("VKI_XEN_IOCTL_PRIVCMD_MMAP_RESOURCE(idx)",
+                  (Addr)&args->idx, sizeof(args->idx));
+      PRE_MEM_READ("VKI_XEN_IOCTL_PRIVCMD_MMAP_RESOURCE(num)",
+                  (Addr)&args->num, sizeof(args->num));
+      PRE_MEM_READ("VKI_XEN_IOCTL_PRIVCMD_MMAP_RESOURCE(addr)",
+                  (Addr)&args->addr, sizeof(args->addr));
+      break;
+   }
 
    case VKI_XEN_IOCTL_EVTCHN_BIND_VIRQ: {
          struct vki_xen_ioctl_evtchn_bind_virq *args =
@@ -12672,6 +12689,7 @@ POST(sys_ioctl)
       }
       break;
    case VKI_XEN_IOCTL_PRIVCMD_RESTRICT:
+   case VKI_XEN_IOCTL_PRIVCMD_MMAP_RESOURCE:
       break;
 
    case VKI_XEN_IOCTL_EVTCHN_BIND_VIRQ:
