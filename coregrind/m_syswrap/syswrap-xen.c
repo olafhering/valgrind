@@ -671,6 +671,7 @@ PRE(sysctl) {
       vki_set_assumed_xenversion(vki_xenversion_411);
 	   break;
    case 0x00000012:
+      vki_set_assumed_xenversion(vki_xenversion_412_or_413);
 	   break;
    default:
       bad_intf_version(tid, layout, arrghs, status, flags,
