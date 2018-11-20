@@ -3413,6 +3413,7 @@ struct vki_xen_privcmd_mmap_resource {
 #define VKI_XEN_IOCTL_PRIVCMD_DM_OP        _VKI_IOC(_VKI_IOC_NONE, 'P', 5, sizeof(struct vki_xen_privcmd_dm_op))
 #define VKI_XEN_IOCTL_PRIVCMD_RESTRICT     _VKI_IOC(_VKI_IOC_NONE, 'P', 6, sizeof(__vki_u16))
 #define VKI_XEN_IOCTL_PRIVCMD_MMAP_RESOURCE _VKI_IOC(_VKI_IOC_NONE, 'P', 7, sizeof(struct vki_xen_privcmd_mmap_resource))
+#define VKI_XEN_IOCTL_PRIVCMD_UNIMPLEMENTED _VKI_IOC(_VKI_IOC_NONE, 'P', 0xff, 0)
 
 //----------------------------------------------------------------------
 // Xen evtchn IOCTL
