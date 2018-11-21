@@ -918,6 +918,8 @@ PRE(domctl)
       vki_set_assumed_xenversion(vki_xenversion_411);
 	   break;
    case 0x00000011:
+      vki_set_assumed_xenversion(vki_xenversion_412);
+	   break;
    case 0x00000012:
 	   break;
    default:
