@@ -30,6 +30,10 @@
  * The domctl interface is versioned via the interface_version
  * field. The structures in this header supports domctl interfaces:
  *
+ * - 0x00000003: Xen 3.0.3 (unhandled)
+ * - 0x00000004: Xen 3.0.4 (unhandled)
+ * - 0x00000005: Xen 3.1 (unhandled)
+ * - 0x00000006: Xen 4.0 (unhandled)
  * - 0x00000007: Xen 4.1
  * - 0x00000008: Xen 4.2
  * - 0x00000009: Xen 4.3 & 4.4
