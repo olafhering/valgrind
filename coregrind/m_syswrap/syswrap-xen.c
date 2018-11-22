@@ -188,7 +188,7 @@ PRE(memory_op)
 
    case VKI_XENMEM_set_memory_map: {
       struct vki_xen_foreign_memory_map *arg =
-	      (struct vki_xen_foreign_memory_map *)ARG2;
+         (struct vki_xen_foreign_memory_map *)ARG2;
       PRE_MEM_READ("XENMEM_set_memory_map domid",
                    (Addr)&arg->domid, sizeof(arg->domid));
       PRE_MEM_READ("XENMEM_set_memory_map map",
@@ -199,7 +199,7 @@ PRE(memory_op)
    case VKI_XENMEM_memory_map:
    case VKI_XENMEM_machine_memory_map: {
       struct vki_xen_memory_map *arg =
-	      (struct vki_xen_memory_map *)ARG2;
+         (struct vki_xen_memory_map *)ARG2;
       PRE_MEM_READ("XENMEM_memory_map nr_entries",
                    (Addr)&arg->nr_entries, sizeof(arg->nr_entries));
       break;
@@ -222,7 +222,7 @@ PRE(memory_op)
          PRE_MEM_READ(which,
                       (Addr)memory_reservation->extent_start.p,
                       sizeof(vki_xen_pfn_t) * memory_reservation->nr_extents);
-	 break;
+         break;
       case VKI_XENMEM_populate_physmap:
          which = "XENMEM_populate_physmap";
          PRE_MEM_READ(which,
@@ -530,9 +530,9 @@ PRE(physdev_op)
 
    PRINT("__HYPERVISOR_physdev_op ( %ld, %#lx )", SARG1, ARG2);
 
-#define PRE_XEN_PHYSDEVOP_READ(_op, _field)		\
-   PRE_MEM_READ("XEN_PHYSDEVOP_" #_op " ." #_field,	\
-                (Addr)&arg->_field,			\
+#define PRE_XEN_PHYSDEVOP_READ(_op, _field) \
+   PRE_MEM_READ("XEN_PHYSDEVOP_" #_op " ." #_field, \
+                (Addr)&arg->_field, \
                 sizeof(arg->_field))
 
    switch (cmd) {
@@ -610,11 +610,11 @@ PRE(grant_table_op)
    switch (ARG1) {
    case VKI_XEN_GNTTABOP_setup_table: {
       struct vki_xen_gnttab_setup_table *gst =
-	      (struct vki_xen_gnttab_setup_table*)ARG2;
+         (struct vki_xen_gnttab_setup_table*)ARG2;
       PRE_MEM_READ("VKI_XEN_GNTTABOP_setup_table dom",
-		   (Addr)&gst->dom, sizeof(gst->dom));
+                  (Addr)&gst->dom, sizeof(gst->dom));
       PRE_MEM_READ("VKI_XEN_GNTTABOP_setup_table nr_frames",
-                   (Addr)&gst->nr_frames, sizeof(gst->nr_frames));
+                  (Addr)&gst->nr_frames, sizeof(gst->nr_frames));
       break;
    }
    default:
@@ -685,9 +685,9 @@ PRE(sysctl) {
       return;
    }
 
-#define __PRE_XEN_SYSCTL_READ(_sysctl, _union, _field)			\
-      PRE_MEM_READ("XEN_SYSCTL_" #_sysctl " u." #_union "." #_field,	\
-                   (Addr)&sysctl->u._union._field,			\
+#define __PRE_XEN_SYSCTL_READ(_sysctl, _union, _field) \
+      PRE_MEM_READ("XEN_SYSCTL_" #_sysctl " u." #_union "." #_field, \
+                   (Addr)&sysctl->u._union._field, \
                    sizeof(sysctl->u._union._field))
 #define PRE_XEN_SYSCTL_READ(_sysctl, _field) \
       __PRE_XEN_SYSCTL_READ(_sysctl, _sysctl, _field)
@@ -709,15 +709,15 @@ PRE(sysctl) {
       switch (sysctl->interface_version)
       {
       case 0x00000008:
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_00000008, first_domain);
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_00000008, max_domains);
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_00000008, buffer);
-	 break;
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000008, first_domain);
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000008, max_domains);
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000008, buffer);
+         break;
       case 0x00000009:
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_00000009, first_domain);
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_00000009, max_domains);
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_00000009, buffer);
-	 break;
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000009, first_domain);
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000009, max_domains);
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000009, buffer);
+         break;
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
@@ -728,16 +728,15 @@ PRE(sysctl) {
       case 0x00000011:
       case 0x00000012:
       case 0x00000013:
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, first_domain);
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, max_domains);
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, buffer);
-	 break;
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, first_domain);
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, max_domains);
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, buffer);
+         break;
       default:
-          VG_(dmsg)("WARNING: XEN_SYSCTL_getdomaininfolist for sysctl version "
-                    "%"PRIx32" not implemented yet\n",
-                    sysctl->interface_version);
-          SET_STATUS_Failure(VKI_EINVAL);
-          return;
+         VG_(dmsg)("WARNING: XEN_SYSCTL_getdomaininfolist for sysctl version "
+                  "%"PRIx32" not implemented yet\n", sysctl->interface_version);
+         SET_STATUS_Failure(VKI_EINVAL);
+         return;
       }
       break;
 
@@ -903,8 +902,8 @@ PRE(domctl)
     *    vki_xen_domid_t  domain;
     */
    PRE_MEM_READ("__HYPERVISOR_domctl", ARG1,
-                sizeof(vki_uint32_t) + sizeof(vki_uint32_t)
-		+ sizeof(vki_xen_domid_t));
+               sizeof(vki_uint32_t) + sizeof(vki_uint32_t)
+               + sizeof(vki_xen_domid_t));
 
    if (!domctl)
       return;
@@ -954,9 +953,9 @@ PRE(domctl)
       return;
    }
 
-#define __PRE_XEN_DOMCTL_READ(_domctl, _union, _field)			\
-      PRE_MEM_READ("XEN_DOMCTL_" #_domctl " u." #_union "." #_field,	\
-                   (Addr)&domctl->u._union._field,			\
+#define __PRE_XEN_DOMCTL_READ(_domctl, _union, _field) \
+      PRE_MEM_READ("XEN_DOMCTL_" #_domctl " u." #_union "." #_field, \
+                   (Addr)&domctl->u._union._field, \
                    sizeof(domctl->u._union._field))
 #define PRE_XEN_DOMCTL_READ(_domctl, _field) \
       __PRE_XEN_DOMCTL_READ(_domctl, _domctl, _field)
@@ -1602,7 +1601,7 @@ PRE(domctl)
                                      mci_ctl2_bank1);
            }
 #endif
-	   break;
+         break;
 
        default:
            VG_(dmsg)("WARNING: VKI_XEN_DOMCTL_set_ext_vcpucontext  domctl version %#"
@@ -2261,7 +2260,7 @@ POST(grant_table_op)
    switch (ARG1) {
    case VKI_XEN_GNTTABOP_setup_table: {
       struct vki_xen_gnttab_setup_table *gst =
-	      (struct vki_xen_gnttab_setup_table*)ARG2;
+         (struct vki_xen_gnttab_setup_table*)ARG2;
       PRE_MEM_WRITE("VKI_XEN_GNTTABOP_setup_table",
                     (Addr)&gst->status, sizeof(gst->status));
       PRE_MEM_WRITE("VKI_XEN_GNTTABOP_setup_table",
@@ -2290,7 +2289,7 @@ POST(sysctl)
    case 0x00000011:
    case 0x00000012:
    case 0x00000013:
-	   break;
+      break;
    default:
       return;
    }
@@ -2311,17 +2310,17 @@ POST(sysctl)
       switch (sysctl->interface_version)
       {
       case 0x00000008:
-	 POST_XEN_SYSCTL_WRITE(getdomaininfolist_00000008, num_domains);
-	 POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_00000008.buffer.p,
-			sizeof(*sysctl->u.getdomaininfolist_00000008.buffer.p)
-			* sysctl->u.getdomaininfolist_00000008.num_domains);
-	 break;
+         POST_XEN_SYSCTL_WRITE(getdomaininfolist_00000008, num_domains);
+         POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_00000008.buffer.p,
+                        sizeof(*sysctl->u.getdomaininfolist_00000008.buffer.p)
+                        * sysctl->u.getdomaininfolist_00000008.num_domains);
+         break;
       case 0x00000009:
-	 POST_XEN_SYSCTL_WRITE(getdomaininfolist_00000009, num_domains);
-	 POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_00000009.buffer.p,
-			sizeof(*sysctl->u.getdomaininfolist_00000009.buffer.p)
-			* sysctl->u.getdomaininfolist_00000009.num_domains);
-	 break;
+         POST_XEN_SYSCTL_WRITE(getdomaininfolist_00000009, num_domains);
+         POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_00000009.buffer.p,
+                        sizeof(*sysctl->u.getdomaininfolist_00000009.buffer.p)
+                        * sysctl->u.getdomaininfolist_00000009.num_domains);
+         break;
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
@@ -2332,11 +2331,11 @@ POST(sysctl)
       case 0x00000011:
       case 0x00000012:
       case 0x00000013:
-	 POST_XEN_SYSCTL_WRITE(getdomaininfolist_0000000a, num_domains);
-	 POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_0000000a.buffer.p,
-			sizeof(*sysctl->u.getdomaininfolist_0000000a.buffer.p)
-			* sysctl->u.getdomaininfolist_0000000a.num_domains);
-	 break;
+         POST_XEN_SYSCTL_WRITE(getdomaininfolist_0000000a, num_domains);
+         POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_0000000a.buffer.p,
+                        sizeof(*sysctl->u.getdomaininfolist_0000000a.buffer.p)
+                        * sysctl->u.getdomaininfolist_0000000a.num_domains);
+         break;
       }
       break;
 
@@ -2481,7 +2480,7 @@ POST(sysctl)
                         sizeof(uint64_t) * sysctl->u.numainfo_0000000c.num_nodes);
          POST_MEM_WRITE((Addr)sysctl->u.numainfo_0000000c.distance.p,
                         sizeof(uint32_t) *
-			(sysctl->u.numainfo_0000000c.num_nodes * sysctl->u.numainfo_0000000c.num_nodes));
+                        (sysctl->u.numainfo_0000000c.num_nodes * sysctl->u.numainfo_0000000c.num_nodes));
          break;
       }
       break;
@@ -2561,9 +2560,9 @@ POST(domctl){
    case 0x00000010:
    case 0x00000011:
    case 0x00000012:
-	   break;
+      break;
    default:
-	   return;
+      return;
    }
 
 #define __POST_XEN_DOMCTL_WRITE(_domctl, _union, _field)        \
@@ -2750,33 +2749,33 @@ POST(domctl){
    case VKI_XEN_DOMCTL_getdomaininfo:
       switch (domctl->interface_version) {
       case 0x00000007:
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, domain);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, flags);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, tot_pages);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, max_pages);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, shr_pages);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, shared_info_frame);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, cpu_time);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, nr_online_vcpus);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, max_vcpu_id);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, ssidref);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, handle);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, cpupool);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, domain);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, flags);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, tot_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, max_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, shr_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, shared_info_frame);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, cpu_time);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, nr_online_vcpus);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, max_vcpu_id);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, ssidref);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, handle);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000007, cpupool);
       break;
       case 0x00000008:
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, domain);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, flags);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, tot_pages);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, max_pages);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, shr_pages);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, paged_pages);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, shared_info_frame);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, cpu_time);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, nr_online_vcpus);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, max_vcpu_id);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, ssidref);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, handle);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, cpupool);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, domain);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, flags);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, tot_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, max_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, shr_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, paged_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, shared_info_frame);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, cpu_time);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, nr_online_vcpus);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, max_vcpu_id);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, ssidref);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, handle);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000008, cpupool);
       break;
       case 0x00000009:
       case 0x0000000a:
@@ -2784,21 +2783,21 @@ POST(domctl){
       case 0x0000000c:
       case 0x0000000d:
       case 0x0000000e:
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, domain);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, flags);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, tot_pages);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, max_pages);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, outstanding_pages);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, shr_pages);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, paged_pages);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, shared_info_frame);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, cpu_time);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, nr_online_vcpus);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, max_vcpu_id);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, ssidref);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, handle);
-	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, cpupool);
-      break;
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, domain);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, flags);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, tot_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, max_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, outstanding_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, shr_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, paged_pages);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, shared_info_frame);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, cpu_time);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, nr_online_vcpus);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, max_vcpu_id);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, ssidref);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, handle);
+         POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, cpupool);
+         break;
       case 0x0000000f:
       case 0x00000011:
       case 0x00000012:
@@ -2862,8 +2861,8 @@ POST(domctl){
 #endif
            break;
 
-       case 0x00000009:
-       case 0x0000000a:
+      case 0x00000009:
+      case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
@@ -2893,7 +2892,7 @@ POST(domctl){
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009,
                                    mci_ctl2_bank1);
 #endif
-	   break;
+         break;
        }
        break;
 
