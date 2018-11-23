@@ -1190,6 +1190,7 @@ PRE(domctl)
          break;
 
       case 0x00000009:
+      case 0x0000000a:
          __PRE_XEN_DOMCTL_READ(get_ext_vcpucontext, ext_vcpucontext_00000009, vcpu);
          break;
 
@@ -1230,6 +1231,7 @@ PRE(domctl)
            break;
 
        case 0x00000009:
+       case 0x0000000a:
            __PRE_XEN_DOMCTL_READ(set_ext_vcpucontext, ext_vcpucontext_00000009, vcpu);
            __PRE_XEN_DOMCTL_READ(set_ext_vcpucontext, ext_vcpucontext_00000009, size);
 #if defined(__i386__) || defined(__x86_64__)
@@ -2215,6 +2217,7 @@ POST(domctl){
            break;
 
        case 0x00000009:
+       case 0x0000000a:
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009, size);
 #if defined(__i386__) || defined(__x86_64__)
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009,
