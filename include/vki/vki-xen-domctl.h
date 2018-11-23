@@ -129,6 +129,7 @@
 #define VKI_XEN_DOMCTL_monitor_op                    77 /* new in 4.6 */
 #define VKI_XEN_DOMCTL_psr_cat_op                    78
 #define VKI_XEN_DOMCTL_soft_reset                    79
+#define VKI_XEN_DOMCTL_set_gnttab_limits             80
 #define VKI_XEN_DOMCTL_gdbsx_guestmemio            1000
 #define VKI_XEN_DOMCTL_gdbsx_pausevcpu             1001
 #define VKI_XEN_DOMCTL_gdbsx_unpausevcpu           1002
@@ -776,6 +777,11 @@ struct vki_xen_domctl_monitor_op_00000011 {
     } u;
 };
 
+struct vki_xen_domctl_set_gnttab_limits_0000000e {
+    vki_uint32_t grant_frames;
+    vki_uint32_t maptrack_frames;
+};
+
 struct vki_xen_domctl {
     vki_uint32_t cmd;
     vki_uint32_t interface_version; /* XEN_DOMCTL_INTERFACE_VERSION */
@@ -857,6 +863,7 @@ struct vki_xen_domctl {
         //struct vki_xen_domctl_psr_cmt_op        psr_cmt_op;
         //struct vki_xen_domctl_psr_cat_op        psr_cat_op;
         //struct vki_xen_domctl_arm_configuredomain configuredomain;
+        struct vki_xen_domctl_set_gnttab_limits_0000000e set_gnttab_limits_0000000e;
         vki_uint8_t                         pad[128];
     } u;
 };
