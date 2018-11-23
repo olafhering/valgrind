@@ -922,6 +922,7 @@ PRE(domctl)
          break;
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          switch (vki_assumed_xenversion) {
          case vki_xenversion_406:
             PRE_XEN_DOMCTL_READ(createdomain_0000000b, ssidref);
@@ -984,6 +985,7 @@ PRE(domctl)
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_00000005, type);
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_00000005, instance);
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_00000005, buffer);
@@ -1029,6 +1031,7 @@ PRE(domctl)
          break;
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          __PRE_XEN_DOMCTL_READ(test_assign_device, assign_device_0000000b, dev);
          __PRE_XEN_DOMCTL_READ(test_assign_device, assign_device_0000000b, flag);
          switch (domctl->u.assign_device_0000000b.dev) {
@@ -1060,6 +1063,7 @@ PRE(domctl)
          break;
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          __PRE_XEN_DOMCTL_READ(assign_device, assign_device_0000000b, dev);
          __PRE_XEN_DOMCTL_READ(assign_device, assign_device_0000000b, flag);
          switch (domctl->u.assign_device_0000000b.dev) {
@@ -1091,6 +1095,7 @@ PRE(domctl)
          break;
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          __PRE_XEN_DOMCTL_READ(deassign_device, assign_device_0000000b, dev);
          __PRE_XEN_DOMCTL_READ(deassign_device, assign_device_0000000b, flag);
          switch (domctl->u.assign_device_0000000b.dev) {
@@ -1126,6 +1131,7 @@ PRE(domctl)
          break;
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          __PRE_XEN_DOMCTL_READ(settscinfo, tsc_info_0000000b, tsc_mode);
          __PRE_XEN_DOMCTL_READ(settscinfo, tsc_info_0000000b, gtsc_khz);
          __PRE_XEN_DOMCTL_READ(settscinfo, tsc_info_0000000b, incarnation);
@@ -1165,6 +1171,7 @@ PRE(domctl)
          break;
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          PRE_XEN_DOMCTL_READ(settimeoffset_0000000b, time_offset_seconds);
          break;
       }
@@ -1214,6 +1221,7 @@ PRE(domctl)
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          __PRE_XEN_DOMCTL_READ(getvcpuaffinity, vcpuaffinity_0000000a, vcpu);
          if (domctl->u.vcpuaffinity_0000000a.flags & VKI_XEN_VCPUAFFINITY_HARD)
             __PRE_XEN_DOMCTL_READ(
@@ -1239,6 +1247,7 @@ PRE(domctl)
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          __PRE_XEN_DOMCTL_READ(setvcpuaffinity, vcpuaffinity_0000000a, vcpu);
          __PRE_XEN_DOMCTL_READ(setvcpuaffinity, vcpuaffinity_0000000a, flags);
          if (domctl->u.vcpuaffinity_0000000a.flags & VKI_XEN_VCPUAFFINITY_HARD) {
@@ -1298,6 +1307,7 @@ PRE(domctl)
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          __PRE_XEN_DOMCTL_READ(get_ext_vcpucontext, ext_vcpucontext_00000009, vcpu);
          break;
 
@@ -1341,6 +1351,7 @@ PRE(domctl)
        case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
            __PRE_XEN_DOMCTL_READ(set_ext_vcpucontext, ext_vcpucontext_00000009, vcpu);
            __PRE_XEN_DOMCTL_READ(set_ext_vcpucontext, ext_vcpucontext_00000009, size);
 #if defined(__i386__) || defined(__x86_64__)
@@ -1482,6 +1493,7 @@ PRE(domctl)
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          __PRE_XEN_DOMCTL_READ(mem_event_op, vm_event_op_00000008, op);
          __PRE_XEN_DOMCTL_READ(mem_event_op, vm_event_op_00000008, mode);
          break;
@@ -1529,6 +1541,7 @@ PRE(domctl)
 
          break;
       case 0x0000000c:
+      case 0x0000000d:
          if (domctl->u.monitor_op_0000000c.op == VKI_XEN_DOMCTL_MONITOR_OP_ENABLE ||
             domctl->u.monitor_op_0000000c.op == VKI_XEN_DOMCTL_MONITOR_OP_DISABLE) {
             switch (domctl->u.monitor_op_0000000c.event) {
@@ -2233,6 +2246,7 @@ POST(domctl){
          break;
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          __POST_XEN_DOMCTL_WRITE(gettscinfo, tsc_info_0000000b, tsc_mode);
          __POST_XEN_DOMCTL_WRITE(gettscinfo, tsc_info_0000000b, gtsc_khz);
          __POST_XEN_DOMCTL_WRITE(gettscinfo, tsc_info_0000000b, incarnation);
@@ -2268,6 +2282,7 @@ POST(domctl){
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          switch (domctl->u.hvmcontext_partial_00000005.type) {
          case VKI_HVM_SAVE_CODE(CPU):
             if ( domctl->u.hvmcontext_partial_00000005.buffer.p )
@@ -2318,6 +2333,7 @@ POST(domctl){
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          if (domctl->u.vcpuaffinity_0000000a.flags & VKI_XEN_VCPUAFFINITY_HARD)
             POST_MEM_WRITE(
                (Addr)domctl->u.vcpuaffinity_0000000a.cpumap_hard.bitmap.p,
@@ -2369,6 +2385,7 @@ POST(domctl){
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
 	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, domain);
 	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, flags);
 	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, tot_pages);
@@ -2424,6 +2441,7 @@ POST(domctl){
        case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009, size);
 #if defined(__i386__) || defined(__x86_64__)
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009,
@@ -2499,6 +2517,7 @@ POST(domctl){
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          __POST_XEN_DOMCTL_WRITE(mem_event_op, vm_event_op_00000008, port);
          break;
       }
@@ -2523,6 +2542,7 @@ POST(domctl){
 
          break;
       case 0x0000000c:
+      case 0x0000000d:
          if (domctl->u.monitor_op_0000000c.op == VKI_XEN_DOMCTL_MONITOR_OP_GET_CAPABILITIES) {
             switch(domctl->u.monitor_op_0000000c.event) {
             case VKI_XEN_DOMCTL_MONITOR_EVENT_WRITE_CTRLREG:
