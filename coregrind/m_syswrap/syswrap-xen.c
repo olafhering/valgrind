@@ -935,6 +935,7 @@ PRE(domctl)
          break;
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          switch (vki_assumed_xenversion) {
          case vki_xenversion_406:
             PRE_XEN_DOMCTL_READ(createdomain_0000000b, ssidref);
@@ -997,6 +998,7 @@ PRE(domctl)
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_00000005, type);
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_00000005, instance);
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_00000005, buffer);
@@ -1202,6 +1204,7 @@ PRE(domctl)
          break;
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          PRE_XEN_DOMCTL_READ(settimeoffset_0000000b, time_offset_seconds);
          break;
       }
@@ -2438,6 +2441,7 @@ POST(domctl){
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          switch (domctl->u.hvmcontext_partial_00000005.type) {
          case VKI_HVM_SAVE_CODE(CPU):
             if ( domctl->u.hvmcontext_partial_00000005.buffer.p )
@@ -2605,6 +2609,7 @@ POST(domctl){
        case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009, size);
 #if defined(__i386__) || defined(__x86_64__)
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009,
@@ -2711,6 +2716,7 @@ POST(domctl){
           }
          break;
       case 0x0000000c:
+      case 0x0000000d:
          if (domctl->u.monitor_op_0000000c.op == VKI_XEN_DOMCTL_MONITOR_OP_GET_CAPABILITIES) {
             switch(domctl->u.monitor_op_0000000c.event) {
             case VKI_XEN_DOMCTL_MONITOR_EVENT_WRITE_CTRLREG:
