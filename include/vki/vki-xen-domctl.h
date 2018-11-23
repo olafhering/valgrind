@@ -192,6 +192,18 @@ struct vki_xen_domctl_createdomain_0000000c {
     struct vki_xen_arch_domainconfig_0000000c config;
 };
 
+struct vki_xen_domctl_createdomain_00000011 {
+    /* IN parameters */
+    vki_uint32_t ssidref;
+    vki_xen_domain_handle_t handle;
+    vki_uint32_t flags;
+    vki_uint32_t max_vcpus;
+    vki_uint32_t max_evtchn_port;
+    vki_uint32_t max_grant_frames;
+    vki_uint32_t max_maptrack_frames;
+    struct vki_xen_arch_domainconfig_0000000c config;
+};
+
 struct vki_xen_domctl_getdomaininfo_00000007 {
     /* OUT variables. */
     vki_xen_domid_t  domain;
@@ -790,6 +802,7 @@ struct vki_xen_domctl {
         struct vki_xen_domctl_createdomain_00000004  createdomain_00000004;
         struct vki_xen_domctl_createdomain_0000000b  createdomain_0000000b;
         struct vki_xen_domctl_createdomain_0000000c  createdomain_0000000c;
+        struct vki_xen_domctl_createdomain_00000011  createdomain_00000011;
         struct vki_xen_domctl_getdomaininfo_00000007 getdomaininfo_00000007;
         struct vki_xen_domctl_getdomaininfo_00000008 getdomaininfo_00000008;
         struct vki_xen_domctl_getdomaininfo_00000009 getdomaininfo_00000009;
