@@ -1743,6 +1743,11 @@ PRE(domctl)
       }
       break;
 
+   case VKI_XEN_DOMCTL_set_gnttab_limits:
+      PRE_XEN_DOMCTL_READ(set_gnttab_limits_0000000e, grant_frames);
+      PRE_XEN_DOMCTL_READ(set_gnttab_limits_0000000e, maptrack_frames);
+      break;
+
    default:
       bad_subop(tid, layout, arrghs, status, flags,
                 "__HYPERVISOR_domctl", domctl->cmd);
