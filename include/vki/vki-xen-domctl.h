@@ -127,6 +127,7 @@
 #define VKI_XEN_DOMCTL_psr_cmt_op                    75
 #define VKI_XEN_DOMCTL_arm_configure_domain          76
 #define VKI_XEN_DOMCTL_monitor_op                    77 /* new in 4.6 */
+#define VKI_XEN_DOMCTL_psr_cat_op                    78
 #define VKI_XEN_DOMCTL_gdbsx_guestmemio            1000
 #define VKI_XEN_DOMCTL_gdbsx_pausevcpu             1001
 #define VKI_XEN_DOMCTL_gdbsx_unpausevcpu           1002
@@ -684,6 +685,7 @@ struct vki_xen_domctl {
         struct vki_xen_domctl_monitor_op_0000000b monitor_op_0000000b;
         //struct vki_xen_domctl_vnuma             vnuma;
         //struct vki_xen_domctl_psr_cmt_op        psr_cmt_op;
+        //struct vki_xen_domctl_psr_cat_op        psr_cat_op;
         //struct vki_xen_domctl_arm_configuredomain configuredomain;
         vki_uint8_t                         pad[128];
     } u;
