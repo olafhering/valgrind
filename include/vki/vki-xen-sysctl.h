@@ -132,6 +132,20 @@ struct vki_xen_sysctl_numainfo_00000008 {
     VKI_XEN_GUEST_HANDLE_64(vki_uint64) node_to_memfree;
     VKI_XEN_GUEST_HANDLE_64(vki_uint32) node_to_node_distance;
 };
+
+struct vki_xen_xen_sysctl_meminfo_0000000c {
+    vki_uint64_t memsize;
+    vki_uint64_t memfree;
+};
+typedef struct vki_xen_xen_sysctl_meminfo_0000000c vki_xen_xen_sysctl_meminfo_0000000c_t;
+DEFINE_VKI_XEN_GUEST_HANDLE(vki_xen_xen_sysctl_meminfo_0000000c_t);
+
+struct vki_xen_sysctl_numainfo_0000000c {
+    vki_uint32_t num_nodes;
+    VKI_XEN_GUEST_HANDLE_64(vki_xen_xen_sysctl_meminfo_0000000c_t) meminfo;
+    VKI_XEN_GUEST_HANDLE_64(vki_uint32) distance;
+};
+
 struct vki_xen_sysctl_physinfo_00000008 {
     vki_uint32_t threads_per_core;
     vki_uint32_t cores_per_socket;
@@ -182,6 +196,7 @@ struct vki_xen_sysctl {
         struct vki_xen_sysctl_physinfo_0000000a physinfo_0000000a;
         struct vki_xen_sysctl_topologyinfo      topologyinfo;
         struct vki_xen_sysctl_numainfo_00000008 numainfo_00000008;
+        struct vki_xen_sysctl_numainfo_0000000c numainfo_0000000c;
         struct vki_xen_sysctl_sched_id          sched_id;
         //struct vki_xen_sysctl_perfc_op          perfc_op;
         struct vki_xen_sysctl_getdomaininfolist_00000008 getdomaininfolist_00000008;

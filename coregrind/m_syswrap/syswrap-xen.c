@@ -780,6 +780,11 @@ PRE(sysctl) {
          PRE_XEN_SYSCTL_READ(numainfo_00000008, node_to_memfree);
          PRE_XEN_SYSCTL_READ(numainfo_00000008, node_to_node_distance);
          break;
+      case 0x0000000c:
+         PRE_XEN_SYSCTL_READ(numainfo_0000000c, num_nodes);
+         PRE_XEN_SYSCTL_READ(numainfo_0000000c, meminfo);
+         PRE_XEN_SYSCTL_READ(numainfo_0000000c, distance);
+         break;
       }
       break;
 
@@ -1972,6 +1977,14 @@ POST(sysctl)
          POST_MEM_WRITE((Addr)sysctl->u.numainfo_00000008.node_to_node_distance.p,
                         sizeof(uint32_t) *
                         (sysctl->u.numainfo_00000008.max_node_index * sysctl->u.numainfo_00000008.max_node_index));
+         break;
+      case 0x0000000c:
+         POST_XEN_SYSCTL_WRITE(numainfo_0000000c, num_nodes);
+         POST_MEM_WRITE((Addr)sysctl->u.numainfo_0000000c.meminfo.p,
+                        sizeof(uint64_t) * sysctl->u.numainfo_0000000c.num_nodes);
+         POST_MEM_WRITE((Addr)sysctl->u.numainfo_0000000c.distance.p,
+                        sizeof(uint32_t) *
+			(sysctl->u.numainfo_0000000c.num_nodes * sysctl->u.numainfo_0000000c.num_nodes));
          break;
       }
       break;
