@@ -934,6 +934,7 @@ PRE(domctl)
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
          switch (vki_assumed_xenversion) {
          case vki_xenversion_406:
             PRE_XEN_DOMCTL_READ(createdomain_0000000b, ssidref);
@@ -1219,6 +1220,7 @@ PRE(domctl)
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
          __PRE_XEN_DOMCTL_READ(settscinfo, tsc_info_0000000b, tsc_mode);
          __PRE_XEN_DOMCTL_READ(settscinfo, tsc_info_0000000b, gtsc_khz);
          __PRE_XEN_DOMCTL_READ(settscinfo, tsc_info_0000000b, incarnation);
@@ -1259,6 +1261,7 @@ PRE(domctl)
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
          PRE_XEN_DOMCTL_READ(settimeoffset_0000000b, time_offset_seconds);
          break;
       }
@@ -1309,6 +1312,7 @@ PRE(domctl)
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
          __PRE_XEN_DOMCTL_READ(getvcpuaffinity, vcpuaffinity_0000000a, vcpu);
          if (domctl->u.vcpuaffinity_0000000a.flags & VKI_XEN_VCPUAFFINITY_HARD)
             __PRE_XEN_DOMCTL_READ(
@@ -1335,6 +1339,7 @@ PRE(domctl)
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
          __PRE_XEN_DOMCTL_READ(setvcpuaffinity, vcpuaffinity_0000000a, vcpu);
          __PRE_XEN_DOMCTL_READ(setvcpuaffinity, vcpuaffinity_0000000a, flags);
          if (domctl->u.vcpuaffinity_0000000a.flags & VKI_XEN_VCPUAFFINITY_HARD) {
@@ -1395,6 +1400,7 @@ PRE(domctl)
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
          __PRE_XEN_DOMCTL_READ(get_ext_vcpucontext, ext_vcpucontext_00000009, vcpu);
          break;
 
@@ -1439,6 +1445,7 @@ PRE(domctl)
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
            __PRE_XEN_DOMCTL_READ(set_ext_vcpucontext, ext_vcpucontext_00000009, vcpu);
            __PRE_XEN_DOMCTL_READ(set_ext_vcpucontext, ext_vcpucontext_00000009, size);
 #if defined(__i386__) || defined(__x86_64__)
@@ -1581,6 +1588,7 @@ PRE(domctl)
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
          __PRE_XEN_DOMCTL_READ(mem_event_op, vm_event_op_00000008, op);
          __PRE_XEN_DOMCTL_READ(mem_event_op, vm_event_op_00000008, mode);
          break;
@@ -2383,6 +2391,7 @@ POST(domctl){
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
          __POST_XEN_DOMCTL_WRITE(gettscinfo, tsc_info_0000000b, tsc_mode);
          __POST_XEN_DOMCTL_WRITE(gettscinfo, tsc_info_0000000b, gtsc_khz);
          __POST_XEN_DOMCTL_WRITE(gettscinfo, tsc_info_0000000b, incarnation);
@@ -2478,6 +2487,7 @@ POST(domctl){
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
          if (domctl->u.vcpuaffinity_0000000a.flags & VKI_XEN_VCPUAFFINITY_HARD)
             POST_MEM_WRITE(
                (Addr)domctl->u.vcpuaffinity_0000000a.cpumap_hard.bitmap.p,
@@ -2530,6 +2540,7 @@ POST(domctl){
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
 	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, domain);
 	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, flags);
 	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, tot_pages);
@@ -2586,6 +2597,7 @@ POST(domctl){
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009, size);
 #if defined(__i386__) || defined(__x86_64__)
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009,
@@ -2662,6 +2674,7 @@ POST(domctl){
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
          __POST_XEN_DOMCTL_WRITE(mem_event_op, vm_event_op_00000008, port);
          break;
       }
