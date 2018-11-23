@@ -1493,12 +1493,12 @@ PRE(domctl)
 
    case VKI_XEN_DOMCTL_monitor_op:
       switch (domctl->interface_version) {
-      case 0x000000b:
-      case 0x000000c:
-      case 0x000000d:
-      case 0x000000e:
-      case 0x000000f:
-      case 0x0000010:
+      case 0x0000000b:
+      case 0x0000000c:
+      case 0x0000000d:
+      case 0x0000000e:
+      case 0x0000000f:
+      case 0x00000010:
           if (domctl->u.monitor_op_0000000b.op == VKI_XEN_DOMCTL_MONITOR_OP_ENABLE ||
               domctl->u.monitor_op_0000000b.op == VKI_XEN_DOMCTL_MONITOR_OP_DISABLE) {
              switch (domctl->u.monitor_op_0000000b.event) {
@@ -2528,7 +2528,7 @@ POST(domctl){
 
    case VKI_XEN_DOMCTL_monitor_op:
       switch (domctl->interface_version) {
-      case 0x000000b:
+      case 0x0000000b:
           if (domctl->u.monitor_op_0000000b.op == VKI_XEN_DOMCTL_MONITOR_OP_GET_CAPABILITIES) {
              switch(domctl->u.monitor_op_0000000b.event) {
              case VKI_XEN_DOMCTL_MONITOR_EVENT_WRITE_CTRLREG:
