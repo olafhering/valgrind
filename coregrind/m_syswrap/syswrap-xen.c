@@ -1149,6 +1149,7 @@ PRE(domctl)
          __PRE_XEN_DOMCTL_READ(getvcpuaffinity, vcpuaffinity_00000009, cpumap.nr_bits);
          break;
       case 0x0000000a:
+      case 0x0000000b:
          __PRE_XEN_DOMCTL_READ(getvcpuaffinity, vcpuaffinity_0000000a, vcpu);
          if (domctl->u.vcpuaffinity_0000000a.flags & VKI_XEN_VCPUAFFINITY_HARD)
             __PRE_XEN_DOMCTL_READ(
@@ -1172,6 +1173,7 @@ PRE(domctl)
                       domctl->u.vcpuaffinity_00000009.cpumap.nr_bits / 8);
          break;
       case 0x0000000a:
+      case 0x0000000b:
          __PRE_XEN_DOMCTL_READ(setvcpuaffinity, vcpuaffinity_0000000a, vcpu);
          __PRE_XEN_DOMCTL_READ(setvcpuaffinity, vcpuaffinity_0000000a, flags);
          if (domctl->u.vcpuaffinity_0000000a.flags & VKI_XEN_VCPUAFFINITY_HARD) {
@@ -1229,6 +1231,7 @@ PRE(domctl)
 
       case 0x00000009:
       case 0x0000000a:
+      case 0x0000000b:
          __PRE_XEN_DOMCTL_READ(get_ext_vcpucontext, ext_vcpucontext_00000009, vcpu);
          break;
 
@@ -1270,6 +1273,7 @@ PRE(domctl)
 
        case 0x00000009:
        case 0x0000000a:
+      case 0x0000000b:
            __PRE_XEN_DOMCTL_READ(set_ext_vcpucontext, ext_vcpucontext_00000009, vcpu);
            __PRE_XEN_DOMCTL_READ(set_ext_vcpucontext, ext_vcpucontext_00000009, size);
 #if defined(__i386__) || defined(__x86_64__)
@@ -2179,6 +2183,7 @@ POST(domctl){
                         domctl->u.vcpuaffinity_00000009.cpumap.nr_bits / 8);
          break;
       case 0x0000000a:
+      case 0x0000000b:
          if (domctl->u.vcpuaffinity_0000000a.flags & VKI_XEN_VCPUAFFINITY_HARD)
             POST_MEM_WRITE(
                (Addr)domctl->u.vcpuaffinity_0000000a.cpumap_hard.bitmap.p,
@@ -2228,6 +2233,7 @@ POST(domctl){
       break;
       case 0x00000009:
       case 0x0000000a:
+      case 0x0000000b:
 	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, domain);
 	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, flags);
 	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, tot_pages);
@@ -2281,6 +2287,7 @@ POST(domctl){
 
        case 0x00000009:
        case 0x0000000a:
+      case 0x0000000b:
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009, size);
 #if defined(__i386__) || defined(__x86_64__)
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009,
