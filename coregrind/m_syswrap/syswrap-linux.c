@@ -9498,6 +9498,8 @@ PRE(sys_ioctl)
                   (Addr)args->ubufs, sizeof(*(args->ubufs)) * args->num);
       break;
    }
+   case VKI_XEN_IOCTL_PRIVCMD_RESTRICT:
+      break;
 
    case VKI_XEN_IOCTL_EVTCHN_BIND_VIRQ: {
          struct vki_xen_ioctl_evtchn_bind_virq *args =
@@ -12287,6 +12289,8 @@ POST(sys_ioctl)
          (struct vki_xen_privcmd_dm_op *)(ARG3);
       POST_MEM_WRITE((Addr)args->ubufs, sizeof(*(args->ubufs)) * args->num);
       }
+      break;
+   case VKI_XEN_IOCTL_PRIVCMD_RESTRICT:
       break;
 
    case VKI_XEN_IOCTL_EVTCHN_BIND_VIRQ:
