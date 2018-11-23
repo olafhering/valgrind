@@ -945,6 +945,7 @@ PRE(domctl)
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
          switch (vki_assumed_xenversion) {
          case vki_xenversion_406:
             PRE_XEN_DOMCTL_READ(createdomain_0000000b, ssidref);
@@ -1283,6 +1284,7 @@ PRE(domctl)
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
          PRE_XEN_DOMCTL_READ(settimeoffset_0000000b, time_offset_seconds);
          break;
       }
@@ -2724,6 +2726,7 @@ POST(domctl){
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
+      case 0x0000000e:
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009, size);
 #if defined(__i386__) || defined(__x86_64__)
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009,
