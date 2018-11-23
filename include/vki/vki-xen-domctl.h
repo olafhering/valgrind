@@ -160,6 +160,28 @@ struct vki_xen_domctl_createdomain_0000000b {
     struct vki_xen_arch_domainconfig_0000000b config;
 };
 
+/* The layout changed in 4.07, which shares domctl with 4.06 */
+struct vki_xen_arch_domainconfig_0000000c {
+#if defined(__i386__) || defined(__x86_64__)
+    vki_uint32_t emulation_flags;
+#endif
+#if defined(__arm__) || defined(__aarch64__)
+    /* IN/OUT */
+    vki_uint8_t gic_version;
+    /* IN */
+    vki_uint32_t nr_spis;
+    vki_uint32_t clock_frequency;
+#endif
+};
+
+struct vki_xen_domctl_createdomain_0000000c {
+    /* IN parameters */
+    vki_uint32_t ssidref;
+    vki_xen_domain_handle_t handle;
+    vki_uint32_t flags;
+    struct vki_xen_arch_domainconfig_0000000c config;
+};
+
 struct vki_xen_domctl_getdomaininfo_00000007 {
     /* OUT variables. */
     vki_xen_domid_t  domain;
@@ -619,6 +641,7 @@ struct vki_xen_domctl {
     union {
         struct vki_xen_domctl_createdomain_00000004  createdomain_00000004;
         struct vki_xen_domctl_createdomain_0000000b  createdomain_0000000b;
+        struct vki_xen_domctl_createdomain_0000000c  createdomain_0000000c;
         struct vki_xen_domctl_getdomaininfo_00000007 getdomaininfo_00000007;
         struct vki_xen_domctl_getdomaininfo_00000008 getdomaininfo_00000008;
         struct vki_xen_domctl_getdomaininfo_00000009 getdomaininfo_00000009;

@@ -891,17 +891,40 @@ PRE(domctl)
          PRE_XEN_DOMCTL_READ(createdomain_00000004, flags);
          break;
       case 0x0000000b:
-         PRE_XEN_DOMCTL_READ(createdomain_0000000b, ssidref);
-         PRE_XEN_DOMCTL_READ(createdomain_0000000b, handle);
-         PRE_XEN_DOMCTL_READ(createdomain_0000000b, flags);
+      case 0x0000000c:
+         switch (vki_assumed_xenversion) {
+         case vki_xenversion_406:
+            PRE_XEN_DOMCTL_READ(createdomain_0000000b, ssidref);
+            PRE_XEN_DOMCTL_READ(createdomain_0000000b, handle);
+            PRE_XEN_DOMCTL_READ(createdomain_0000000b, flags);
 #if defined(__i386__) || defined(__x86_64__)
-         __PRE_XEN_DOMCTL_READ(createdomain_0000000b, createdomain_0000000b, config.dummy);
+            __PRE_XEN_DOMCTL_READ(createdomain_0000000b, createdomain_0000000b, config.dummy);
 #endif
 #if defined(__arm__) || defined(__aarch64__)
-         __PRE_XEN_DOMCTL_READ(createdomain_0000000b, createdomain_0000000b, config.gic_version);
-         __PRE_XEN_DOMCTL_READ(createdomain_0000000b, createdomain_0000000b, config.nr_spis);
-         __PRE_XEN_DOMCTL_READ(createdomain_0000000b, createdomain_0000000b, config.clock_frequency);
+            __PRE_XEN_DOMCTL_READ(createdomain_0000000b, createdomain_0000000b, config.gic_version);
+            __PRE_XEN_DOMCTL_READ(createdomain_0000000b, createdomain_0000000b, config.nr_spis);
+            __PRE_XEN_DOMCTL_READ(createdomain_0000000b, createdomain_0000000b, config.clock_frequency);
 #endif
+            break;
+         case vki_xenversion_unset:
+         case vki_xenversion_406_or_407:
+            vki_report_unknown_xenversion("VKI_XEN_DOMCTL_createdomain");
+            /* fallthrough */
+         case vki_xenversion_407:
+         default:
+            PRE_XEN_DOMCTL_READ(createdomain_0000000c, ssidref);
+            PRE_XEN_DOMCTL_READ(createdomain_0000000c, handle);
+            PRE_XEN_DOMCTL_READ(createdomain_0000000c, flags);
+#if defined(__i386__) || defined(__x86_64__)
+            __PRE_XEN_DOMCTL_READ(createdomain_0000000c, createdomain_0000000c, config.emulation_flags);
+#endif
+#if defined(__arm__) || defined(__aarch64__)
+            __PRE_XEN_DOMCTL_READ(createdomain_0000000c, createdomain_0000000c, config.gic_version);
+            __PRE_XEN_DOMCTL_READ(createdomain_0000000c, createdomain_0000000c, config.nr_spis);
+            __PRE_XEN_DOMCTL_READ(createdomain_0000000c, createdomain_0000000c, config.clock_frequency);
+#endif
+            break;
+         }
          break;
       }
       break;
