@@ -122,6 +122,7 @@
 #define VKI_XEN_DOMCTL_get_vcpu_msrs                 72
 #define VKI_XEN_DOMCTL_set_vcpu_msrs                 73
 #define VKI_XEN_DOMCTL_setvnumainfo                  74
+#define VKI_XEN_DOMCTL_psr_cmt_op                    75
 #define VKI_XEN_DOMCTL_monitor_op                    77 /* new in 4.6 */
 #define VKI_XEN_DOMCTL_gdbsx_guestmemio            1000
 #define VKI_XEN_DOMCTL_gdbsx_pausevcpu             1001
@@ -736,6 +737,7 @@ struct vki_xen_domctl {
         struct vki_xen_domctl_monitor_op_0000000b monitor_op_0000000b;
         struct vki_xen_domctl_monitor_op_00000011 monitor_op_00000011;
         //struct vki_xen_domctl_vnuma             vnuma;
+        //struct vki_xen_domctl_psr_cmt_op        psr_cmt_op;
         vki_uint8_t                         pad[128];
     } u;
 };
