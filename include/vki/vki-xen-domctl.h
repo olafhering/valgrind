@@ -38,8 +38,7 @@
  * - 0x00000008: Xen 4.2
  * - 0x00000009: Xen 4.3 & 4.4
  * - 0x0000000a: Xen 4.5
- * - 0x0000000b: Xen 4.6
- * - 0x0000000c: Xen 4.7
+ * - 0x0000000b: Xen 4.6 & 4.7
  *
  * When adding a new subop be sure to include the variants used by all
  * of the above, both here and in syswrap-xen.c
