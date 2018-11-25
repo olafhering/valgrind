@@ -3468,6 +3468,16 @@ struct vki_xen_ioctl_gntdev_set_max_grants {
    vki_u32 count;
 };
 
+#define VKI_XEN_IOCTL_GNTALLOC_ALLOC_GREF			\
+	_VKI_IOC(_VKI_IOC_NONE, 'G', 5, sizeof(struct vki_xen_ioctl_gntalloc_alloc_gref))
+struct vki_xen_ioctl_gntalloc_alloc_gref {
+   vki_u16 domid;
+   vki_u16 flags;
+   vki_u32 count;
+   __vki_u64 index;
+   vki_u32 gref_ids[1];
+};
+
 //----------------------------------------------------------------------
 // From linux-3.4.0/include/linux/fs.h
 //----------------------------------------------------------------------
