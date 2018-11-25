@@ -51,6 +51,7 @@
 #define VKI_XEN_SYSCTL_tmem_op                       24
 #define VKI_XEN_SYSCTL_get_cpu_levelling_caps        25
 #define VKI_XEN_SYSCTL_get_cpu_featureset            26
+#define VKI_XEN_SYSCTL_livepatch_op                  27
 
 struct vki_xen_sysctl_readconsole {
     /* IN */
@@ -252,6 +253,7 @@ struct vki_xen_sysctl {
         //struct vki_xen_sysctl_tmem_op           tmem_op;
         //struct vki_xen_sysctl_cpu_levelling_caps cpu_levelling_caps;
         struct vki_xen_sysctl_cpu_featureset_0000000d cpu_featureset_0000000d;
+        //struct vki_xen_sysctl_livepatch_op      livepatch;
 
         vki_uint8_t                             pad[128];
     } u;
