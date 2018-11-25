@@ -8314,6 +8314,17 @@ PRE(sys_ioctl)
                   (Addr)&args->count, sizeof(args->count));
       }
       break;
+   case VKI_XEN_IOCTL_GNTALLOC_SET_UNMAP_NOTIFY: {
+      struct vki_xen_ioctl_gntalloc_set_unmap_notify *args =
+         (struct vki_xen_ioctl_gntalloc_set_unmap_notify*)(Addr)(ARG3);
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTALLOC_set_unmap_notify(index)",
+                  (Addr)&args->index, sizeof(args->index));
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTALLOC_set_unmap_notify(action)",
+                  (Addr)&args->action, sizeof(args->action));
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTALLOC_set_unmap_notify(event_channel_port)",
+                  (Addr)&args->event_channel_port, sizeof(args->event_channel_port));
+      }
+      break;
 #endif
 
    /* Lustre */
@@ -10818,6 +10829,7 @@ POST(sys_ioctl)
       }
       break;
    case VKI_XEN_IOCTL_GNTALLOC_DEALLOC_GREF:
+   case VKI_XEN_IOCTL_GNTALLOC_SET_UNMAP_NOTIFY:
       /* No output */
       break;
 #endif
