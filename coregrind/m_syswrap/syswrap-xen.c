@@ -1237,8 +1237,7 @@ PRE(domctl)
       PRE_XEN_DOMCTL_READ(access_required, access_required);
       break;
 
-   case VKI_XEN_DOMCTL_mem_event_op:
-   //case VKI_XEN_DOMCTL_vm_event_op: /* name change in 4.6 */
+   case VKI_XEN_DOMCTL_mem_event_op | VKI_XEN_DOMCTL_vm_event_op:
       switch (domctl->interface_version) {
       case 0x00000007:
       case 0x00000008:
@@ -2109,8 +2108,7 @@ POST(domctl){
                         domctl->u.vcpu_msrs.msr_count);
       break;
 
-   case VKI_XEN_DOMCTL_mem_event_op:
-   //case VKI_XEN_DOMCTL_vm_event_op: /* name change in 4.6 */
+   case VKI_XEN_DOMCTL_mem_event_op | VKI_XEN_DOMCTL_vm_event_op:
       switch (domctl->interface_version) {
       case 0x00000007:
       case 0x00000008:
