@@ -890,6 +890,23 @@ PRE(domctl)
          __PRE_XEN_DOMCTL_READ(createdomain_0000000c, createdomain_0000000c, config.nr_spis);
          __PRE_XEN_DOMCTL_READ(createdomain_0000000c, createdomain_0000000c, config.clock_frequency);
 #endif
+         break;
+      case 0x00000011:
+         PRE_XEN_DOMCTL_READ(createdomain_00000011, ssidref);
+         PRE_XEN_DOMCTL_READ(createdomain_00000011, handle);
+         PRE_XEN_DOMCTL_READ(createdomain_00000011, flags);
+         PRE_XEN_DOMCTL_READ(createdomain_00000011, max_vcpus);
+         PRE_XEN_DOMCTL_READ(createdomain_00000011, max_evtchn_port);
+         PRE_XEN_DOMCTL_READ(createdomain_00000011, max_maptrack_frames);
+#if defined(__i386__) || defined(__x86_64__)
+         __PRE_XEN_DOMCTL_READ(createdomain_00000011, createdomain_00000011, config.emulation_flags);
+#endif
+#if defined(__arm__) || defined(__aarch64__)
+         __PRE_XEN_DOMCTL_READ(createdomain_00000011, createdomain_00000011, config.gic_version);
+         __PRE_XEN_DOMCTL_READ(createdomain_00000011, createdomain_00000011, config.nr_spis);
+         __PRE_XEN_DOMCTL_READ(createdomain_00000011, createdomain_00000011, config.clock_frequency);
+#endif
+         break;
       }
       break;
 
