@@ -640,6 +640,7 @@ PRE(sysctl) {
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
 	 PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, first_domain);
 	 PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, max_domains);
 	 PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, buffer);
@@ -708,6 +709,7 @@ PRE(sysctl) {
          PRE_XEN_SYSCTL_READ(topologyinfo, cpu_to_node);
          break;
       case 0x0000000c:
+      case 0x0000000d:
          PRE_XEN_SYSCTL_READ(cputopoinfo_0000000c, num_cpus);
          PRE_XEN_SYSCTL_READ(cputopoinfo_0000000c, cputopo);
          break;
@@ -727,6 +729,7 @@ PRE(sysctl) {
          PRE_XEN_SYSCTL_READ(numainfo_00000008, node_to_node_distance);
          break;
       case 0x0000000c:
+      case 0x0000000d:
          PRE_XEN_SYSCTL_READ(numainfo_0000000c, num_nodes);
          PRE_XEN_SYSCTL_READ(numainfo_0000000c, meminfo);
          PRE_XEN_SYSCTL_READ(numainfo_0000000c, distance);
@@ -738,6 +741,7 @@ PRE(sysctl) {
       switch (sysctl->interface_version)
       {
       case 0x0000000c:
+      case 0x0000000d:
          PRE_XEN_SYSCTL_READ(pcitopoinfo_0000000c, num_devs);
          PRE_XEN_SYSCTL_READ(pcitopoinfo_0000000c, devs);
          break;
@@ -1836,6 +1840,7 @@ POST(sysctl)
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
 	 POST_XEN_SYSCTL_WRITE(getdomaininfolist_0000000a, num_domains);
 	 POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_0000000a.buffer.p,
 			sizeof(*sysctl->u.getdomaininfolist_0000000a.buffer.p)
@@ -1882,6 +1887,7 @@ POST(sysctl)
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
+      case 0x0000000d:
          POST_XEN_SYSCTL_WRITE(physinfo_0000000a, threads_per_core);
          POST_XEN_SYSCTL_WRITE(physinfo_0000000a, cores_per_socket);
          POST_XEN_SYSCTL_WRITE(physinfo_0000000a, nr_cpus);
@@ -1919,6 +1925,7 @@ POST(sysctl)
                            sizeof(uint32_t) * sysctl->u.topologyinfo.max_cpu_index);
          break;
       case 0x0000000c:
+      case 0x0000000d:
          POST_XEN_SYSCTL_WRITE(cputopoinfo_0000000c, num_cpus);
          if (sysctl->u.cputopoinfo_0000000c.cputopo.p)
             POST_MEM_WRITE((Addr)sysctl->u.cputopoinfo_0000000c.cputopo.p,
@@ -1944,6 +1951,7 @@ POST(sysctl)
                         (sysctl->u.numainfo_00000008.max_node_index * sysctl->u.numainfo_00000008.max_node_index));
          break;
       case 0x0000000c:
+      case 0x0000000d:
          POST_XEN_SYSCTL_WRITE(numainfo_0000000c, num_nodes);
          POST_MEM_WRITE((Addr)sysctl->u.numainfo_0000000c.meminfo.p,
                         sizeof(uint64_t) * sysctl->u.numainfo_0000000c.num_nodes);
@@ -1958,6 +1966,7 @@ POST(sysctl)
       switch (sysctl->interface_version)
       {
       case 0x0000000c:
+      case 0x0000000d:
          POST_XEN_SYSCTL_WRITE(pcitopoinfo_0000000c, num_devs);
          POST_MEM_WRITE((Addr)sysctl->u.pcitopoinfo_0000000c.nodes.p,
                         sizeof(uint32_t) *  sysctl->u.pcitopoinfo_0000000c.num_devs);
