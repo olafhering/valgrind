@@ -45,6 +45,7 @@
 #define VKI_XEN_SYSCTL_scheduler_op                  19
 #define VKI_XEN_SYSCTL_coverage_op                   20
 #define VKI_XEN_SYSCTL_psr_cmt_op                    21
+#define VKI_XEN_SYSCTL_pcitopoinfo                   22
 
 struct vki_xen_sysctl_readconsole {
     /* IN */
@@ -140,6 +141,12 @@ struct vki_xen_sysctl_cputopoinfo_0000000c {
     VKI_XEN_GUEST_HANDLE_64(vki_xen_sysctl_cputopo_0000000c_t) cputopo;
 };
 
+struct vki_xen_sysctl_pcitopoinfo_0000000c {
+    vki_uint32_t num_devs;
+    VKI_XEN_GUEST_HANDLE_64(vki_physdev_pci_device_t) devs;
+    VKI_XEN_GUEST_HANDLE_64(vki_uint32) nodes;
+};
+
 struct vki_xen_sysctl_numainfo_00000008 {
     vki_uint32_t max_node_index;
     VKI_XEN_GUEST_HANDLE_64(vki_uint64) node_to_memsize;
@@ -210,6 +217,7 @@ struct vki_xen_sysctl {
         struct vki_xen_sysctl_physinfo_0000000a physinfo_0000000a;
         struct vki_xen_sysctl_topologyinfo      topologyinfo;
         struct vki_xen_sysctl_cputopoinfo_0000000c cputopoinfo_0000000c;
+        struct vki_xen_sysctl_pcitopoinfo_0000000c pcitopoinfo_0000000c;
         struct vki_xen_sysctl_numainfo_00000008 numainfo_00000008;
         struct vki_xen_sysctl_numainfo_0000000c numainfo_0000000c;
         struct vki_xen_sysctl_sched_id          sched_id;
