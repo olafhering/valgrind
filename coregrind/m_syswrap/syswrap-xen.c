@@ -884,6 +884,7 @@ PRE(domctl)
       case 0x00000009:
       case 0x0000000a:
       case 0x0000000b:
+      case 0x0000000c:
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_00000005, type);
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_00000005, instance);
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_00000005, buffer);
@@ -928,6 +929,7 @@ PRE(domctl)
          __PRE_XEN_DOMCTL_READ(test_assign_device, assign_device_00000007, machine_sbdf);
          break;
       case 0x0000000b:
+      case 0x0000000c:
          __PRE_XEN_DOMCTL_READ(test_assign_device, assign_device_0000000b, dev);
          __PRE_XEN_DOMCTL_READ(test_assign_device, assign_device_0000000b, flag);
          switch (domctl->u.assign_device_0000000b.dev) {
@@ -958,6 +960,7 @@ PRE(domctl)
          __PRE_XEN_DOMCTL_READ(assign_device, assign_device_00000007, machine_sbdf);
          break;
       case 0x0000000b:
+      case 0x0000000c:
          __PRE_XEN_DOMCTL_READ(assign_device, assign_device_0000000b, dev);
          __PRE_XEN_DOMCTL_READ(assign_device, assign_device_0000000b, flag);
          switch (domctl->u.assign_device_0000000b.dev) {
@@ -988,6 +991,7 @@ PRE(domctl)
          __PRE_XEN_DOMCTL_READ(deassign_device, assign_device_00000007, machine_sbdf);
          break;
       case 0x0000000b:
+      case 0x0000000c:
          __PRE_XEN_DOMCTL_READ(deassign_device, assign_device_0000000b, dev);
          __PRE_XEN_DOMCTL_READ(deassign_device, assign_device_0000000b, flag);
          switch (domctl->u.assign_device_0000000b.dev) {
@@ -1022,6 +1026,7 @@ PRE(domctl)
          __PRE_XEN_DOMCTL_READ(settscinfo, tsc_info_00000007, info.elapsed_nsec);
          break;
       case 0x0000000b:
+      case 0x0000000c:
          __PRE_XEN_DOMCTL_READ(settscinfo, tsc_info_0000000b, tsc_mode);
          __PRE_XEN_DOMCTL_READ(settscinfo, tsc_info_0000000b, gtsc_khz);
          __PRE_XEN_DOMCTL_READ(settscinfo, tsc_info_0000000b, incarnation);
@@ -1060,6 +1065,7 @@ PRE(domctl)
          PRE_XEN_DOMCTL_READ(settimeoffset_00000001, time_offset_seconds);
          break;
       case 0x0000000b:
+      case 0x0000000c:
          PRE_XEN_DOMCTL_READ(settimeoffset_0000000b, time_offset_seconds);
          break;
       }
@@ -1108,6 +1114,7 @@ PRE(domctl)
          break;
       case 0x0000000a:
       case 0x0000000b:
+      case 0x0000000c:
          __PRE_XEN_DOMCTL_READ(getvcpuaffinity, vcpuaffinity_0000000a, vcpu);
          if (domctl->u.vcpuaffinity_0000000a.flags & VKI_XEN_VCPUAFFINITY_HARD)
             __PRE_XEN_DOMCTL_READ(
@@ -1132,6 +1139,7 @@ PRE(domctl)
          break;
       case 0x0000000a:
       case 0x0000000b:
+      case 0x0000000c:
          __PRE_XEN_DOMCTL_READ(setvcpuaffinity, vcpuaffinity_0000000a, vcpu);
          __PRE_XEN_DOMCTL_READ(setvcpuaffinity, vcpuaffinity_0000000a, flags);
          if (domctl->u.vcpuaffinity_0000000a.flags & VKI_XEN_VCPUAFFINITY_HARD) {
@@ -1190,6 +1198,7 @@ PRE(domctl)
       case 0x00000009:
       case 0x0000000a:
       case 0x0000000b:
+      case 0x0000000c:
          __PRE_XEN_DOMCTL_READ(get_ext_vcpucontext, ext_vcpucontext_00000009, vcpu);
          break;
 
@@ -1232,6 +1241,7 @@ PRE(domctl)
        case 0x00000009:
        case 0x0000000a:
       case 0x0000000b:
+      case 0x0000000c:
            __PRE_XEN_DOMCTL_READ(set_ext_vcpucontext, ext_vcpucontext_00000009, vcpu);
            __PRE_XEN_DOMCTL_READ(set_ext_vcpucontext, ext_vcpucontext_00000009, size);
 #if defined(__i386__) || defined(__x86_64__)
@@ -1369,6 +1379,7 @@ PRE(domctl)
          __PRE_XEN_DOMCTL_READ(mem_event_op, mem_event_op_00000007, mode);
          break;
       case 0x0000000b:
+      case 0x0000000c:
          __PRE_XEN_DOMCTL_READ(vm_event_op, vm_event_op_0000000b, op);
          __PRE_XEN_DOMCTL_READ(vm_event_op, vm_event_op_0000000b, mode);
          break;
@@ -2086,6 +2097,7 @@ POST(domctl){
                         sizeof(vki_xen_guest_tsc_info_t));
          break;
       case 0x0000000b:
+      case 0x0000000c:
          __POST_XEN_DOMCTL_WRITE(gettscinfo, tsc_info_0000000b, tsc_mode);
          __POST_XEN_DOMCTL_WRITE(gettscinfo, tsc_info_0000000b, gtsc_khz);
          __POST_XEN_DOMCTL_WRITE(gettscinfo, tsc_info_0000000b, incarnation);
@@ -2120,6 +2132,7 @@ POST(domctl){
       case 0x00000009:
       case 0x0000000a:
       case 0x0000000b:
+      case 0x0000000c:
          switch (domctl->u.hvmcontext_partial_00000005.type) {
          case VKI_HVM_SAVE_CODE(CPU):
             if ( domctl->u.hvmcontext_partial_00000005.buffer.p )
@@ -2169,6 +2182,7 @@ POST(domctl){
          break;
       case 0x0000000a:
       case 0x0000000b:
+      case 0x0000000c:
          if (domctl->u.vcpuaffinity_0000000a.flags & VKI_XEN_VCPUAFFINITY_HARD)
             POST_MEM_WRITE(
                (Addr)domctl->u.vcpuaffinity_0000000a.cpumap_hard.bitmap.p,
@@ -2219,6 +2233,7 @@ POST(domctl){
       case 0x00000009:
       case 0x0000000a:
       case 0x0000000b:
+      case 0x0000000c:
 	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, domain);
 	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, flags);
 	 POST_XEN_DOMCTL_WRITE(getdomaininfo_00000009, tot_pages);
@@ -2273,6 +2288,7 @@ POST(domctl){
        case 0x00000009:
        case 0x0000000a:
       case 0x0000000b:
+      case 0x0000000c:
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009, size);
 #if defined(__i386__) || defined(__x86_64__)
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009,
@@ -2348,6 +2364,7 @@ POST(domctl){
          __POST_XEN_DOMCTL_WRITE(mem_event_op, mem_event_op_00000007, port);
          break;
       case 0x0000000b:
+      case 0x0000000c:
          __POST_XEN_DOMCTL_WRITE(vm_event_op, vm_event_op_0000000b, port);
          break;
       }
