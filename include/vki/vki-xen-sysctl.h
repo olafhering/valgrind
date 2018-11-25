@@ -5,6 +5,10 @@
  * The sysctl interface is versioned via the interface_version
  * field. The structures in this header supports sysctl interfaces:
  *
+ * - 0x00000002: Xen 3.0.3 (unhandled)
+ * - 0x00000003: Xen 3.1.0 (unhandled)
+ * - 0x00000006: Xen 3.2 (unhandled)   
+ * - 0x00000007: Xen 4.0 (unhandled)
  * - 0x00000008: Xen 4.1
  * - 0x00000009: Xen 4.2
  * - 0x0000000a: Xen 4.3 & 4.4
