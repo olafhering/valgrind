@@ -1083,6 +1083,7 @@ PRE(domctl)
       case 0x0000000e:
       case 0x0000000f:
       case 0x00000010:
+      case 0x00000011:
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_0000000e, type);
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_0000000e, instance);
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_0000000e, bufsz);
@@ -1336,6 +1337,7 @@ PRE(domctl)
       case 0x0000000e:
       case 0x0000000f:
       case 0x00000010:
+      case 0x00000011:
          PRE_XEN_DOMCTL_READ(settimeoffset_0000000b, time_offset_seconds);
          break;
       }
@@ -2645,6 +2647,7 @@ POST(domctl){
          break;
       case 0x0000000e:
       case 0x0000000f:
+      case 0x00000011:
          switch (domctl->u.hvmcontext_partial_0000000e.type) {
          case VKI_HVM_SAVE_CODE(CPU):
             if ( domctl->u.hvmcontext_partial_0000000e.buffer.p )
@@ -2839,6 +2842,7 @@ POST(domctl){
       case 0x0000000d:
       case 0x0000000e:
       case 0x0000000f:
+      case 0x00000011:
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009, size);
 #if defined(__i386__) || defined(__x86_64__)
            __POST_XEN_DOMCTL_WRITE(get_ext_vcpucontext, ext_vcpucontext_00000009,
