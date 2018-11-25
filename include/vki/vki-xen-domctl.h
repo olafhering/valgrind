@@ -132,6 +132,7 @@
 #define VKI_XEN_DOMCTL_psr_cat_op                    78
 #define VKI_XEN_DOMCTL_soft_reset                    79
 #define VKI_XEN_DOMCTL_set_gnttab_limits             80
+#define VKI_XEN_DOMCTL_vuart_op                      81
 #define VKI_XEN_DOMCTL_gdbsx_guestmemio            1000
 #define VKI_XEN_DOMCTL_gdbsx_pausevcpu             1001
 #define VKI_XEN_DOMCTL_gdbsx_unpausevcpu           1002
@@ -798,6 +799,7 @@ struct vki_xen_domctl {
         //struct vki_xen_domctl_psr_cat_op        psr_cat_op;
         //struct vki_xen_domctl_arm_configuredomain configuredomain;
         struct vki_xen_domctl_set_gnttab_limits_0000000e set_gnttab_limits_0000000e;
+        //struct vki_xen_domctl_vuart_op          vuart_op;
         vki_uint8_t                         pad[128];
     } u;
 };
