@@ -95,6 +95,14 @@ struct vki_xen_remove_from_physmap {
     vki_xen_pfn_t gpfn;
 };
 
+struct vki_xen_pod_target {
+    vki_uint64_t    target_pages;
+    vki_uint64_t    tot_pages;
+    vki_uint64_t    pod_cache_pages;
+    vki_uint64_t    pod_entries;
+    vki_xen_domid_t domid;
+};
+
 struct vki_xen_mem_event_op {
     vki_uint8_t     op;
     vki_xen_domid_t     domain;
