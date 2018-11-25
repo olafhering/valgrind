@@ -336,6 +336,8 @@ struct vki_xen_domctl_scheduler_op {
     vki_uint32_t cmd;       /* VKI_XEN_DOMCTL_SCHEDOP_* */
 #define VKI_XEN_DOMCTL_SCHEDOP_putinfo 0
 #define VKI_XEN_DOMCTL_SCHEDOP_getinfo 1
+#define VKI_XEN_DOMCTL_SCHEDOP_putvcpuinfo 2
+#define VKI_XEN_DOMCTL_SCHEDOP_getvcpuinfo 3
     union {
         struct xen_domctl_sched_sedf {
             vki_xen_uint64_aligned_t period;
