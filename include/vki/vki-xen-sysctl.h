@@ -3,7 +3,7 @@
 
 /*
  * The sysctl interface is versioned via the interface_version
- * field. This structures in this header supports sysctl interfaces:
+ * field. The structures in this header supports sysctl interfaces:
  *
  * - 0x00000008: Xen 4.1
  * - 0x00000009: Xen 4.2
