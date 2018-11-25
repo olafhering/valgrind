@@ -794,6 +794,19 @@ PRE(domctl)
          PRE_XEN_DOMCTL_READ(createdomain_00000004, handle);
          PRE_XEN_DOMCTL_READ(createdomain_00000004, flags);
          break;
+      case 0x0000000b:
+         PRE_XEN_DOMCTL_READ(createdomain_0000000b, ssidref);
+         PRE_XEN_DOMCTL_READ(createdomain_0000000b, handle);
+         PRE_XEN_DOMCTL_READ(createdomain_0000000b, flags);
+#if defined(__i386__) || defined(__x86_64__)
+         __PRE_XEN_DOMCTL_READ(createdomain_0000000b, createdomain_0000000b, config.dummy);
+#endif
+#if defined(__arm__) || defined(__aarch64__)
+         __PRE_XEN_DOMCTL_READ(createdomain_0000000b, createdomain_0000000b, config.gic_version);
+         __PRE_XEN_DOMCTL_READ(createdomain_0000000b, createdomain_0000000b, config.nr_spis);
+         __PRE_XEN_DOMCTL_READ(createdomain_0000000b, createdomain_0000000b, config.clock_frequency);
+#endif
+         break;
       }
       break;
 
