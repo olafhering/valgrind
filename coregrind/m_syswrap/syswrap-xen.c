@@ -1548,6 +1548,26 @@ PRE(domctl)
             }
          }
          break;
+      case 0x0000000e:
+          if (domctl->u.monitor_op_0000000e.op == VKI_XEN_DOMCTL_MONITOR_OP_ENABLE ||
+              domctl->u.monitor_op_0000000e.op == VKI_XEN_DOMCTL_MONITOR_OP_DISABLE) {
+             switch (domctl->u.monitor_op_0000000e.event) {
+             case VKI_XEN_DOMCTL_MONITOR_EVENT_WRITE_CTRLREG:
+                __PRE_XEN_DOMCTL_READ(monitor_op, monitor_op_0000000e, u.mov_to_cr);
+                break;
+             case VKI_XEN_DOMCTL_MONITOR_EVENT_MOV_TO_MSR:
+                __PRE_XEN_DOMCTL_READ(monitor_op, monitor_op_0000000e, u.mov_to_msr);
+                break;
+             case VKI_XEN_DOMCTL_MONITOR_EVENT_GUEST_REQUEST:
+                __PRE_XEN_DOMCTL_READ(monitor_op, monitor_op_0000000e, u.guest_request);
+                break;
+             case VKI_XEN_DOMCTL_MONITOR_EVENT_DEBUG_EXCEPTION:
+                __PRE_XEN_DOMCTL_READ(monitor_op, monitor_op_0000000e, u.debug_exception);
+                break;
+             }
+          }
+
+         break;
       }
       break;
 
@@ -2549,6 +2569,25 @@ POST(domctl){
                break;
             }
          }
+
+         break;
+      case 0x0000000e:
+          if (domctl->u.monitor_op_0000000e.op == VKI_XEN_DOMCTL_MONITOR_OP_GET_CAPABILITIES) {
+             switch(domctl->u.monitor_op_0000000e.event) {
+             case VKI_XEN_DOMCTL_MONITOR_EVENT_WRITE_CTRLREG:
+                __POST_XEN_DOMCTL_WRITE(monitor_op, monitor_op_0000000e, u.mov_to_cr);
+                break;
+             case VKI_XEN_DOMCTL_MONITOR_EVENT_MOV_TO_MSR:
+                __POST_XEN_DOMCTL_WRITE(monitor_op, monitor_op_0000000e, u.mov_to_msr);
+                break;
+             case VKI_XEN_DOMCTL_MONITOR_EVENT_GUEST_REQUEST:
+                __POST_XEN_DOMCTL_WRITE(monitor_op, monitor_op_0000000e, u.guest_request);
+                break;
+             case VKI_XEN_DOMCTL_MONITOR_EVENT_DEBUG_EXCEPTION:
+                __POST_XEN_DOMCTL_WRITE(monitor_op, monitor_op_0000000e, u.debug_exception);
+                break;
+             }
+          }
 
          break;
       }
