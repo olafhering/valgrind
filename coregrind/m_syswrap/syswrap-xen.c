@@ -957,6 +957,7 @@ PRE(domctl)
       case 0x0000000d:
       case 0x0000000e:
       case 0x0000000f:
+      case 0x00000010:
          switch (vki_assumed_xenversion) {
          case vki_xenversion_406:
             PRE_XEN_DOMCTL_READ(createdomain_0000000b, ssidref);
@@ -1046,6 +1047,7 @@ PRE(domctl)
          break;
       case 0x0000000e:
       case 0x0000000f:
+      case 0x00000010:
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_0000000e, type);
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_0000000e, instance);
          __PRE_XEN_DOMCTL_READ(gethvmcontext_partial, hvmcontext_partial_0000000e, bufsz);
@@ -1298,6 +1300,7 @@ PRE(domctl)
       case 0x0000000d:
       case 0x0000000e:
       case 0x0000000f:
+      case 0x00000010:
          PRE_XEN_DOMCTL_READ(settimeoffset_0000000b, time_offset_seconds);
          break;
       }
