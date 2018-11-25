@@ -598,6 +598,7 @@ PRE(sysctl) {
    case 0x0000000c:
    case 0x0000000d:
    case 0x0000000e:
+   case 0x0000000f:
 	   break;
    default:
       bad_intf_version(tid, layout, arrghs, status, flags,
@@ -1843,6 +1844,7 @@ POST(sysctl)
    case 0x0000000c:
    case 0x0000000d:
    case 0x0000000e:
+   case 0x0000000f:
 	   break;
    default:
       return;
