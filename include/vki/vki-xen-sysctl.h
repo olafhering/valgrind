@@ -59,6 +59,7 @@
 #define VKI_XEN_SYSCTL_get_cpu_featureset            26
 #define VKI_XEN_SYSCTL_livepatch_op                  27
 #define VKI_XEN_SYSCTL_set_parameter                 28
+#define VKI_XEN_SYSCTL_get_cpu_policy                29
 
 struct vki_xen_sysctl_readconsole {
     /* IN */
@@ -281,6 +282,7 @@ struct vki_xen_sysctl {
         struct vki_xen_sysctl_cpu_featureset_0000000d cpu_featureset_0000000d;
         //struct vki_xen_sysctl_livepatch_op      livepatch;
         //struct vki_xen_sysctl_set_parameter     set_parameter;
+        //struct vki_xen_sysctl_get_cpu_policy    get_cpu_policy;
 
         vki_uint8_t                             pad[128];
     } u;
