@@ -15,7 +15,7 @@
  *
  * Structs which are identical in all supported versions have no
  * version suffix. Structs which do differ are defined multiple times
- * and use the suffix of the latest version to contain that particular
+ * and use the suffix of the earliest version to contain that particular
  * variant.
  */
 
