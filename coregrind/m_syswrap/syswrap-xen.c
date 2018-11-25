@@ -815,7 +815,7 @@ PRE(domctl)
 
    case VKI_XEN_DOMCTL_test_assign_device:
       switch (domctl->interface_version) {
-      case 0x00000007: /* pre-4.6 */
+      case 0x00000007:
       case 0x00000008:
       case 0x00000009:
       case 0x0000000a:
@@ -845,7 +845,7 @@ PRE(domctl)
       break;
    case VKI_XEN_DOMCTL_assign_device:
       switch (domctl->interface_version) {
-      case 0x00000007: /* pre-4.6 */
+      case 0x00000007:
       case 0x00000008:
       case 0x00000009:
       case 0x0000000a:
@@ -875,7 +875,7 @@ PRE(domctl)
       break;
    case VKI_XEN_DOMCTL_deassign_device:
       switch (domctl->interface_version) {
-      case 0x00000007: /* pre-4.6 */
+      case 0x00000007:
       case 0x00000008:
       case 0x00000009:
       case 0x0000000a:
@@ -906,7 +906,7 @@ PRE(domctl)
 
    case VKI_XEN_DOMCTL_settscinfo:
       switch (domctl->interface_version) {
-      case 0x00000007: /* pre-4.6 */
+      case 0x00000007:
       case 0x00000008:
       case 0x00000009:
       case 0x0000000a:
@@ -1240,7 +1240,7 @@ PRE(domctl)
    case VKI_XEN_DOMCTL_mem_event_op:
    //case VKI_XEN_DOMCTL_vm_event_op: /* name change in 4.6 */
       switch (domctl->interface_version) {
-      case 0x00000007: /* pre-4.6 */
+      case 0x00000007:
       case 0x00000008:
       case 0x00000009:
       case 0x0000000a:
@@ -1859,7 +1859,7 @@ POST(domctl){
 
    case VKI_XEN_DOMCTL_gettscinfo:
       switch (domctl->interface_version) {
-      case 0x00000007: /* pre-4.6 */
+      case 0x00000007:
       case 0x00000008:
       case 0x00000009:
       case 0x0000000a:
@@ -2112,7 +2112,7 @@ POST(domctl){
    case VKI_XEN_DOMCTL_mem_event_op:
    //case VKI_XEN_DOMCTL_vm_event_op: /* name change in 4.6 */
       switch (domctl->interface_version) {
-      case 0x00000007: /* pre-4.6 */
+      case 0x00000007:
       case 0x00000008:
       case 0x00000009:
       case 0x0000000a:
