@@ -3403,6 +3403,7 @@ struct vki_xen_privcmd_dm_op {
 #define VKI_XEN_IOCTL_PRIVCMD_MMAPBATCH_V2 _VKI_IOC(_VKI_IOC_NONE, 'P', 4, sizeof(struct vki_xen_privcmd_mmapbatch_v2))
 
 #define VKI_XEN_IOCTL_PRIVCMD_DM_OP        _VKI_IOC(_VKI_IOC_NONE, 'P', 5, sizeof(struct vki_xen_privcmd_dm_op))
+#define VKI_XEN_IOCTL_PRIVCMD_RESTRICT     _VKI_IOC(_VKI_IOC_NONE, 'P', 6, sizeof(__vki_u16))
 
 //----------------------------------------------------------------------
 // Xen evtchn IOCTL
