@@ -336,6 +336,7 @@ struct vki_xen_domctl_scheduler_op {
 #define VKI_XEN_SCHEDULER_CREDIT2  6
 #define VKI_XEN_SCHEDULER_ARINC653 7
 #define VKI_XEN_SCHEDULER_RTDS     8
+#define VKI_XEN_SCHEDULER_NULL     9
     vki_uint32_t cmd;       /* VKI_XEN_DOMCTL_SCHEDOP_* */
 #define VKI_XEN_DOMCTL_SCHEDOP_putinfo 0
 #define VKI_XEN_DOMCTL_SCHEDOP_getinfo 1
