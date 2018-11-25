@@ -3478,6 +3478,13 @@ struct vki_xen_ioctl_gntalloc_alloc_gref {
    vki_u32 gref_ids[1];
 };
 
+#define VKI_XEN_IOCTL_GNTALLOC_DEALLOC_GREF			\
+	_VKI_IOC(_VKI_IOC_NONE, 'G', 6, sizeof(struct vki_xen_ioctl_gntalloc_dealloc_gref))
+struct vki_xen_ioctl_gntalloc_dealloc_gref {
+   __vki_u64 index;
+   vki_u32 count;
+};
+
 //----------------------------------------------------------------------
 // From linux-3.4.0/include/linux/fs.h
 //----------------------------------------------------------------------

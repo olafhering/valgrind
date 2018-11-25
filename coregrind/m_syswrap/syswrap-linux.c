@@ -8305,6 +8305,15 @@ PRE(sys_ioctl)
                   (Addr)&args->count, sizeof(args->count));
       }
       break;
+   case VKI_XEN_IOCTL_GNTALLOC_DEALLOC_GREF: {
+      struct vki_xen_ioctl_gntalloc_dealloc_gref *args =
+         (struct vki_xen_ioctl_gntalloc_dealloc_gref*)(Addr)(ARG3);
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTALLOC_dealloc_gref(index)",
+                  (Addr)&args->index, sizeof(args->index));
+      PRE_MEM_READ("VKI_XEN_IOCTL_GNTALLOC_dealloc_gref(count)",
+                  (Addr)&args->count, sizeof(args->count));
+      }
+      break;
 #endif
 
    /* Lustre */
@@ -10807,6 +10816,9 @@ POST(sys_ioctl)
       POST_MEM_WRITE((Addr)&args->gref_ids,
                      sizeof(args->gref_ids) * sizeof(args->count));
       }
+      break;
+   case VKI_XEN_IOCTL_GNTALLOC_DEALLOC_GREF:
+      /* No output */
       break;
 #endif
 
