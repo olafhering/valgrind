@@ -1358,8 +1358,6 @@ PRE(domctl)
              case VKI_XEN_DOMCTL_MONITOR_EVENT_GUEST_REQUEST:
                 __PRE_XEN_DOMCTL_READ(monitor_op, monitor_op_0000000b, u.guest_request);
                 break;
-             case VKI_XEN_DOMCTL_MONITOR_OP_GET_CAPABILITIES:
-                break;
              }
           }
 
