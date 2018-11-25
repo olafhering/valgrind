@@ -526,6 +526,20 @@ struct vki_xen_domctl_assign_device_0000000b {
     vki_uint32_t  flag;   /* flag of assigned device */
 };
 
+struct vki_xen_domctl_assign_device_0000000e {
+    vki_uint32_t dev;   /* XEN_DOMCTL_DEV_* */
+    vki_uint32_t flags;
+    union {
+        struct {
+            vki_uint32_t machine_sbdf;   /* machine PCI ID of assigned device */
+        } pci;
+        struct {
+            vki_uint32_t size; /* Length of the path */
+            VKI_XEN_GUEST_HANDLE_64(vki_uint8) path; /* path to the device tree node */
+        } dt;
+    } u;
+};
+
 struct vki_xen_domctl_debug_op {
     vki_uint32_t op;   /* IN */
     vki_uint32_t vcpu; /* IN */
@@ -708,6 +722,7 @@ struct vki_xen_domctl {
         //struct vki_xen_domctl_get_device_group  get_device_group;
         struct vki_xen_domctl_assign_device_00000007 assign_device_00000007;
         struct vki_xen_domctl_assign_device_0000000b assign_device_0000000b;
+        struct vki_xen_domctl_assign_device_0000000e assign_device_0000000e;
         //struct vki_xen_domctl_bind_pt_irq       bind_pt_irq;
         //struct vki_xen_domctl_memory_mapping    memory_mapping;
         //struct vki_xen_domctl_ioport_mapping    ioport_mapping;
