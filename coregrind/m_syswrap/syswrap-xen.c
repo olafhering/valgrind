@@ -691,10 +691,19 @@ PRE(sysctl) {
       break;
 
    case VKI_XEN_SYSCTL_topologyinfo:
-      PRE_XEN_SYSCTL_READ(topologyinfo, max_cpu_index);
-      PRE_XEN_SYSCTL_READ(topologyinfo, cpu_to_core);
-      PRE_XEN_SYSCTL_READ(topologyinfo, cpu_to_socket);
-      PRE_XEN_SYSCTL_READ(topologyinfo, cpu_to_node);
+      switch (sysctl->interface_version)
+      {
+      case 0x00000007:
+      case 0x00000008:
+      case 0x00000009:
+      case 0x0000000a:
+      case 0x0000000b:
+         PRE_XEN_SYSCTL_READ(topologyinfo, max_cpu_index);
+         PRE_XEN_SYSCTL_READ(topologyinfo, cpu_to_core);
+         PRE_XEN_SYSCTL_READ(topologyinfo, cpu_to_socket);
+         PRE_XEN_SYSCTL_READ(topologyinfo, cpu_to_node);
+         break;
+      }
       break;
 
    case VKI_XEN_SYSCTL_numainfo:
@@ -1816,16 +1825,25 @@ POST(sysctl)
       break;
 
    case VKI_XEN_SYSCTL_topologyinfo:
-      POST_XEN_SYSCTL_WRITE(topologyinfo, max_cpu_index);
-      if (sysctl->u.topologyinfo.cpu_to_core.p)
-         POST_MEM_WRITE((Addr)sysctl->u.topologyinfo.cpu_to_core.p,
-                     sizeof(uint32_t) * sysctl->u.topologyinfo.max_cpu_index);
-      if (sysctl->u.topologyinfo.cpu_to_socket.p)
-         POST_MEM_WRITE((Addr)sysctl->u.topologyinfo.cpu_to_socket.p,
-                     sizeof(uint32_t) * sysctl->u.topologyinfo.max_cpu_index);
-      if (sysctl->u.topologyinfo.cpu_to_node.p)
-         POST_MEM_WRITE((Addr)sysctl->u.topologyinfo.cpu_to_node.p,
-                     sizeof(uint32_t) * sysctl->u.topologyinfo.max_cpu_index);
+      switch (sysctl->interface_version)
+      {
+      case 0x00000007:
+      case 0x00000008:
+      case 0x00000009:
+      case 0x0000000a:
+      case 0x0000000b:
+         POST_XEN_SYSCTL_WRITE(topologyinfo, max_cpu_index);
+         if (sysctl->u.topologyinfo.cpu_to_core.p)
+            POST_MEM_WRITE((Addr)sysctl->u.topologyinfo.cpu_to_core.p,
+                           sizeof(uint32_t) * sysctl->u.topologyinfo.max_cpu_index);
+         if (sysctl->u.topologyinfo.cpu_to_socket.p)
+            POST_MEM_WRITE((Addr)sysctl->u.topologyinfo.cpu_to_socket.p,
+                           sizeof(uint32_t) * sysctl->u.topologyinfo.max_cpu_index);
+         if (sysctl->u.topologyinfo.cpu_to_node.p)
+            POST_MEM_WRITE((Addr)sysctl->u.topologyinfo.cpu_to_node.p,
+                           sizeof(uint32_t) * sysctl->u.topologyinfo.max_cpu_index);
+         break;
+      }
       break;
 
    case VKI_XEN_SYSCTL_numainfo:
