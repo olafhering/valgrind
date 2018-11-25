@@ -28,7 +28,7 @@
 
 /*
  * The domctl interface is versioned via the interface_version
- * field. This structures in this header supports domctl interfaces:
+ * field. The structures in this header supports domctl interfaces:
  *
  * - 0x00000007: Xen 4.1
  * - 0x00000008: Xen 4.2
