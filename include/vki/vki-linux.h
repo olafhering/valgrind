@@ -3453,6 +3453,15 @@ struct vki_xen_ioctl_gntdev_unmap_grant_ref {
    vki_u32 pad;
 };
 
+#define VKI_XEN_IOCTL_GNTDEV_GET_OFFSET_FOR_VADDR			\
+	_VKI_IOC(_VKI_IOC_NONE, 'G', 2, sizeof(struct vki_xen_ioctl_gntdev_get_offset_for_vaddr))
+struct vki_xen_ioctl_gntdev_get_offset_for_vaddr {
+   __vki_u64 vaddr;
+   __vki_u64 offset;
+   vki_u32 count;
+   vki_u32 pad;
+};
+
 //----------------------------------------------------------------------
 // From linux-3.4.0/include/linux/fs.h
 //----------------------------------------------------------------------
