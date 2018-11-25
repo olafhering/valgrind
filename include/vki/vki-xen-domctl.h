@@ -123,6 +123,7 @@
 #define VKI_XEN_DOMCTL_cacheflush                    71
 #define VKI_XEN_DOMCTL_get_vcpu_msrs                 72
 #define VKI_XEN_DOMCTL_set_vcpu_msrs                 73
+#define VKI_XEN_DOMCTL_setvnumainfo                  74
 #define VKI_XEN_DOMCTL_monitor_op                    77 /* new in 4.6 */
 #define VKI_XEN_DOMCTL_gdbsx_guestmemio            1000
 #define VKI_XEN_DOMCTL_gdbsx_pausevcpu             1001
@@ -648,6 +649,7 @@ struct vki_xen_domctl {
         //struct vki_xen_domctl_gdbsx_pauseunp_vcpu gdbsx_pauseunp_vcpu;
         //struct vki_xen_domctl_gdbsx_domstatus   gdbsx_domstatus;
         struct vki_xen_domctl_monitor_op_0000000b monitor_op_0000000b;
+        //struct vki_xen_domctl_vnuma             vnuma;
         vki_uint8_t                         pad[128];
     } u;
 };
