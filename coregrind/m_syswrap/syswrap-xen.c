@@ -828,6 +828,18 @@ PRE(domctl)
          __PRE_XEN_DOMCTL_READ(createdomain_0000000b, createdomain_0000000b, config.clock_frequency);
 #endif
          break;
+      case 0x0000000c:
+         PRE_XEN_DOMCTL_READ(createdomain_0000000c, ssidref);
+         PRE_XEN_DOMCTL_READ(createdomain_0000000c, handle);
+         PRE_XEN_DOMCTL_READ(createdomain_0000000c, flags);
+#if defined(__i386__) || defined(__x86_64__)
+         __PRE_XEN_DOMCTL_READ(createdomain_0000000c, createdomain_0000000c, config.emulation_flags);
+#endif
+#if defined(__arm__) || defined(__aarch64__)
+         __PRE_XEN_DOMCTL_READ(createdomain_0000000c, createdomain_0000000c, config.gic_version);
+         __PRE_XEN_DOMCTL_READ(createdomain_0000000c, createdomain_0000000c, config.nr_spis);
+         __PRE_XEN_DOMCTL_READ(createdomain_0000000c, createdomain_0000000c, config.clock_frequency);
+#endif
       }
       break;
 
