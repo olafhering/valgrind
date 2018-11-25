@@ -637,6 +637,7 @@ PRE(sysctl) {
 	 break;
       case 0x0000000a:
       case 0x0000000b:
+      case 0x0000000c:
 	 PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, first_domain);
 	 PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, max_domains);
 	 PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, buffer);
@@ -1805,6 +1806,7 @@ POST(sysctl)
 	 break;
       case 0x0000000a:
       case 0x0000000b:
+      case 0x0000000c:
 	 POST_XEN_SYSCTL_WRITE(getdomaininfolist_0000000a, num_domains);
 	 POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_0000000a.buffer.p,
 			sizeof(*sysctl->u.getdomaininfolist_0000000a.buffer.p)
@@ -1850,6 +1852,7 @@ POST(sysctl)
          break;
       case 0x0000000a:
       case 0x0000000b:
+      case 0x0000000c:
          POST_XEN_SYSCTL_WRITE(physinfo_0000000a, threads_per_core);
          POST_XEN_SYSCTL_WRITE(physinfo_0000000a, cores_per_socket);
          POST_XEN_SYSCTL_WRITE(physinfo_0000000a, nr_cpus);
