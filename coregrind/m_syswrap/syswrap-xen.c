@@ -800,6 +800,7 @@ PRE(domctl)
    case 0x0000000a:
    case 0x0000000b:
    case 0x0000000c:
+   case 0x0000000d:
 	   break;
    default:
       bad_intf_version(tid, layout, arrghs, status, flags,
@@ -2046,6 +2047,7 @@ POST(domctl){
    case 0x0000000a:
    case 0x0000000b:
    case 0x0000000c:
+   case 0x0000000d:
 	   break;
    default:
 	   return;
