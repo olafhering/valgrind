@@ -946,8 +946,15 @@ PRE(domctl)
       break;
 
    case VKI_XEN_DOMCTL_settimeoffset:
-       PRE_XEN_DOMCTL_READ(settimeoffset, time_offset_seconds);
-       break;
+      switch (domctl->interface_version) {
+      case 0x00000007:
+      case 0x00000008:
+      case 0x00000009:
+      case 0x0000000a:
+         PRE_XEN_DOMCTL_READ(settimeoffset_00000001, time_offset_seconds);
+         break;
+      }
+      break;
 
    case VKI_XEN_DOMCTL_getvcpuinfo:
       PRE_XEN_DOMCTL_READ(getvcpuinfo, vcpu);
