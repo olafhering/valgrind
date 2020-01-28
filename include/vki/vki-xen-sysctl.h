@@ -19,7 +19,8 @@
  * - 0x0000000f: Xen 4.9
  * - 0x00000010: Xen 4.10
  * - 0x00000011: Xen 4.11
- * - 0x00000012: Xen 4.12
+ * - 0x00000012: Xen 4.12 & 4.13
+ * - 0x00000013: Xen 4.14
  *
  * When adding a new subop be sure to include the variants used by all
  * of the above, both here and in syswrap-xen.c
