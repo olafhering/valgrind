@@ -938,6 +938,7 @@ PRE(domctl)
       vki_set_assumed_xenversion(vki_xenversion_412);
 	   break;
    case 0x00000012:
+      vki_set_assumed_xenversion(vki_xenversion_413);
 	   break;
    default:
       bad_intf_version(tid, layout, arrghs, status, flags,
