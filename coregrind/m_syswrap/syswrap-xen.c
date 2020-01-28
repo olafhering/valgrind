@@ -1032,6 +1032,24 @@ PRE(domctl)
          __PRE_XEN_DOMCTL_READ(createdomain_00000011, createdomain_00000011, config.clock_frequency);
 #endif
          break;
+      case 0x00000012:
+         PRE_XEN_DOMCTL_READ(createdomain_00000012, ssidref);
+         PRE_XEN_DOMCTL_READ(createdomain_00000012, handle);
+         PRE_XEN_DOMCTL_READ(createdomain_00000012, flags);
+         PRE_XEN_DOMCTL_READ(createdomain_00000012, iommu_opts);
+         PRE_XEN_DOMCTL_READ(createdomain_00000012, max_vcpus);
+         PRE_XEN_DOMCTL_READ(createdomain_00000012, max_evtchn_port);
+         PRE_XEN_DOMCTL_READ(createdomain_00000012, max_maptrack_frames);
+#if defined(__i386__) || defined(__x86_64__)
+         __PRE_XEN_DOMCTL_READ(createdomain_00000012, createdomain_00000012, config.emulation_flags);
+#endif
+#if defined(__arm__) || defined(__aarch64__)
+         __PRE_XEN_DOMCTL_READ(createdomain_00000012, createdomain_00000012, config.gic_version);
+         __PRE_XEN_DOMCTL_READ(createdomain_00000012, createdomain_00000012, config.tee_type);
+         __PRE_XEN_DOMCTL_READ(createdomain_00000012, createdomain_00000012, config.nr_spis);
+         __PRE_XEN_DOMCTL_READ(createdomain_00000012, createdomain_00000012, config.clock_frequency);
+#endif
+         break;
       }
       break;
 
