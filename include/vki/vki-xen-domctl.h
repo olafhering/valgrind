@@ -101,11 +101,11 @@
 #define VKI_XEN_DOMCTL_set_target                    46
 #define VKI_XEN_DOMCTL_deassign_device               47
 #define VKI_XEN_DOMCTL_unbind_pt_irq                 48
-#define VKI_XEN_DOMCTL_set_cpuid                     49
+#define VKI_XEN_DOMCTL_set_cpuid                     49 /* Obsolete in 4.13 */
 #define VKI_XEN_DOMCTL_get_device_group              50
-#define VKI_XEN_DOMCTL_set_machine_address_size      51
-#define VKI_XEN_DOMCTL_get_machine_address_size      52
-#define VKI_XEN_DOMCTL_suppress_spurious_page_faults 53
+#define VKI_XEN_DOMCTL_set_machine_address_size      51 /* Obsolete in 4.13 */
+#define VKI_XEN_DOMCTL_get_machine_address_size      52 /* Obsolete in 4.13 */
+#define VKI_XEN_DOMCTL_suppress_spurious_page_faults 53 /* Obsolete in 4.13 */
 #define VKI_XEN_DOMCTL_debug_op                      54
 #define VKI_XEN_DOMCTL_gethvmcontext_partial         55
 #define VKI_XEN_DOMCTL_mem_event_op                  56
