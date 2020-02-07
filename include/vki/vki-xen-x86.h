@@ -283,6 +283,20 @@ struct vki_hvm_hw_mtrr {
 
 VKI_DECLARE_HVM_SAVE_TYPE(MTRR, 14, struct vki_hvm_hw_mtrr);
 
+struct vki_xen_cpuid_leaf_00000012 {
+    vki_uint32_t leaf, subleaf;
+    vki_uint32_t a, b, c, d;
+};
+typedef struct vki_xen_cpuid_leaf_00000012 vki_xen_cpuid_leaf_00000012_t;
+DEFINE_VKI_XEN_GUEST_HANDLE(vki_xen_cpuid_leaf_00000012_t);
+
+struct vki_xen_msr_entry_00000012 {
+    vki_uint32_t leaf, subleaf;
+    vki_uint32_t a, b, c, d;
+};
+typedef struct vki_xen_msr_entry_00000012 vki_xen_msr_entry_00000012_t;
+DEFINE_VKI_XEN_GUEST_HANDLE(vki_xen_msr_entry_00000012_t);
+
 #endif // __VKI_XEN_H
 
 /*--------------------------------------------------------------------*/
