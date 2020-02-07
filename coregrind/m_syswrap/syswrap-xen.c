@@ -858,6 +858,18 @@ PRE(sysctl) {
       }
       break;
 
+   case VKI_XEN_SYSCTL_get_cpu_policy:
+      switch (sysctl->interface_version)
+      {
+      case 0x00000012:
+         PRE_XEN_SYSCTL_READ(get_cpu_policy_00000012, index);
+         PRE_XEN_SYSCTL_READ(get_cpu_policy_00000012, nr_leaves);
+         PRE_XEN_SYSCTL_READ(get_cpu_policy_00000012, nr_msrs);
+         PRE_XEN_SYSCTL_READ(get_cpu_policy_00000012, _rsvd);
+         break;
+      }
+      break;
+
    default:
       bad_subop(tid, layout, arrghs, status, flags,
                 "__HYPERVISOR_sysctl", sysctl->cmd);
@@ -2450,6 +2462,22 @@ POST(sysctl)
          POST_XEN_SYSCTL_WRITE(cpu_featureset_0000000d, nr_features);
          POST_MEM_WRITE((Addr)sysctl->u.cpu_featureset_0000000d.features.p,
                         sizeof(uint32_t) *  sysctl->u.cpu_featureset_0000000d.nr_features);
+         break;
+      }
+      break;
+
+   case VKI_XEN_SYSCTL_get_cpu_policy:
+      switch (sysctl->interface_version)
+      {
+      case 0x00000012:
+         POST_XEN_SYSCTL_WRITE(get_cpu_policy_00000012, index);
+         POST_XEN_SYSCTL_WRITE(get_cpu_policy_00000012, nr_leaves);
+         POST_XEN_SYSCTL_WRITE(get_cpu_policy_00000012, nr_msrs);
+         POST_XEN_SYSCTL_WRITE(get_cpu_policy_00000012, _rsvd);
+         POST_MEM_WRITE((Addr)sysctl->u.get_cpu_policy_00000012.cpuid_policy.p,
+                        sizeof(vki_xen_cpuid_leaf_00000012_t) *  sysctl->u.get_cpu_policy_00000012.nr_leaves);
+         POST_MEM_WRITE((Addr)sysctl->u.get_cpu_policy_00000012.msr_policy.p,
+                        sizeof(vki_xen_msr_entry_00000012_t) *  sysctl->u.get_cpu_policy_00000012.nr_msrs);
          break;
       }
       break;
