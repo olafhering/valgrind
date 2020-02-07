@@ -1787,6 +1787,15 @@ PRE(domctl)
       PRE_XEN_DOMCTL_READ(set_gnttab_limits_0000000e, maptrack_frames);
       break;
 
+   case VKI_XEN_DOMCTL_get_cpu_policy:
+      switch (domctl->interface_version) {
+      case 0x00000011:
+         PRE_XEN_DOMCTL_READ(cpu_policy_00000011, nr_leaves);
+         PRE_XEN_DOMCTL_READ(cpu_policy_00000011, nr_msrs);
+         break;
+      }
+      break;
+
    default:
       bad_subop(tid, layout, arrghs, status, flags,
                 "__HYPERVISOR_domctl", domctl->cmd);
@@ -2977,6 +2986,20 @@ POST(domctl){
              }
           }
 
+         break;
+      }
+      break;
+   case VKI_XEN_DOMCTL_get_cpu_policy:
+      switch (domctl->interface_version) {
+      case 0x00000011:
+         POST_XEN_DOMCTL_WRITE(cpu_policy_00000011, nr_leaves);
+         POST_XEN_DOMCTL_WRITE(cpu_policy_00000011, nr_msrs);
+         if (domctl->u.cpu_policy_00000011.cpuid_policy.p)
+            POST_MEM_WRITE((Addr)domctl->u.cpu_policy_00000011.cpuid_policy.p,
+                           domctl->u.cpu_policy_00000011.nr_leaves);
+         if (domctl->u.cpu_policy_00000011.msr_policy.p)
+            POST_MEM_WRITE((Addr)domctl->u.cpu_policy_00000011.msr_policy.p,
+                           domctl->u.cpu_policy_00000011.nr_msrs);
          break;
       }
       break;
