@@ -59,6 +59,7 @@
 #define VKI_XEN_SYSCTL_get_cpu_featureset            26
 #define VKI_XEN_SYSCTL_livepatch_op                  27
 #define VKI_XEN_SYSCTL_set_parameter                 28
+#define VKI_XEN_SYSCTL_get_cpu_policy                29
 
 struct vki_xen_sysctl_readconsole {
     /* IN */
@@ -248,6 +249,15 @@ struct vki_xen_sysctl_cpu_featureset_0000000d {
     VKI_XEN_GUEST_HANDLE_64(vki_uint32) features;
 };
 
+struct vki_xen_sysctl_get_cpu_policy_00000012 {
+    vki_uint32_t index;
+    vki_uint32_t nr_leaves;
+    vki_uint64_t nr_msrs;
+    vki_uint64_t _rsvd;
+    VKI_XEN_GUEST_HANDLE_64(vki_xen_cpuid_leaf_00000012_t) cpuid_policy;
+    VKI_XEN_GUEST_HANDLE_64(vki_xen_msr_entry_00000012_t) msr_policy;
+};
+
 struct vki_xen_sysctl {
     vki_uint32_t cmd;
     vki_uint32_t interface_version; /* XEN_SYSCTL_INTERFACE_VERSION */
@@ -288,6 +298,7 @@ struct vki_xen_sysctl {
         struct vki_xen_sysctl_cpu_featureset_0000000d cpu_featureset_0000000d;
         //struct vki_xen_sysctl_livepatch_op      livepatch;
         //struct vki_xen_sysctl_set_parameter     set_parameter;
+        struct vki_xen_sysctl_get_cpu_policy_00000012 get_cpu_policy_00000012;
 
         vki_uint8_t                             pad[128];
     } u;
