@@ -138,6 +138,7 @@
 #define VKI_XEN_DOMCTL_set_gnttab_limits             80
 #define VKI_XEN_DOMCTL_vuart_op                      81
 #define VKI_XEN_DOMCTL_get_cpu_policy                82
+#define VKI_XEN_DOMCTL_set_cpu_policy                83
 #define VKI_XEN_DOMCTL_gdbsx_guestmemio            1000
 #define VKI_XEN_DOMCTL_gdbsx_pausevcpu             1001
 #define VKI_XEN_DOMCTL_gdbsx_unpausevcpu           1002
@@ -834,6 +835,14 @@ struct vki_xen_domctl_cpu_policy_00000011 {
     VKI_XEN_GUEST_HANDLE_64(vki_xen_msr_entry_00000012_t) msr_policy;
 };
 
+struct vki_xen_domctl_cpu_policy_00000012 {
+    vki_uint32_t nr_leaves;
+    vki_uint32_t nr_msrs;
+    VKI_XEN_GUEST_HANDLE_64(vki_xen_cpuid_leaf_00000012_t) cpuid_policy;
+    VKI_XEN_GUEST_HANDLE_64(vki_xen_msr_entry_00000012_t) msr_policy;
+    vki_uint32_t err_leaf, err_subleaf, err_msr;
+};
+
 struct vki_xen_domctl {
     vki_uint32_t cmd;
     vki_uint32_t interface_version; /* XEN_DOMCTL_INTERFACE_VERSION */
@@ -921,6 +930,7 @@ struct vki_xen_domctl {
         struct vki_xen_domctl_set_gnttab_limits_0000000e set_gnttab_limits_0000000e;
         //struct vki_xen_domctl_vuart_op          vuart_op;
         struct vki_xen_domctl_cpu_policy_00000011 cpu_policy_00000011;
+        struct vki_xen_domctl_cpu_policy_00000012 cpu_policy_00000012;
         vki_uint8_t                         pad[128];
     } u;
 };

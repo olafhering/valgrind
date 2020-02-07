@@ -1832,6 +1832,25 @@ PRE(domctl)
       }
       break;
 
+   case VKI_XEN_DOMCTL_set_cpu_policy:
+      switch (domctl->interface_version) {
+      case 0x00000012:
+         PRE_XEN_DOMCTL_READ(cpu_policy_00000012, nr_leaves);
+         PRE_XEN_DOMCTL_READ(cpu_policy_00000012, nr_msrs);
+         if (domctl->u.cpu_policy_00000012.cpuid_policy.p)
+            PRE_MEM_READ("XEN_DOMCTL_set_cpu_policy_00000012 *u.cpu_policy_00000012.cpuid_policy.p",
+                         (Addr)domctl->u.cpu_policy_00000012.cpuid_policy.p,
+                         sizeof(vki_xen_cpuid_leaf_00000012_t) *
+                         domctl->u.cpu_policy_00000012.nr_leaves);
+         if (domctl->u.cpu_policy_00000012.msr_policy.p)
+            PRE_MEM_READ("XEN_DOMCTL_set_cpu_policy_00000012 *u.cpu_policy_00000012.msr_policy.p",
+                         (Addr)domctl->u.cpu_policy_00000012.msr_policy.p,
+                         sizeof(vki_xen_msr_entry_00000012_t) *
+                         domctl->u.cpu_policy_00000012.nr_msrs);
+         break;
+      }
+      break;
+
    default:
       bad_subop(tid, layout, arrghs, status, flags,
                 "__HYPERVISOR_domctl", domctl->cmd);
@@ -2999,6 +3018,25 @@ POST(domctl){
          if (domctl->u.cpu_policy_00000011.msr_policy.p)
             POST_MEM_WRITE((Addr)domctl->u.cpu_policy_00000011.msr_policy.p,
                            domctl->u.cpu_policy_00000011.nr_msrs);
+         break;
+      }
+      break;
+   case VKI_XEN_DOMCTL_set_cpu_policy:
+      switch (domctl->interface_version) {
+      case 0x00000012:
+         POST_XEN_DOMCTL_WRITE(cpu_policy_00000012, nr_leaves);
+         POST_XEN_DOMCTL_WRITE(cpu_policy_00000012, nr_msrs);
+         POST_XEN_DOMCTL_WRITE(cpu_policy_00000012, err_leaf);
+         POST_XEN_DOMCTL_WRITE(cpu_policy_00000012, err_subleaf);
+         POST_XEN_DOMCTL_WRITE(cpu_policy_00000012, err_msr);
+         if (domctl->u.cpu_policy_00000012.cpuid_policy.p)
+            POST_MEM_WRITE((Addr)domctl->u.cpu_policy_00000012.cpuid_policy.p,
+                           sizeof(vki_xen_cpuid_leaf_00000012_t) *
+                           domctl->u.cpu_policy_00000012.nr_leaves);
+         if (domctl->u.cpu_policy_00000012.msr_policy.p)
+            POST_MEM_WRITE((Addr)domctl->u.cpu_policy_00000012.msr_policy.p,
+                           sizeof(vki_xen_msr_entry_00000012_t) *
+                           domctl->u.cpu_policy_00000012.nr_msrs);
          break;
       }
       break;
