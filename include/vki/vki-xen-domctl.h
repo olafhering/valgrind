@@ -141,7 +141,6 @@ struct vki_xen_domctl_getdomaininfo_00000007 {
     vki_xen_uint64_aligned_t tot_pages;
     vki_xen_uint64_aligned_t max_pages;
     vki_xen_uint64_aligned_t shr_pages;
-    vki_xen_uint64_aligned_t paged_pages;
     vki_xen_uint64_aligned_t shared_info_frame;
     vki_xen_uint64_aligned_t cpu_time;
     vki_uint32_t nr_online_vcpus;
