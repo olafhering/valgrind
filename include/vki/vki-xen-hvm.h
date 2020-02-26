@@ -97,6 +97,15 @@ struct vki_xen_hvm_get_mem_access {
 typedef struct vki_xen_hvm_get_mem_access vki_xen_hvm_get_mem_access_t;
 
 #define VKI_XEN_HVMOP_inject_trap            14
+struct vki_xen_hvm_inject_trap_0401 {
+    vki_xen_domid_t domid;
+    vki_uint32_t vcpuid;
+    vki_uint32_t trap;
+    vki_uint32_t error_code;
+    vki_uint64_t cr2;
+};
+typedef struct vki_xen_hvm_inject_trap_0401 vki_xen_hvm_inject_trap_0401_t;
+
 struct vki_xen_hvm_inject_trap_0402 {
     vki_xen_domid_t domid;
     vki_uint32_t vcpuid;
