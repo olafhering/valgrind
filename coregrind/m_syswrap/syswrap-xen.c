@@ -1342,7 +1342,13 @@ PRE(domctl)
 
    case VKI_XEN_DOMCTL_mem_event_op | VKI_XEN_DOMCTL_vm_event_op:
       switch (domctl->interface_version) {
-      case 0x00000007: /* pre-4.6 */
+      case 0x00000007:
+         __PRE_XEN_DOMCTL_READ(mem_event_op, mem_event_op_00000007, op);
+         __PRE_XEN_DOMCTL_READ(mem_event_op, mem_event_op_00000007, mode);
+         __PRE_XEN_DOMCTL_READ(mem_event_op, mem_event_op_00000007, shared_addr);
+         __PRE_XEN_DOMCTL_READ(mem_event_op, mem_event_op_00000007, ring_addr);
+         __PRE_XEN_DOMCTL_READ(mem_event_op, mem_event_op_00000007, gfn);
+         break;
       case 0x00000008:
       case 0x00000009:
       case 0x0000000a:
@@ -2235,7 +2241,8 @@ POST(domctl){
 
    case VKI_XEN_DOMCTL_mem_event_op | VKI_XEN_DOMCTL_vm_event_op:
       switch (domctl->interface_version) {
-      case 0x00000007: /* pre-4.6 */
+      case 0x00000007:
+         break;
       case 0x00000008:
       case 0x00000009:
       case 0x0000000a:
