@@ -470,14 +470,11 @@ struct vki_xen_domctl_debug_op {
 };
 typedef struct vki_xen_domctl_debug_op vki_xen_domctl_debug_op_t;
 
-struct vki_xen_domctl_mem_event_op_00000007 {
+struct vki_xen_domctl_vm_event_op_00000008 {
     vki_uint32_t op; /* IN */
     vki_uint32_t mode; /* IN */
     vki_uint32_t port; /* OUT */
 };
-
-/* only a name change in 4.6 */
-typedef struct vki_xen_domctl_mem_event_op_00000007 vki_xen_domctl_vm_event_op_0000000b;
 
 struct vki_xen_domctl_set_access_required {
     vki_uint8_t access_required; /* IN */
@@ -626,8 +623,7 @@ struct vki_xen_domctl {
         //struct vki_xen_domctl_set_target        set_target;
         //struct vki_xen_domctl_subscribe         subscribe;
         struct vki_xen_domctl_debug_op          debug_op;
-        struct vki_xen_domctl_mem_event_op_00000007 mem_event_op_00000007;
-        vki_xen_domctl_vm_event_op_0000000b vm_event_op_0000000b;
+        struct vki_xen_domctl_vm_event_op_00000008 vm_event_op_00000008;
         //struct vki_xen_domctl_mem_sharing_op    mem_sharing_op;
 #if defined(__i386__) || defined(__x86_64__)
         struct vki_xen_domctl_cpuid             cpuid;
