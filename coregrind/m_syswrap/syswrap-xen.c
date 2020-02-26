@@ -1398,9 +1398,6 @@ PRE(domctl)
       case 0x00000008:
       case 0x00000009:
       case 0x0000000a:
-         __PRE_XEN_DOMCTL_READ(mem_event_op, mem_event_op_00000007, op);
-         __PRE_XEN_DOMCTL_READ(mem_event_op, mem_event_op_00000007, mode);
-         break;
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
@@ -1408,8 +1405,8 @@ PRE(domctl)
       case 0x0000000f:
       case 0x00000010:
       case 0x00000011:
-         __PRE_XEN_DOMCTL_READ(vm_event_op, vm_event_op_0000000b, op);
-         __PRE_XEN_DOMCTL_READ(vm_event_op, vm_event_op_0000000b, mode);
+         __PRE_XEN_DOMCTL_READ(mem_event_op, vm_event_op_00000008, op);
+         __PRE_XEN_DOMCTL_READ(mem_event_op, vm_event_op_00000008, mode);
          break;
       case 0x00000012:
          __PRE_XEN_DOMCTL_READ(vm_event_op, vm_event_op_00000012, op);
@@ -2421,8 +2418,6 @@ POST(domctl){
       case 0x00000008:
       case 0x00000009:
       case 0x0000000a:
-         __POST_XEN_DOMCTL_WRITE(mem_event_op, mem_event_op_00000007, port);
-         break;
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
@@ -2430,7 +2425,7 @@ POST(domctl){
       case 0x0000000f:
       case 0x00000010:
       case 0x00000011:
-         __POST_XEN_DOMCTL_WRITE(vm_event_op, vm_event_op_0000000b, port);
+         __POST_XEN_DOMCTL_WRITE(mem_event_op, vm_event_op_00000008, port);
          break;
       case 0x00000012:
          __POST_XEN_DOMCTL_WRITE(vm_event_op, vm_event_op_00000012, u.enable.port);
