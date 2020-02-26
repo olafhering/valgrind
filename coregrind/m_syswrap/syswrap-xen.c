@@ -1613,6 +1613,13 @@ PRE(hvm_op)
 
    case VKI_XEN_HVMOP_inject_trap:
       switch (vki_assumed_xenversion) {
+         case vki_xenversion_401:
+         PRE_XEN_HVMOP_READ(inject_trap_0401, domid);
+         PRE_XEN_HVMOP_READ(inject_trap_0401, vcpuid);
+         PRE_XEN_HVMOP_READ(inject_trap_0401, trap);
+         PRE_XEN_HVMOP_READ(inject_trap_0401, error_code);
+         PRE_XEN_HVMOP_READ(inject_trap_0401, cr2);
+         break;
          case vki_xenversion_unset:
             vki_report_unknown_xenversion("VKI_XEN_HVMOP_inject_trap");
             /* fallthrough */
