@@ -1582,13 +1582,21 @@ PRE(hvm_op)
       break;
 
    case VKI_XEN_HVMOP_inject_trap:
-      PRE_XEN_HVMOP_READ(inject_trap, domid);
-      PRE_XEN_HVMOP_READ(inject_trap, vcpuid);
-      PRE_XEN_HVMOP_READ(inject_trap, vector);
-      PRE_XEN_HVMOP_READ(inject_trap, type);
-      PRE_XEN_HVMOP_READ(inject_trap, error_code);
-      PRE_XEN_HVMOP_READ(inject_trap, insn_len);
-      PRE_XEN_HVMOP_READ(inject_trap, cr2);
+      switch (vki_assumed_xenversion) {
+         case vki_xenversion_unset:
+            vki_report_unknown_xenversion("VKI_XEN_HVMOP_inject_trap");
+            /* fallthrough */
+         case vki_xenversion_402:
+         default:
+         PRE_XEN_HVMOP_READ(inject_trap_0402, domid);
+         PRE_XEN_HVMOP_READ(inject_trap_0402, vcpuid);
+         PRE_XEN_HVMOP_READ(inject_trap_0402, vector);
+         PRE_XEN_HVMOP_READ(inject_trap_0402, type);
+         PRE_XEN_HVMOP_READ(inject_trap_0402, error_code);
+         PRE_XEN_HVMOP_READ(inject_trap_0402, insn_len);
+         PRE_XEN_HVMOP_READ(inject_trap_0402, cr2);
+         break;
+      }
       break;
 
    case VKI_XEN_HVMOP_altp2m: {
