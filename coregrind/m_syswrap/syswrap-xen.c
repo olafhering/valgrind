@@ -62,6 +62,57 @@
 
 #include <inttypes.h>
 
+typedef enum {
+   vki_xenversion_unset = 0,
+   vki_xenversion_401,
+   vki_xenversion_402,
+   vki_xenversion_403,
+   vki_xenversion_404,
+   vki_xenversion_405,
+   vki_xenversion_406_or_407,
+   vki_xenversion_406,
+   vki_xenversion_407,
+   vki_xenversion_408,
+   vki_xenversion_409,
+   vki_xenversion_410,
+   vki_xenversion_4101,
+   vki_xenversion_411,
+   vki_xenversion_412_or_413,
+   vki_xenversion_412,
+   vki_xenversion_413,
+   vki_xenversion_414,
+} vki_assumed_xenversion_t;
+static vki_assumed_xenversion_t vki_assumed_xenversion;
+
+/*
+ * Some of the interfaces to Xen are versioned, like domctl and sysctl.
+ * Other interfaces lack a version number to derive the layout of arguments.
+ * Track the assumed Xen version for them, based on prior domctl or sysctl.
+ */
+static void vki_set_assumed_xenversion(vki_assumed_xenversion_t v)
+{
+   switch (vki_assumed_xenversion) {
+      case vki_xenversion_unset:
+         vki_assumed_xenversion = v;
+         break;
+      case vki_xenversion_406_or_407:
+         if (v == vki_xenversion_406 || v == vki_xenversion_407)
+            vki_assumed_xenversion = v;
+         break;
+      case vki_xenversion_412_or_413:
+         if (v == vki_xenversion_412 || v == vki_xenversion_413)
+            vki_assumed_xenversion = v;
+         break;
+      default:
+         break;
+   }
+}
+
+static void vki_report_unknown_xenversion(const char *str)
+{
+   VG_(dmsg)("WARNING: %s prior domctl/sysctl. Assuming latest interface version.\n", str);
+}
+
 #define PRE(name) static DEFN_PRE_TEMPLATE(xen, name)
 #define POST(name) static DEFN_POST_TEMPLATE(xen, name)
 
@@ -581,9 +632,17 @@ PRE(sysctl) {
    switch (sysctl->interface_version)
    {
    case 0x00000008:
+      vki_set_assumed_xenversion(vki_xenversion_401);
+	   break;
    case 0x00000009:
+      vki_set_assumed_xenversion(vki_xenversion_402);
+	   break;
    case 0x0000000a:
+      /* value shared between 4.3 and 4.4 */
+      vki_set_assumed_xenversion(vki_xenversion_404);
+	   break;
    case 0x0000000b:
+      vki_set_assumed_xenversion(vki_xenversion_405);
 	   break;
    default:
       bad_intf_version(tid, layout, arrghs, status, flags,
@@ -725,11 +784,23 @@ PRE(domctl)
    switch (domctl->interface_version)
    {
    case 0x00000007:
+      vki_set_assumed_xenversion(vki_xenversion_401);
+	   break;
    case 0x00000008:
+      vki_set_assumed_xenversion(vki_xenversion_402);
+	   break;
    case 0x00000009:
+      /* value shared between 4.3 and 4.4 */
+      vki_set_assumed_xenversion(vki_xenversion_404);
+	   break;
    case 0x0000000a:
+      vki_set_assumed_xenversion(vki_xenversion_405);
+	   break;
    case 0x0000000b:
+      vki_set_assumed_xenversion(vki_xenversion_406_or_407);
+	   break;
    case 0x0000000c:
+      vki_set_assumed_xenversion(vki_xenversion_408);
 	   break;
    default:
       bad_intf_version(tid, layout, arrghs, status, flags,
