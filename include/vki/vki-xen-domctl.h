@@ -309,6 +309,27 @@ struct vki_xen_domctl_getdomaininfo_0000000f {
 typedef struct vki_xen_domctl_getdomaininfo_0000000f vki_xen_domctl_getdomaininfo_0000000f_t;
 DEFINE_VKI_XEN_GUEST_HANDLE(vki_xen_domctl_getdomaininfo_0000000f_t);
 
+struct vki_xen_domctl_getdomaininfo_00000012 {
+    /* OUT variables. */
+    vki_xen_domid_t  domain;
+    vki_uint32_t flags;
+    vki_xen_uint64_aligned_t tot_pages;
+    vki_xen_uint64_aligned_t max_pages;
+    vki_xen_uint64_aligned_t outstanding_pages;
+    vki_xen_uint64_aligned_t shr_pages;
+    vki_xen_uint64_aligned_t paged_pages;
+    vki_xen_uint64_aligned_t shared_info_frame;
+    vki_xen_uint64_aligned_t cpu_time;
+    vki_uint32_t nr_online_vcpus;
+    vki_uint32_t max_vcpu_id;
+    vki_uint32_t ssidref;
+    vki_xen_domain_handle_t handle;
+    vki_uint32_t cpupool;
+    struct vki_xen_arch_domainconfig_00000012 arch;
+};
+typedef struct vki_xen_domctl_getdomaininfo_00000012 vki_xen_domctl_getdomaininfo_00000012_t;
+DEFINE_VKI_XEN_GUEST_HANDLE(vki_xen_domctl_getdomaininfo_00000012_t);
+
 /* Get/set the NUMA node(s) with which the guest has affinity with. */
 /* XEN_DOMCTL_setnodeaffinity */
 /* XEN_DOMCTL_getnodeaffinity */
@@ -824,6 +845,7 @@ struct vki_xen_domctl {
         struct vki_xen_domctl_getdomaininfo_00000008 getdomaininfo_00000008;
         struct vki_xen_domctl_getdomaininfo_00000009 getdomaininfo_00000009;
         struct vki_xen_domctl_getdomaininfo_0000000f getdomaininfo_0000000f;
+        struct vki_xen_domctl_getdomaininfo_00000012 getdomaininfo_00000012;
         //struct vki_xen_domctl_getmemlist        getmemlist;
         //struct vki_xen_domctl_getpageframeinfo  getpageframeinfo;
         //struct vki_xen_domctl_getpageframeinfo2 getpageframeinfo2;
