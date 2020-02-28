@@ -725,9 +725,23 @@ PRE(sysctl) {
       case 0x00000010:
       case 0x00000011:
       case 0x00000012:
-         PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000f, first_domain);
-         PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000f, max_domains);
-         PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000f, buffer);
+         switch (vki_assumed_xenversion) {
+         case vki_xenversion_412:
+            PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000f, first_domain);
+            PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000f, max_domains);
+            PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000f, buffer);
+            break;
+         case vki_xenversion_unset:
+         case vki_xenversion_412_or_413:
+            vki_report_unknown_xenversion("VKI_XEN_SYSCTL_getdomaininfolist");
+            /* fallthrough */
+         case vki_xenversion_413:
+         default:
+            PRE_XEN_SYSCTL_READ(getdomaininfolist_00000012, first_domain);
+            PRE_XEN_SYSCTL_READ(getdomaininfolist_00000012, max_domains);
+            PRE_XEN_SYSCTL_READ(getdomaininfolist_00000012, buffer);
+            break;
+         }
          break;
       default:
           VG_(dmsg)("WARNING: XEN_SYSCTL_getdomaininfolist for sysctl version "
@@ -2336,11 +2350,25 @@ POST(sysctl)
       case 0x00000010:
       case 0x00000011:
       case 0x00000012:
-         POST_XEN_SYSCTL_WRITE(getdomaininfolist_0000000f, num_domains);
-         if (sysctl->u.getdomaininfolist_0000000f.num_domains > 0)
-            POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_0000000f.buffer.p,
-               sizeof(*sysctl->u.getdomaininfolist_0000000f.buffer.p) *
-               sysctl->u.getdomaininfolist_0000000f.num_domains);
+         switch (vki_assumed_xenversion) {
+         case vki_xenversion_412:
+            POST_XEN_SYSCTL_WRITE(getdomaininfolist_0000000f, num_domains);
+            if (sysctl->u.getdomaininfolist_0000000f.num_domains > 0)
+               POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_0000000f.buffer.p,
+                  sizeof(*sysctl->u.getdomaininfolist_0000000f.buffer.p) *
+                  sysctl->u.getdomaininfolist_0000000f.num_domains);
+            break;
+         case vki_xenversion_unset:
+         case vki_xenversion_412_or_413:
+         case vki_xenversion_413:
+         default:
+            POST_XEN_SYSCTL_WRITE(getdomaininfolist_00000012, num_domains);
+            if (sysctl->u.getdomaininfolist_00000012.num_domains > 0)
+               POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_00000012.buffer.p,
+                  sizeof(*sysctl->u.getdomaininfolist_00000012.buffer.p) *
+                  sysctl->u.getdomaininfolist_00000012.num_domains);
+            break;
+         }
          break;
       }
       break;
