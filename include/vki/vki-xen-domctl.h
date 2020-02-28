@@ -189,11 +189,11 @@ typedef struct vki_xen_domctl_getdomaininfo_00000009 vki_xen_domctl_getdomaininf
 DEFINE_VKI_XEN_GUEST_HANDLE(vki_xen_domctl_getdomaininfo_00000009_t);
 
 // x86 version only for now
-struct vki_xen_arch_domainconfig_00000010 {
+struct vki_xen_arch_domainconfig_0000000b {
     vki_uint32_t emulation_flags;
 };
 
-struct vki_xen_domctl_getdomaininfo_00000010 {
+struct vki_xen_domctl_getdomaininfo_0000000f {
     /* OUT variables. */
     vki_xen_domid_t  domain;
     vki_uint32_t flags;
@@ -209,12 +209,10 @@ struct vki_xen_domctl_getdomaininfo_00000010 {
     vki_uint32_t ssidref;
     vki_xen_domain_handle_t handle;
     vki_uint32_t cpupool;
-    struct vki_xen_arch_domainconfig_00000010 arch;
+    struct vki_xen_arch_domainconfig_0000000b arch;
 };
-typedef struct vki_xen_domctl_getdomaininfo_00000010 vki_xen_domctl_getdomaininfo_00000010_t;
-DEFINE_VKI_XEN_GUEST_HANDLE(vki_xen_domctl_getdomaininfo_00000010_t);
-
-/* vki_xen_domctl_getdomaininfo_0000000a is the same as 00000009 */
+typedef struct vki_xen_domctl_getdomaininfo_0000000f vki_xen_domctl_getdomaininfo_0000000f_t;
+DEFINE_VKI_XEN_GUEST_HANDLE(vki_xen_domctl_getdomaininfo_0000000f_t);
 
 /* Get/set the NUMA node(s) with which the guest has affinity with. */
 /* XEN_DOMCTL_setnodeaffinity */
