@@ -676,35 +676,35 @@ PRE(sysctl) {
        break;
 
    case VKI_XEN_SYSCTL_getdomaininfolist:
-      switch (sysctl->interface_version)
-      {
+      switch (sysctl->interface_version) {
+      case 0x00000007:
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000007, first_domain);
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000007, max_domains);
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000007, buffer);
+         break;
       case 0x00000008:
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_00000008, first_domain);
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_00000008, max_domains);
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_00000008, buffer);
-	 break;
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000008, first_domain);
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000008, max_domains);
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000008, buffer);
+         break;
       case 0x00000009:
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_00000009, first_domain);
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_00000009, max_domains);
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_00000009, buffer);
-	 break;
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
       case 0x0000000e:
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000009, first_domain);
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000009, max_domains);
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_00000009, buffer);
+         break;
       case 0x0000000f:
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, first_domain);
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, max_domains);
-	 PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000a, buffer);
-	 break;
       case 0x00000010:
       case 0x00000011:
       case 0x00000012:
-     PRE_XEN_SYSCTL_READ(getdomaininfolist_00000010, first_domain);
-     PRE_XEN_SYSCTL_READ(getdomaininfolist_00000010, max_domains);
-     PRE_XEN_SYSCTL_READ(getdomaininfolist_00000010, buffer);
-	 break;
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000f, first_domain);
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000f, max_domains);
+         PRE_XEN_SYSCTL_READ(getdomaininfolist_0000000f, buffer);
+         break;
       default:
           VG_(dmsg)("WARNING: XEN_SYSCTL_getdomaininfolist for sysctl version "
                     "%"PRIx32" not implemented yet\n",
@@ -1919,39 +1919,43 @@ POST(sysctl)
        break;
 
    case VKI_XEN_SYSCTL_getdomaininfolist:
-      switch (sysctl->interface_version)
-      {
+      switch (sysctl->interface_version) {
+      case 0x00000007:
+         POST_XEN_SYSCTL_WRITE(getdomaininfolist_00000007, num_domains);
+         if (sysctl->u.getdomaininfolist_00000007.num_domains > 0)
+            POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_00000007.buffer.p,
+               sizeof(*sysctl->u.getdomaininfolist_00000007.buffer.p) *
+               sysctl->u.getdomaininfolist_00000007.num_domains);
+         break;
       case 0x00000008:
-	 POST_XEN_SYSCTL_WRITE(getdomaininfolist_00000008, num_domains);
-	 POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_00000008.buffer.p,
-			sizeof(*sysctl->u.getdomaininfolist_00000008.buffer.p)
-			* sysctl->u.getdomaininfolist_00000008.num_domains);
-	 break;
+         POST_XEN_SYSCTL_WRITE(getdomaininfolist_00000008, num_domains);
+         if (sysctl->u.getdomaininfolist_00000008.num_domains > 0)
+            POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_00000008.buffer.p,
+               sizeof(*sysctl->u.getdomaininfolist_00000008.buffer.p) *
+               sysctl->u.getdomaininfolist_00000008.num_domains);
+         break;
       case 0x00000009:
-	 POST_XEN_SYSCTL_WRITE(getdomaininfolist_00000009, num_domains);
-	 POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_00000009.buffer.p,
-			sizeof(*sysctl->u.getdomaininfolist_00000009.buffer.p)
-			* sysctl->u.getdomaininfolist_00000009.num_domains);
-	 break;
       case 0x0000000a:
       case 0x0000000b:
       case 0x0000000c:
       case 0x0000000d:
       case 0x0000000e:
+         POST_XEN_SYSCTL_WRITE(getdomaininfolist_00000009, num_domains);
+         if (sysctl->u.getdomaininfolist_00000009.num_domains > 0)
+            POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_00000009.buffer.p,
+               sizeof(*sysctl->u.getdomaininfolist_00000009.buffer.p) *
+               sysctl->u.getdomaininfolist_00000009.num_domains);
+         break;
       case 0x0000000f:
-	 POST_XEN_SYSCTL_WRITE(getdomaininfolist_0000000a, num_domains);
-	 POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_0000000a.buffer.p,
-			sizeof(*sysctl->u.getdomaininfolist_0000000a.buffer.p)
-			* sysctl->u.getdomaininfolist_0000000a.num_domains);
-	 break;
       case 0x00000010:
       case 0x00000011:
       case 0x00000012:
-	 POST_XEN_SYSCTL_WRITE(getdomaininfolist_00000010, num_domains);
-	 POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_00000010.buffer.p,
-			sizeof(*sysctl->u.getdomaininfolist_00000010.buffer.p)
-			* sysctl->u.getdomaininfolist_00000010.num_domains);
-	 break;
+         POST_XEN_SYSCTL_WRITE(getdomaininfolist_0000000f, num_domains);
+         if (sysctl->u.getdomaininfolist_0000000f.num_domains > 0)
+            POST_MEM_WRITE((Addr)sysctl->u.getdomaininfolist_0000000f.buffer.p,
+               sizeof(*sysctl->u.getdomaininfolist_0000000f.buffer.p) *
+               sysctl->u.getdomaininfolist_0000000f.num_domains);
+         break;
       }
       break;
 
