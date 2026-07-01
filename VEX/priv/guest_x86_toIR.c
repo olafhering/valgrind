@@ -13737,6 +13737,39 @@ DisResult disInstr_X86_WRK (
       goto decode_success;
    }
 
+   /* 66 0F 38 20 /r = PMOVSXBW xmm1, xmm2/m64
+      Packed Move with Sign Extend from Byte to Word (XMM) */
+   if (sz == 2
+       && insn[0] == 0x0F && insn[1] == 0x38
+       && insn[2] == 0x20) {
+      IRTemp srcVec = newTemp(Ity_V128);
+      modrm = insn[3];
+      UInt rG = gregOfRM(modrm);
+
+      if (epartIsReg(modrm)) {
+         UInt rE = eregOfRM(modrm);
+         assign( srcVec, getXMMReg(rE) );
+         DIP("pmovsxbw %s,%s\n", nameXMMReg(rE), nameXMMReg(rG));
+         delta += 1 + 3;
+      } else {
+         addr = disAMode( &alen, sorb, delta+3, dis_buf );
+         assign( srcVec,
+                 unop( Iop_64UtoV128, loadLE( Ity_I64, mkexpr(addr) ) ) );
+         DIP("pmovsxbw %s,%s\n", dis_buf, nameXMMReg(rG));
+         delta += alen + 3;
+      }
+
+      putXMMReg( rG, binop(Iop_SarN16x8,
+                           binop(Iop_ShlN16x8,
+                                 binop(Iop_InterleaveLO8x16,
+                                       IRExpr_Const(IRConst_V128(0)),
+                                       mkexpr(srcVec)),
+                                 mkU8(8)),
+                           mkU8(8)) );
+
+      goto decode_success;
+   }
+
    /* 66 0F 3A 0B /r ib = ROUNDSD imm8, xmm2/m64, xmm1
       66 0F 3A 0A /r ib = ROUNDSS imm8, xmm2/m32, xmm1
    */

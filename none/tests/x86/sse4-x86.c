@@ -271,6 +271,7 @@ int main(void)
    test_ROUNDPS_w_mxcsr_rounding();
    test_PMULDQ();
    test_PCMPGTQ();
+   test_PMOVSXBW();
 
    return 0;
 }
