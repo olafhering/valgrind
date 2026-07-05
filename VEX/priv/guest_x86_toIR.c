@@ -8448,6 +8448,12 @@ DisResult disInstr_X86_WRK (
             goto decode_success;
          }
          /* We don't know what it is. */
+         if (sigill_diag) {
+            vex_printf ("vex x86->IR: special instruction preamble ");
+            vex_printf ("followed by unknown instruction\n");
+            vex_printf ("  this can happen when inline valgrind.h assembly ");
+            vex_printf ("is optimized (away)\n");
+         }
          goto decode_failure;
          /*NOTREACHED*/
       }

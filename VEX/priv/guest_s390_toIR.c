@@ -20586,6 +20586,12 @@ s390_decode_special_and_irgen(const UChar *bytes)
       s390_irgen_inject_ir();
    } else {
       /* We don't know what it is. */
+      if (sigill_diag) {
+         vex_printf ("vex s390->IR: special instruction preamble ");
+         vex_printf ("followed by unknown instruction\n");
+         vex_printf ("  this can happen when inline valgrind.h assembly ");
+         vex_printf ("is optimized (away)\n");
+      }
       return S390_DECODE_UNKNOWN_SPECIAL_INSN;
    }
 

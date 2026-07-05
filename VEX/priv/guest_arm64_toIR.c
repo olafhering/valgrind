@@ -16432,6 +16432,12 @@ Bool disInstr_ARM64_WRK (
             return True;
          }
          /* We don't know what it is. */
+         if (sigill_diag) {
+            vex_printf ("disInstr(arm64): special instruction preamble ");
+            vex_printf ("followed by unknown instruction\n");
+            vex_printf ("  this can happen when inline valgrind.h assembly ");
+            vex_printf ("is optimized (away)\n");
+         }
          return False;
          /*NOTREACHED*/
       }
