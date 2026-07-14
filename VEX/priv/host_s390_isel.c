@@ -5332,7 +5332,7 @@ no_memcpy_put:
                   doHelperCall. */
                vassert(rloc.pri == RLPri_V128SpRel);
                vassert(addToSp == sizeof(V128));
-               s390_amode* am  = s390_amode_b12(rloc.spOff, s390_hreg_stack_pointer());
+               s390_amode *am  = s390_amode_for_stack_pointer(rloc.spOff);
                addInstr(env, s390_insn_load(sizeof(V128), dst, am));
                add_to_SP(env, addToSp);
                break;

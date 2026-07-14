@@ -262,11 +262,9 @@ s390_amode_for_guest_state(Int offset)
 }
 
 
-/* Construct an AMODE for accessing stack pointer at OFFSET.
-   OFFSET can be at most 3 * sizeof(VexGuestS390XState) + LibVEX_N_SPILL_BYTES
-   which may be too large for a B12 addressing mode.
-   Use a B20 amode as a fallback which will be safe for any offset.
-*/
+/* Construct an AMODE for accessing the stack pointer at OFFSET.
+   Current offset values are small enough such that the following
+   implementation suffices. */
 s390_amode *
 s390_amode_for_stack_pointer(Int offset)
 {
@@ -276,7 +274,7 @@ s390_amode_for_stack_pointer(Int offset)
    if (fits_signed_20bit(offset))
       return s390_amode_b20(offset, s390_hreg_stack_pointer());
 
-   vpanic("invalid stack pointer offset");
+   vpanic("stack pointer offset out of range");
 }
 
 
